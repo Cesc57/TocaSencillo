@@ -36,7 +36,8 @@
                     android:layout_weight="1"
                     android:background="@color/primaryColor"
                     android:gravity="center"
-                    android:text="@string/add_frag" />
+                    android:text="@string/add_frag"
+                    tools:ignore="TextContrastCheck" />
 
                 <TextView
                     android:id="@+id/btnSaveSong"
@@ -46,7 +47,8 @@
                     android:layout_weight="1"
                     android:background="@color/primaryColor"
                     android:gravity="center"
-                    android:text="@string/save" />
+                    android:text="@string/save"
+                    tools:ignore="TextContrastCheck" />
             </LinearLayout>
 
 
@@ -60,7 +62,7 @@
                 android:hint="@string/song_title"
                 android:importantForAutofill="no"
                 android:textColorHint="@color/grayHint"
-                tools:ignore="TextFields" />
+                tools:ignore="TextFields,TouchTargetSizeCheck,TextContrastCheck" />
 
         </LinearLayout>
     </ScrollView>

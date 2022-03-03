@@ -27,7 +27,7 @@
     <string name="label">Etiqueta</string>
     <string name="intro">Intro</string>
     <string name="verse">Estrofa</string>
-    <string name="pre_chorus">Estribillo</string>
+    <string name="pre_chorus">PreEstribillo</string>
     <string name="chorus">Estribillo</string>
     <string name="bridge">Puente</string>
     <string name="solo">Solo</string>
