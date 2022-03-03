@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:id="@+id/viewRoot"
+    android:orientation="horizontal"
+    android:weightSum="29"
+    tools:context=".ContentFragment" >
+
+    <TextView
+        android:id="@+id/tvLine1"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        android:text="@string/bar"
+        android:textSize="40sp"
+        android:padding="4sp"
+        android:layout_weight="1"/>
+
+    <EditText
+        android:id="@+id/etBar1"
+        android:layout_width="77dp"
+        android:layout_height="match_parent"
+        android:autoSizeTextType="uniform"
+        android:autofillHints="chord"
+        android:inputType="none"
+        android:singleLine="true"
+        android:text="@string/empty_bar"
+        android:textStyle="bold"
+        tools:ignore="LabelFor,DuplicateSpeakableTextCheck"
+        tools:targetApi="o"
+        android:layout_weight="6"/>
+
+    <TextView
+        android:id="@+id/tvLine2"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        android:text="@string/bar"
+        android:textSize="40sp"
+        android:padding="4sp"
+        android:layout_weight="1"/>
+
+    <EditText android:autofillHints="chord"
+        android:id="@+id/etBar2"
+        android:layout_width="77dp"
+        android:layout_height="match_parent"
+        android:autoSizeTextType="uniform"
+        android:inputType="none"
+        android:singleLine="true"
+        android:text=""
+        android:textStyle="bold"
+        tools:targetApi="o"
+        tools:ignore="Autofill,LabelFor"
+        android:layout_weight="6"/>
+
+    <TextView
+        android:id="@+id/tvLine3"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        android:text="@string/bar"
+        android:textSize="40sp"
+        android:padding="4sp"
+        android:layout_weight="1"/>
+
+    <EditText android:autofillHints="chord"
+        android:id="@+id/etBar3"
+        android:layout_width="77dp"
+        android:layout_height="match_parent"
+        android:autoSizeTextType="uniform"
+        android:inputType="none"
+        android:singleLine="true"
+        android:text=""
+        android:textStyle="bold"
+        tools:targetApi="o"
+        tools:ignore="LabelFor"
+        android:layout_weight="6"/>
+
+    <TextView
+        android:id="@+id/tvLine4"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        android:text="@string/bar"
+        android:textSize="40sp"
+        android:padding="4sp"/>
+
+    <EditText android:autofillHints="chord"
+        android:id="@+id/etBar4"
+        android:layout_width="77dp"
+        android:layout_height="match_parent"
+        android:autoSizeTextType="uniform"
+        android:inputType="none"
+        android:singleLine="true"
+        android:text=""
+        android:textStyle="bold"
+        tools:targetApi="o"
+        tools:ignore="LabelFor"
+        android:layout_weight="6"/>
+
+    <TextView
+        android:id="@+id/tvLine5"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        android:text="@string/bar"
+        android:textSize="40sp"
+        android:padding="4sp"/>
+
+</LinearLayout>

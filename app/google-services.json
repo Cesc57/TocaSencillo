@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "897412074770",
+    "project_id": "toca-sencillo",
+    "storage_bucket": "toca-sencillo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:897412074770:android:37fb7e894db2efdfaff7cb",
+        "android_client_info": {
+          "package_name": "com.example.tocasencillo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "897412074770-umg00jhulm1iivqtvm730jmbbbcm8bg2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4JFC55FRVBh89qcpSaBck0SJ-9J0xgBs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "897412074770-umg00jhulm1iivqtvm730jmbbbcm8bg2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
