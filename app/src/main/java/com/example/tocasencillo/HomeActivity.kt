@@ -22,20 +22,8 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //Setup
-        //val bundle: Bundle? = intent.extras
-        //val name: String? = bundle?.getString("name")
-        //val mail: String? = bundle?.getString("mail")
-        //val provider: String? = bundle?.getString("provider")
-        //setup()
-
-        //Saving data
-
-
         binding.btnSong.setOnClickListener {
-
             goEditor()
-
         }
 
         binding.btnExit.setOnClickListener {

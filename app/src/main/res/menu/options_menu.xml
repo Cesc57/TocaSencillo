@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/itTitle"
+        android:title="@string/title" />
+
+    <item
+        android:id="@+id/itLabel"
+        android:title="@string/label">
+
+        <menu>
+
+            <item
+                android:id="@+id/itIntro"
+                android:title="@string/intro" />
+
+            <item
+                android:id="@+id/itVerse"
+                android:title="@string/verse" />
+
+            <item
+                android:id="@+id/itPreChorus"
+                android:title="@string/pre_chorus" />
+
+            <item
+                android:id="@+id/itChorus"
+                android:title="@string/chorus" />
+            <item
+                android:id="@+id/itBridge"
+                android:title="@string/bridge" />
+
+            <item
+                android:id="@+id/itSolo"
+                android:title="@string/solo" />
+
+            <item
+                android:id="@+id/itFinal"
+                android:title="@string/end" />
+
+        </menu>
+
+    </item>
+
+    <item
+        android:id="@+id/itContent"
+        android:title="@string/content">
+
+        <menu>
+            <item
+                android:id="@+id/cc4"
+                android:title="@string/_4_cc" />
+            <item
+                android:id="@+id/cc8"
+                android:title="@string/_8_cc" />
+            <item
+                android:id="@+id/cc12"
+                android:title="@string/_12_cc" />
+            <item
+                android:id="@+id/cc16"
+                android:title="@string/_16_cc" />
+        </menu>
+    </item>
+
+    <item
+        android:id="@+id/itNote"
+        android:title="@string/text" />
+
+</menu>
