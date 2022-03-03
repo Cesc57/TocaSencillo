@@ -78,21 +78,21 @@ class EditorActivity : AppCompatActivity() {
                     }
 
                     "8 cc" -> {
-                        loadFragment(fragment = ContentFragment())
-                        loadFragment(fragment = ContentFragment())
+                        repeat(2){
+                            loadFragment(fragment = ContentFragment())
+                        }
                     }
 
                     "12 cc" -> {
-                        loadFragment(fragment = ContentFragment())
-                        loadFragment(fragment = ContentFragment())
-                        loadFragment(fragment = ContentFragment())
+                        repeat(3){
+                            loadFragment(fragment = ContentFragment())
+                        }
                     }
 
                     "16 cc" -> {
-                        loadFragment(fragment = ContentFragment())
-                        loadFragment(fragment = ContentFragment())
-                        loadFragment(fragment = ContentFragment())
-                        loadFragment(fragment = ContentFragment())
+                        repeat(4){
+                            loadFragment(fragment = ContentFragment())
+                        }
                     }
 
                     "Texto" -> {
