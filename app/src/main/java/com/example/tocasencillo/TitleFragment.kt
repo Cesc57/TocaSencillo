@@ -41,7 +41,7 @@ class TitleFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentTitleBinding.inflate(inflater, container, false)
         val view = binding.root
         return view

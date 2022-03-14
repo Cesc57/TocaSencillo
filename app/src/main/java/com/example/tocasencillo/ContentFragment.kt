@@ -43,7 +43,7 @@ class ContentFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentContentBinding.inflate(inflater, container, false)
         val view = binding.root
 
@@ -73,22 +73,21 @@ class ContentFragment : Fragment() {
         return view
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
-
     override fun onStop() {
         if (guardando==false){
             posic--
         }else{
             //Go to DBB for save the song
-            Log.d("Por HACER", "POR HACER")
         }
 
         super.onStop()
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
 
     companion object {
         /**

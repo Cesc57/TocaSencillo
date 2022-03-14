@@ -47,7 +47,7 @@ class LabelFragment : Fragment() {
         _binding = FragmentLabelBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        binding.tvLabel.text = label.toString()
+        binding.tvLabel.text = label
 
         return view
     }
