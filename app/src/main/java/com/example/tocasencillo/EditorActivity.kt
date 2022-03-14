@@ -41,43 +41,36 @@ class EditorActivity : AppCompatActivity() {
                     "Intro" -> {
                         label = "Intro"
                         loadFragment(fragment = LabelFragment())
-                        label = "tag"
                     }
 
                     "Estrofa" -> {
                         label = "Estrofa"
                         loadFragment(fragment = LabelFragment())
-                        label = "tag"
                     }
 
                     "PreEstribillo" -> {
                         label = "PreStrb"
                         loadFragment(fragment = LabelFragment())
-                        label = "tag"
                     }
 
                     "Estribillo" -> {
                         label = "Strb"
                         loadFragment(fragment = LabelFragment())
-                        label = "tag"
                     }
 
                     "Puente" -> {
                         label ="Puente"
                         loadFragment(fragment = LabelFragment())
-                        label = "tag"
                     }
 
                     "Solo" -> {
                         label = "Solo"
                         loadFragment(fragment = LabelFragment())
-                        label = "tag"
                     }
 
                     "Final" -> {
                         label = "Final"
                         loadFragment(fragment = LabelFragment())
-                        label = "tag"
                     }
 
                     "4 cc" -> {

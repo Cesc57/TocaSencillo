@@ -1,10 +1,12 @@
 package com.example.tocasencillo
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import com.example.tocasencillo.EditorActivity.Companion.guardando
 import com.example.tocasencillo.EditorActivity.Companion.posic
 import com.example.tocasencillo.databinding.FragmentContentBinding
@@ -44,6 +46,30 @@ class ContentFragment : Fragment() {
     ): View? {
         _binding = FragmentContentBinding.inflate(inflater, container, false)
         val view = binding.root
+
+        /*Tanto la primera como la última barrita de los acordes
+        se pueden cambiar por barras de repetición:*/
+        val bar1: TextView =binding.tvLine1
+        bar1.setOnClickListener{
+            when (bar1.text) {
+                "|" -> {
+                    bar1.setText("|:")
+                }
+                else -> bar1.setText("|")
+            }
+        }
+
+        val bar5: TextView =binding.tvLine5
+        bar5.setOnClickListener{
+            when (bar5.text) {
+                "|" -> {
+                    bar5.setText(":|")
+                    //bar5.autoSizeMaxTextSize()
+                }
+                else -> bar5.setText("|")
+            }
+        }
+
         return view
     }
 
@@ -58,6 +84,7 @@ class ContentFragment : Fragment() {
             posic--
         }else{
             //Go to DBB for save the song
+            Log.d("Por HACER", "POR HACER")
         }
 
         super.onStop()

@@ -15,7 +15,7 @@
         android:gravity="bottom"
         android:text="@string/bar"
         android:textSize="40sp"
-        android:padding="4sp"
+        android:padding="2sp"
         android:layout_weight="1"/>
 
     <EditText
@@ -39,7 +39,7 @@
         android:gravity="bottom"
         android:text="@string/bar"
         android:textSize="40sp"
-        android:padding="4sp"
+        android:padding="2sp"
         android:layout_weight="1"/>
 
     <EditText android:autofillHints="chord"
@@ -62,7 +62,7 @@
         android:gravity="bottom"
         android:text="@string/bar"
         android:textSize="40sp"
-        android:padding="4sp"
+        android:padding="2sp"
         android:layout_weight="1"/>
 
     <EditText android:autofillHints="chord"
@@ -85,7 +85,7 @@
         android:gravity="bottom"
         android:text="@string/bar"
         android:textSize="40sp"
-        android:padding="4sp"/>
+        android:padding="2sp"/>
 
     <EditText android:autofillHints="chord"
         android:id="@+id/etBar4"
@@ -107,6 +107,6 @@
         android:gravity="bottom"
         android:text="@string/bar"
         android:textSize="40sp"
-        android:padding="4sp"/>
+        android:padding="2sp"/>
 
 </LinearLayout>
