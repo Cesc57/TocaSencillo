@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.tocasencillo.EditorActivity.Companion.guardando
 import com.example.tocasencillo.EditorActivity.Companion.label
+import com.example.tocasencillo.EditorActivity.Companion.posic
 import com.example.tocasencillo.databinding.FragmentLabelBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -48,6 +50,16 @@ class LabelFragment : Fragment() {
         binding.tvLabel.text = label.toString()
 
         return view
+    }
+
+    override fun onStop() {
+        if (guardando ==false){
+            posic--
+        }else{
+            //Go to DB for save the song
+        }
+
+        super.onStop()
     }
 
     override fun onDestroyView() {

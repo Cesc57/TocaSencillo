@@ -14,7 +14,7 @@ class EditorActivity : AppCompatActivity() {
     companion object {
         var posic: Int = 0
         var label: String = "tag"
-        //var guardando = false
+        var guardando = false   //In clickListener from btnSaveSong, this value change to true
         //lateinit var cancionesDBHelper: MiSQLiteHelper
 
     }

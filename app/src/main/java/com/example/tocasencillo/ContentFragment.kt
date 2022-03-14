@@ -5,6 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.tocasencillo.EditorActivity.Companion.guardando
+import com.example.tocasencillo.EditorActivity.Companion.posic
+import com.example.tocasencillo.databinding.FragmentContentBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -29,12 +32,35 @@ class ContentFragment : Fragment() {
         }
     }
 
+    private var _binding: FragmentContentBinding? = null
+    // This property is only valid between onCreateView and
+    // onDestroyView.
+    private val binding get() = _binding!!
+
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_content, container, false)
+        _binding = FragmentContentBinding.inflate(inflater, container, false)
+        val view = binding.root
+        return view
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+
+    override fun onStop() {
+        if (guardando==false){
+            posic--
+        }else{
+            //Go to DBB for save the song
+        }
+
+        super.onStop()
     }
 
     companion object {
