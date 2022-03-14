@@ -47,8 +47,8 @@ class ContentFragment : Fragment() {
         _binding = FragmentContentBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        /*Tanto la primera como la última barrita de los acordes
-        se pueden cambiar por barras de repetición:*/
+        /*the first and the last chord bar
+         can be changed to repeat bars*/
         val bar1: TextView =binding.tvLine1
         bar1.setOnClickListener{
             when (bar1.text) {
