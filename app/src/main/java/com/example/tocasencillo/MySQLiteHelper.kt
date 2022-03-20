@@ -5,7 +5,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
 class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
-    context, "song_book.db", null, 1) {
+    context, "song_book.db", null, 22) {
 
     override fun onCreate(db: SQLiteDatabase?) {
 
@@ -55,11 +55,43 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
             this.execSQL(createSongFragmentCommand)
         }
 
+        val tags = arrayOf("Intro", "Estrofa", "PreStrb", "Strb",
+            "Puente", "Solo", "Final")
+
+        for (tag in tags) {
+            val myTag = tag
+            val insertTags = """INSERT INTO etiqueta (tipo) 
+                VALUES ('$myTag')"""
+            with(db) {
+                this!!.execSQL(insertTags)
+            }
+        }
+
     }
 
+    /*private fun saveTags(tag: String) {
+        val data = ContentValues().apply {
+            put("tag", tag)
+        }
+
+        //Abrir BDD en modo escritura:
+        val myDB = this.writableDatabase
+        myDB.insert("etiqueta",null, data)
+    }*/
+
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        val dropTable = "DROP TABLE IF EXISTS song_book"
-        db!!.execSQL(dropTable)
+        val dropTableSong = "DROP TABLE IF EXISTS cancion"
+        db!!.execSQL(dropTableSong)
+        val dropTableTitle = "DROP TABLE IF EXISTS titulo"
+        db.execSQL(dropTableTitle)
+        val dropTableContent = "DROP TABLE IF EXISTS contenido"
+        db.execSQL(dropTableContent)
+        val dropTableNote = "DROP TABLE IF EXISTS nota"
+        db.execSQL(dropTableNote)
+        val dropTableLabel = "DROP TABLE IF EXISTS etiqueta"
+        db.execSQL(dropTableLabel)
+        val dropTableSongFragment = "DROP TABLE IF EXISTS cancion_fragmento"
+        db.execSQL(dropTableSongFragment)
         onCreate(db)
     }
 
