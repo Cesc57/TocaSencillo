@@ -1,7 +1,6 @@
 package com.example.tocasencillo
 
 import android.content.Context
-import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
@@ -55,31 +54,18 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
             this.execSQL(createTagCommand)
             this.execSQL(createSongFragmentCommand)
         }
-        //insertTags()
+
     }
 
-    //Prefabricated Tags
-    /*private fun insertTags() {
-        val tags = arrayOf("Intro", "Estrofa", "PreStrb", "Strb",
-            "Puente", "Solo", "Final")
-        for (tag in tags) {
-            val myTag = ContentValues().apply {
-                put("tipo", tag)
-            }
-            val db = this.writableDatabase
-            db.insert("etiqueta", null, myTag)
-        }
-    }*/
-
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        val ordenBorrado = "DROP TABLE IF EXISTS song_book"
-        db!!.execSQL(ordenBorrado)
+        val dropTable = "DROP TABLE IF EXISTS song_book"
+        db!!.execSQL(dropTable)
         onCreate(db)
     }
 
-    fun showSongs(): Cursor? {
+    /*fun showSongs(): Cursor? {
         val db: SQLiteDatabase = this.readableDatabase
-        return db.rawQuery("""SELECT * FROM amigos""", null)
-    }
+        return db.rawQuery("""SELECT * FROM cancion""", null)
+    }*/
 
 }

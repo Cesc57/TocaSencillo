@@ -124,4 +124,10 @@ class EditorActivity : AppCompatActivity() {
         fragmentIntercambio.commit()
         posic++
     }
+
+    override fun onDestroy() {
+        songsDBHelper.close()
+        super.onDestroy()
+    }
+
 }
