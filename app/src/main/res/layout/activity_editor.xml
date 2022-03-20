@@ -69,7 +69,7 @@
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatEliminar"
+        android:id="@+id/floatDelete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
@@ -79,6 +79,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.95"
+        app:fabSize="mini"
         app:srcCompat="@android:drawable/ic_delete"
         tools:ignore="ContentDescription,HardcodedText,SpeakableTextPresentCheck"/>
 

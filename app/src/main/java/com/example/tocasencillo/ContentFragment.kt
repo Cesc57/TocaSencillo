@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import com.example.tocasencillo.EditorActivity.Companion.guardando
+import com.example.tocasencillo.EditorActivity.Companion.saving
 import com.example.tocasencillo.EditorActivity.Companion.posic
 import com.example.tocasencillo.databinding.FragmentContentBinding
 
@@ -73,7 +73,7 @@ class ContentFragment : Fragment() {
     }
 
     override fun onStop() {
-        if (guardando==false){
+        if (saving==false){
             posic--
         }else{
             //Go to DBB for save the song

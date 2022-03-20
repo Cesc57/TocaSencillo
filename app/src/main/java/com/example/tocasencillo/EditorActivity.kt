@@ -14,8 +14,8 @@ class EditorActivity : AppCompatActivity() {
     companion object {
         var posic: Int = 0
         var label: String = "tag"
-        var guardando = false   //In clickListener from btnSaveSong, this value change to true
-        //lateinit var cancionesDBHelper: MiSQLiteHelper
+        var saving = false   //In clickListener from btnSaveSong, this value change to true
+        lateinit var songsDBHelper: MySQLiteHelper
 
     }
 
@@ -23,6 +23,13 @@ class EditorActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityEditorBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        songsDBHelper = MySQLiteHelper(this)
+        songsDBHelper.readableDatabase
+
+        binding.floatDelete.setOnClickListener {
+            finish()
+        }
 
         val menuPopup: TextView = binding.btnAddFrag
 
@@ -59,7 +66,7 @@ class EditorActivity : AppCompatActivity() {
                     }
 
                     "Puente" -> {
-                        label ="Puente"
+                        label = "Puente"
                         loadFragment(fragment = LabelFragment())
                     }
 
@@ -78,19 +85,19 @@ class EditorActivity : AppCompatActivity() {
                     }
 
                     "8 cc" -> {
-                        repeat(2){
+                        repeat(2) {
                             loadFragment(fragment = ContentFragment())
                         }
                     }
 
                     "12 cc" -> {
-                        repeat(3){
+                        repeat(3) {
                             loadFragment(fragment = ContentFragment())
                         }
                     }
 
                     "16 cc" -> {
-                        repeat(4){
+                        repeat(4) {
                             loadFragment(fragment = ContentFragment())
                         }
                     }
