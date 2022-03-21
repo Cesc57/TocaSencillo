@@ -30,6 +30,7 @@ class EditorActivity : AppCompatActivity() {
         songsDBHelper.readableDatabase
 
         binding.floatDelete.setOnClickListener {
+            songsDBHelper.close()
             finish()
         }
 
@@ -136,6 +137,7 @@ class EditorActivity : AppCompatActivity() {
             for (fragment in supportFragmentManager.fragments) {
                 supportFragmentManager.beginTransaction().remove(fragment!!).commit()
             }
+            songsDBHelper.close()
             finish()
         } catch (e: Exception) {
             Toast.makeText(this, "ERROR, prueba otra vez a guardar", Toast.LENGTH_SHORT).show()
@@ -148,11 +150,6 @@ class EditorActivity : AppCompatActivity() {
         fragmentIntercambio.addToBackStack(null)
         fragmentIntercambio.commit()
         posic++
-    }
-
-    override fun onDestroy() {
-        songsDBHelper.close()
-        super.onDestroy()
     }
 
 }

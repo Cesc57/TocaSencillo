@@ -37,6 +37,8 @@ class NoteFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
+    private val myPosic = posic
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -51,10 +53,25 @@ class NoteFragment : Fragment() {
         if (saving ==false){
             posic--
         }else{
-            //Go to DB for save the song
+            byeFragNote()
         }
 
         super.onStop()
+    }
+
+    private fun byeFragNote() {
+        if (!saving) {
+            posic--
+        } else {
+            val note: String = binding.txtNote.text.toString()
+            MySQLiteHelper(this.requireContext()).apply {
+                saveNote(note)
+                saveSongFragment(lastSong(),
+                    lastFragment("nota"),
+                    "nota",
+                    myPosic)
+            }
+        }
     }
 
     override fun onDestroyView() {

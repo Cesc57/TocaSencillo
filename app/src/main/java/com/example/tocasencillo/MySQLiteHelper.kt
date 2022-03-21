@@ -137,6 +137,15 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
         db.insert("titulo", null, data)
     }
 
+    fun saveNote(note: String) {
+        val data = ContentValues().apply {
+            put("texto", note)
+        }
+
+        val db = this.writableDatabase
+        db.insert("nota", null, data)
+    }
+
     fun saveSongFragment(song: Int, fragment: Int, type: String, posic: Int) {
         val data = ContentValues().apply {
             put("id_cancion", song)
