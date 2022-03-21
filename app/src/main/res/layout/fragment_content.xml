@@ -18,12 +18,11 @@
         android:padding="2sp"
         android:layout_weight="1"/>
 
-    <EditText
+    <EditText android:autofillHints="chord"
         android:id="@+id/etBar1"
         android:layout_width="77dp"
         android:layout_height="match_parent"
         android:autoSizeTextType="uniform"
-        android:autofillHints="chord"
         android:inputType="none"
         android:singleLine="true"
         android:text="@string/empty_bar"
