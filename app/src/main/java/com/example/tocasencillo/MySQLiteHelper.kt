@@ -1,5 +1,6 @@
 package com.example.tocasencillo
 
+import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
@@ -60,9 +61,8 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
             "Puente", "Solo", "Final")
 
         for (tag in tags) {
-            val myTag = tag
             val insertTags = """INSERT INTO etiqueta (tipo) 
-                VALUES ('$myTag')"""
+                VALUES ('$tag')"""
             with(db) {
                 this!!.execSQL(insertTags)
             }
@@ -138,21 +138,21 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
         db.insert("cancion_fragmento",null,data)
     }
 
+    @SuppressLint("Recycle")
     fun lastSong(): Int {
         val database = this.readableDatabase
         val cursor =
             database.rawQuery("SELECT MAX(id) FROM cancion", null)
         cursor.moveToFirst()
-        cursor.close()
         return cursor.getInt(0)
     }
 
+    @SuppressLint("Recycle")
     fun lastFragment(type: String): Int {
         val database = this.readableDatabase
-        val cursor =
-            database.rawQuery("SELECT MAX(id) FROM $type", null)
-        cursor.moveToFirst()
-        cursor.close()
+        val cursor = database.rawQuery("SELECT MAX(id) FROM $type", null).apply {
+            moveToFirst()
+        }
         return  cursor.getInt(0)
     }
 
