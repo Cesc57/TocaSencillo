@@ -177,14 +177,6 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
         return cursor.getInt(0)
     }
 
-    fun idForLabel(tvLabel: String): Int {
-        val database = this.readableDatabase
-        val cursor = database.rawQuery("SELECT id FROM etiqueta WHERE tipo = $tvLabel", null).apply {
-            moveToFirst()
-        }
-        return cursor.getInt(0)
-    }
-
     /*fun showSongs(): Cursor? {
         val db: SQLiteDatabase = this.readableDatabase
         return db.rawQuery("""SELECT * FROM cancion""", null)
