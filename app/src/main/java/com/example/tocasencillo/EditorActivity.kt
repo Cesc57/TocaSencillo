@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.PopupMenu
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.tocasencillo.databinding.ActivityEditorBinding
+import java.lang.Exception
 
 class EditorActivity : AppCompatActivity() {
 
@@ -29,6 +31,16 @@ class EditorActivity : AppCompatActivity() {
 
         binding.floatDelete.setOnClickListener {
             finish()
+        }
+
+        binding.btnSaveSong.setOnClickListener {
+            if (binding.etMainTitle.text.toString() == "") {
+                Toast.makeText(this, "Pon nombre a tu canción", Toast.LENGTH_SHORT).show()
+            } else {
+                saving = true
+                saveSong()
+            }
+
         }
 
         val menuPopup: TextView = binding.btnAddFrag
@@ -115,6 +127,19 @@ class EditorActivity : AppCompatActivity() {
             menuPopupMenu.show()
         }
 
+    }
+
+    private fun saveSong() {
+        //Try-catch in case the DB fails
+        try {
+            songsDBHelper.saveSong(binding.etMainTitle.text.toString())
+            for (fragment in supportFragmentManager.fragments) {
+                supportFragmentManager.beginTransaction().remove(fragment!!).commit()
+                finish()
+            }
+        } catch (e: Exception) {
+            Toast.makeText(this, "ERROR, prueba otra vez a guardar", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun loadFragment(fragment: Fragment) {

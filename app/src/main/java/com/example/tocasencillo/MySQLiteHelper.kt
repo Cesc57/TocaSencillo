@@ -1,39 +1,40 @@
 package com.example.tocasencillo
 
+import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
 class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
-    context, "song_book.db", null, 22) {
+    context, "song_book.db", null, 23) {
 
     override fun onCreate(db: SQLiteDatabase?) {
 
         //defining our DB
         val createSongCommand =
             """CREATE TABLE cancion
-                (id_cancion INTEGER PRIMARY KEY AUTOINCREMENT,
+                (id INTEGER PRIMARY KEY AUTOINCREMENT,
                 nombre TEXT)"""
 
         val createTitleCommand =
             """CREATE TABLE titulo 
-                (id_titulo INTEGER PRIMARY KEY AUTOINCREMENT,
+                (id INTEGER PRIMARY KEY AUTOINCREMENT,
                 nombre TEXT, velocidad INTEGER, tonalidad TEXT)"""
 
         val createContentCommand =
             """CREATE TABLE contenido 
-                (id_contenido INTEGER PRIMARY KEY AUTOINCREMENT,
+                (id INTEGER PRIMARY KEY AUTOINCREMENT,
                 ccBar1 TEXT, ccBar5 TEXT, 
                 ccMusica1 TEXT,ccMusica2 TEXT, ccMusica3 TEXT, ccMusica4 TEXT )"""
 
         val createNoteCommand =
             """CREATE TABLE nota
-                (id_nota INTEGER PRIMARY KEY AUTOINCREMENT,
+                (id INTEGER PRIMARY KEY AUTOINCREMENT,
                 texto TEXT)"""
 
         val createTagCommand =
             """CREATE TABLE etiqueta
-                (id_etiqueta INTEGER PRIMARY KEY AUTOINCREMENT,
+                (id INTEGER PRIMARY KEY AUTOINCREMENT,
                 tipo TEXT)"""
 
         val createSongFragmentCommand =
@@ -93,6 +94,64 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
         val dropTableSongFragment = "DROP TABLE IF EXISTS cancion_fragmento"
         db.execSQL(dropTableSongFragment)
         onCreate(db)
+    }
+
+    fun saveSong(song: String) {
+        val songName = ContentValues().apply {
+            put("nombre", song)
+        }
+        val db = this.writableDatabase
+        db.insert("cancion", null, songName)
+    }
+
+    fun saveContent(
+        ccBar1: String,
+        ccBar5: String,
+        txtCC1: String,
+        txtCC2: String,
+        txtCC3: String,
+        txtCC4: String,
+    ) {
+        val data = ContentValues().apply {
+            put("ccBar1", ccBar1)
+            put("ccBar5", ccBar5)
+            put("ccMusica1", txtCC1)
+            put("ccMusica2", txtCC2)
+            put("ccMusica3", txtCC3)
+            put("ccMusica4", txtCC4)
+        }
+
+        val db = this.writableDatabase
+        db.insert("contenido", null, data)
+    }
+
+    fun saveSongFragment(song: Int, fragment: Int, type: String, posic: Int) {
+        val data = ContentValues().apply {
+            put("id_cancion", song)
+            put("id_fragmento", fragment)
+            put("tipo",type)
+            put("posicion", posic)
+
+        }
+
+        val db = this.writableDatabase
+        db.insert("cancion_fragmento",null,data)
+    }
+
+    fun lastSong(): Int {
+        val database = this.readableDatabase
+        val cursor =
+            database.rawQuery("SELECT MAX(id) FROM cancion", null)
+        cursor.moveToFirst()
+        return cursor.getInt(0)
+    }
+
+    fun lastFragment(type: String): Int {
+        val database = this.readableDatabase
+        val cursor =
+            database.rawQuery("SELECT MAX(id) FROM $type", null)
+        cursor.moveToFirst()
+        return  cursor.getInt(0)
     }
 
     /*fun showSongs(): Cursor? {

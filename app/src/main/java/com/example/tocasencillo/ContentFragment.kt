@@ -34,6 +34,7 @@ class ContentFragment : Fragment() {
     }
 
     private var _binding: FragmentContentBinding? = null
+
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -41,31 +42,31 @@ class ContentFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentContentBinding.inflate(inflater, container, false)
         val view = binding.root
 
         /*the first and the last chord bar
          can be changed to repeat bars*/
-        val bar1: TextView =binding.tvLine1
-        bar1.setOnClickListener{
+        val bar1: TextView = binding.tvLine1
+        bar1.setOnClickListener {
             when (bar1.text) {
                 "|" -> {
-                    bar1.setText("|:")
+                    bar1.text = "|:"
                 }
-                else -> bar1.setText("|")
+                else -> bar1.text = "|"
             }
         }
 
-        val bar5: TextView =binding.tvLine5
-        bar5.setOnClickListener{
+        val bar5: TextView = binding.tvLine5
+        bar5.setOnClickListener {
             when (bar5.text) {
                 "|" -> {
-                    bar5.setText(":|")
+                    bar5.text = ":|"
                     //bar5.autoSizeMaxTextSize()
                 }
-                else -> bar5.setText("|")
+                else -> bar5.text = "|"
             }
         }
 
@@ -73,12 +74,7 @@ class ContentFragment : Fragment() {
     }
 
     override fun onStop() {
-        if (saving==false){
-            posic--
-        }else{
-            //Go to DBB for save the song
-        }
-
+        byeFragContent()
         super.onStop()
     }
 
@@ -87,6 +83,25 @@ class ContentFragment : Fragment() {
         _binding = null
     }
 
+    private fun byeFragContent() {
+        if (!saving) {
+            posic--
+        } else {
+            val ccBar1: String = binding.tvLine1.text.toString()
+            val ccBar5: String = binding.tvLine5.text.toString()
+            val txtCC1: String = binding.etBar1.text.toString()
+            val txtCC2: String = binding.etBar2.text.toString()
+            val txtCC3: String = binding.etBar3.text.toString()
+            val txtCC4: String = binding.etBar4.text.toString()
+            MySQLiteHelper(this.requireContext()).apply {
+                saveContent(ccBar1, ccBar5, txtCC1, txtCC2, txtCC3, txtCC4)
+                saveSongFragment(lastSong(),
+                    lastFragment("contenido"),
+                    "contenido",
+                    posic)
+            }
+        }
+    }
 
     companion object {
         /**
