@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
 class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
-    context, "song_book.db", null, 23) {
+    context, "song_book.db", null, 26) {
 
     override fun onCreate(db: SQLiteDatabase?) {
 
@@ -125,17 +125,29 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
         db.insert("contenido", null, data)
     }
 
+    fun saveTitle(title: String, tempo: String, key: String) {
+        val data = ContentValues().apply {
+            put("nombre", title)
+            put("velocidad", tempo)
+            put("tonalidad", key)
+
+        }
+
+        val db = this.writableDatabase
+        db.insert("titulo", null, data)
+    }
+
     fun saveSongFragment(song: Int, fragment: Int, type: String, posic: Int) {
         val data = ContentValues().apply {
             put("id_cancion", song)
             put("id_fragmento", fragment)
-            put("tipo",type)
+            put("tipo", type)
             put("posicion", posic)
 
         }
 
         val db = this.writableDatabase
-        db.insert("cancion_fragmento",null,data)
+        db.insert("cancion_fragmento", null, data)
     }
 
     @SuppressLint("Recycle")
@@ -153,7 +165,7 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
         val cursor = database.rawQuery("SELECT MAX(id) FROM $type", null).apply {
             moveToFirst()
         }
-        return  cursor.getInt(0)
+        return cursor.getInt(0)
     }
 
     /*fun showSongs(): Cursor? {

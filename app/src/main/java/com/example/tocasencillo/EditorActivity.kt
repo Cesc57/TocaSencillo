@@ -135,8 +135,8 @@ class EditorActivity : AppCompatActivity() {
             songsDBHelper.saveSong(binding.etMainTitle.text.toString())
             for (fragment in supportFragmentManager.fragments) {
                 supportFragmentManager.beginTransaction().remove(fragment!!).commit()
-                finish()
             }
+            finish()
         } catch (e: Exception) {
             Toast.makeText(this, "ERROR, prueba otra vez a guardar", Toast.LENGTH_SHORT).show()
         }

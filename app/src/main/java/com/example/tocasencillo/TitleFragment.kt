@@ -33,14 +33,17 @@ class TitleFragment : Fragment() {
     }
 
     private var _binding: FragmentTitleBinding? = null
+
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
 
+    private val myPosic = posic
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentTitleBinding.inflate(inflater, container, false)
         val view = binding.root
@@ -48,13 +51,25 @@ class TitleFragment : Fragment() {
     }
 
     override fun onStop() {
-        if (saving ==false){
-            posic--
-        }else{
-            //Go to DB for save the song
-        }
-
+        byeFragTitle()
         super.onStop()
+    }
+
+    private fun byeFragTitle() {
+        if (!saving) {
+            posic--
+        } else {
+            val title: String = binding.title.text.toString()
+            val tempo: String = binding.tempo.text.toString()
+            val key: String = binding.tune.text.toString()
+            MySQLiteHelper(this.requireContext()).apply {
+                saveTitle(title, tempo, key)
+                saveSongFragment(lastSong(),
+                    lastFragment("titulo"),
+                    "titulo",
+                    myPosic)
+            }
+        }
     }
 
 

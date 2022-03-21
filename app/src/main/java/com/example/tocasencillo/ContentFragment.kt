@@ -39,6 +39,8 @@ class ContentFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
+    private val myPosic = posic
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -98,7 +100,7 @@ class ContentFragment : Fragment() {
                 saveSongFragment(lastSong(),
                     lastFragment("contenido"),
                     "contenido",
-                    posic)
+                    myPosic)
             }
         }
     }
