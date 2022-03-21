@@ -143,6 +143,7 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
         val cursor =
             database.rawQuery("SELECT MAX(id) FROM cancion", null)
         cursor.moveToFirst()
+        cursor.close()
         return cursor.getInt(0)
     }
 
@@ -151,6 +152,7 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
         val cursor =
             database.rawQuery("SELECT MAX(id) FROM $type", null)
         cursor.moveToFirst()
+        cursor.close()
         return  cursor.getInt(0)
     }
 
