@@ -39,6 +39,10 @@ class LabelFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
+    private val myPosic = posic
+
+    private var myId: Int = 0
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -49,17 +53,50 @@ class LabelFragment : Fragment() {
 
         binding.tvLabel.text = label
 
+        myId = when (label) {
+            "Intro" -> {
+                1
+            }
+            "Estrofa" -> {
+                2
+            }
+            "PreStrb" -> {
+                3
+            }
+            "Strb" -> {
+                4
+            }
+            "Puente" -> {
+                5
+            }
+            "Solo" -> {
+                6
+            }
+            else -> {
+                7
+            }
+        }
+
         return view
     }
 
     override fun onStop() {
-        if (saving ==false){
-            posic--
-        }else{
-            //Go to DB for save the song
-        }
-
+        byeFragLabel()
         super.onStop()
+    }
+
+    private fun byeFragLabel() {
+        if (!saving) {
+            posic--
+        } else {
+            //val title: String = (select id where = label)
+            MySQLiteHelper(this.requireContext()).apply {
+                saveSongFragment(lastSong(),
+                    myId,
+                    "etiqueta",
+                    myPosic)
+            }
+        }
     }
 
     override fun onDestroyView() {

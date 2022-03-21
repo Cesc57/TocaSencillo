@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
 class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
-    context, "song_book.db", null, 26) {
+    context, "song_book.db", null, 27) {
 
     override fun onCreate(db: SQLiteDatabase?) {
 
@@ -172,6 +172,14 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
     fun lastFragment(type: String): Int {
         val database = this.readableDatabase
         val cursor = database.rawQuery("SELECT MAX(id) FROM $type", null).apply {
+            moveToFirst()
+        }
+        return cursor.getInt(0)
+    }
+
+    fun idForLabel(tvLabel: String): Int {
+        val database = this.readableDatabase
+        val cursor = database.rawQuery("SELECT id FROM etiqueta WHERE tipo = $tvLabel", null).apply {
             moveToFirst()
         }
         return cursor.getInt(0)
