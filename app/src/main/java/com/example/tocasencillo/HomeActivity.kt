@@ -27,10 +27,11 @@ class HomeActivity : AppCompatActivity() {
         }
 
         binding.btnExit.setOnClickListener {
-
             //Delete data from sharPref
             val sharePrefs: Editor =
                 getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit()
+//OJO: Per eliminar sols alguna sharePref:
+            //sharePrefs.remove("key")
             sharePrefs.clear()
             sharePrefs.apply()
 

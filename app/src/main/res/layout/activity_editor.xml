@@ -37,6 +37,7 @@
                     android:background="@color/primaryColor"
                     android:gravity="center"
                     android:text="@string/add_frag"
+                    android:textColor="@color/black"
                     tools:ignore="TextContrastCheck" />
 
                 <TextView
@@ -48,6 +49,7 @@
                     android:background="@color/primaryColor"
                     android:gravity="center"
                     android:text="@string/save"
+                    android:textColor="@color/black"
                     tools:ignore="TextContrastCheck" />
             </LinearLayout>
 
