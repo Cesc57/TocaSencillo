@@ -7,9 +7,26 @@
     android:orientation="vertical"
     tools:context=".HomeActivity">
 
+    <SearchView
+        android:id="@+id/svSong"
+        android:autofillHints="name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="4dp"
+        android:background="@color/lightpink"/>
+
     <Space
         android:layout_width="wrap_content"
-        android:layout_height="24dp"/>
+        android:layout_height="4dp"/>
+
+    <TextView
+        android:id="@+id/mySearch"
+        android:layout_margin="16dp"
+        android:hint="@string/try_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
     <Space
         android:layout_width="wrap_content"

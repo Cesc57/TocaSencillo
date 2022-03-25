@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.SharedPreferences.*
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.SearchView
 import com.example.tocasencillo.databinding.ActivityHomeBinding
 import com.google.firebase.auth.FirebaseAuth
 
@@ -21,6 +22,22 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
+//VIDEO SEARCHVIEW:
+    //https://www.youtube.com/watch?v=oE8nZRJ9vxA&ab_channel=Foxandroid
+        binding.svSong.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                binding.mySearch.clearFocus()
+                binding.mySearch.text=query
+                return true
+            }
+
+            override fun onQueryTextChange(p0: String?): Boolean {
+                return false
+            }
+
+        })
 
         binding.btnSong.setOnClickListener {
             goEditor()
