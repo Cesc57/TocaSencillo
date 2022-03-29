@@ -35,7 +35,7 @@ class HomeActivity : AppCompatActivity() {
             null)
 
         val adapter = RecyclerViewAdapterSongs()
-        adapter.RecyclerViewAdapterSongs(this, cursor)
+        adapter.recyclerViewAdapterSongs(this, cursor)
 
         binding.recyclerSongs.setHasFixedSize(true)
         binding.recyclerSongs.layoutManager = LinearLayoutManager(this)

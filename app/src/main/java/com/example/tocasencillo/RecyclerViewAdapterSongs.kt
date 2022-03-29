@@ -14,9 +14,9 @@ class RecyclerViewAdapterSongs
     : RecyclerView.Adapter<RecyclerViewAdapterSongs.ViewHolder>() {
 
     lateinit var context: Context
-    lateinit var cursor: Cursor
+    private lateinit var cursor: Cursor
 
-    fun RecyclerViewAdapterSongs(context: Context, cursor: Cursor) {
+    fun recyclerViewAdapterSongs(context: Context, cursor: Cursor) {
         this.context = context
         this.cursor = cursor
     }
@@ -33,25 +33,23 @@ class RecyclerViewAdapterSongs
     }
 
     override fun getItemCount(): Int {
-        if (cursor == null) {
-            return 0
+        return if (cursor.count == 0) {
+            0
         } else {
-            return cursor.count
+            cursor.count
         }
     }
 
-    inner class ViewHolder : RecyclerView.ViewHolder {
+    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         val tvSong: TextView
 
-        constructor(view: View) : super(view) {
+        init {
             val bindingItemsRV = ItemRecyclerBinding.bind(view)
             tvSong = bindingItemsRV.recSong
-
             view.setOnClickListener {
                 Toast.makeText(context, "${tvSong.text}", Toast.LENGTH_SHORT).show()
             }
-
         }
     }
 
