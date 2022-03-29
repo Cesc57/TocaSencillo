@@ -7,6 +7,10 @@
     android:orientation="vertical"
     tools:context=".HomeActivity">
 
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="8dp"/>
+
     <SearchView
         android:id="@+id/svSong"
         android:autofillHints="name"
@@ -28,21 +32,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerSongs"
+        android:layout_width="match_parent"
+        android:layout_height="460dp"
+        android:layout_margin="4dp"
+        android:padding="2dp"
+        android:background="@color/lightpink"/>
+
     <Space
         android:layout_width="wrap_content"
         android:layout_height="24dp"/>
 
-    <Space
-        android:layout_width="wrap_content"
-        android:layout_height="36dp"/>
-
-    <Space
-        android:layout_width="wrap_content"
-        android:layout_height="36dp"/>
-
-    <Space
-        android:layout_width="wrap_content"
-        android:layout_height="36dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"

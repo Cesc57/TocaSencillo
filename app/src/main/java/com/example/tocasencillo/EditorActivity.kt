@@ -1,5 +1,6 @@
 package com.example.tocasencillo
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.PopupMenu
@@ -30,7 +31,8 @@ class EditorActivity : AppCompatActivity() {
         songsDBHelper.readableDatabase
 
         binding.floatDelete.setOnClickListener {
-            songsDBHelper.close()
+            val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
             finish()
         }
 
@@ -137,8 +139,10 @@ class EditorActivity : AppCompatActivity() {
             for (fragment in supportFragmentManager.fragments) {
                 supportFragmentManager.beginTransaction().remove(fragment!!).commit()
             }
-            songsDBHelper.close()
+            val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
             finish()
+            //super.onDestroy()
         } catch (e: Exception) {
             Toast.makeText(this, "ERROR, prueba otra vez a guardar", Toast.LENGTH_SHORT).show()
         }

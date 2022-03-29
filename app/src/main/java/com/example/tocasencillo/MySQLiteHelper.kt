@@ -7,44 +7,44 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
 class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
-    context, "song_book.db", null, 27) {
+    context, "song_book.db", null, 29) {
 
     override fun onCreate(db: SQLiteDatabase?) {
 
         //defining our DB
         val createSongCommand =
             """CREATE TABLE cancion
-                (id INTEGER PRIMARY KEY AUTOINCREMENT,
+                (_id INTEGER PRIMARY KEY AUTOINCREMENT,
                 nombre TEXT)"""
 
         val createTitleCommand =
             """CREATE TABLE titulo 
-                (id INTEGER PRIMARY KEY AUTOINCREMENT,
+                (_id INTEGER PRIMARY KEY AUTOINCREMENT,
                 nombre TEXT, velocidad INTEGER, tonalidad TEXT)"""
 
         val createContentCommand =
             """CREATE TABLE contenido 
-                (id INTEGER PRIMARY KEY AUTOINCREMENT,
+                (_id INTEGER PRIMARY KEY AUTOINCREMENT,
                 ccBar1 TEXT, ccBar5 TEXT, 
                 ccMusica1 TEXT,ccMusica2 TEXT, ccMusica3 TEXT, ccMusica4 TEXT )"""
 
         val createNoteCommand =
             """CREATE TABLE nota
-                (id INTEGER PRIMARY KEY AUTOINCREMENT,
+                (_id INTEGER PRIMARY KEY AUTOINCREMENT,
                 texto TEXT)"""
 
         val createTagCommand =
             """CREATE TABLE etiqueta
-                (id INTEGER PRIMARY KEY AUTOINCREMENT,
+                (_id INTEGER PRIMARY KEY AUTOINCREMENT,
                 tipo TEXT)"""
 
         val createSongFragmentCommand =
             """CREATE TABLE cancion_fragmento 
-                (id_cancion INTEGER,
-                id_fragmento INTEGER,
+                (_id_cancion INTEGER,
+                _id_fragmento INTEGER,
                 tipo TEXT,
                 posicion INTEGER,
-                FOREIGN KEY(id_cancion) REFERENCES cancion(id))"""
+                FOREIGN KEY(_id_cancion) REFERENCES cancion(_id))"""
 
 
         //exec create tables
@@ -148,8 +148,8 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
 
     fun saveSongFragment(song: Int, fragment: Int, type: String, posic: Int) {
         val data = ContentValues().apply {
-            put("id_cancion", song)
-            put("id_fragmento", fragment)
+            put("_id_cancion", song)
+            put("_id_fragmento", fragment)
             put("tipo", type)
             put("posicion", posic)
 
@@ -163,7 +163,7 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
     fun lastSong(): Int {
         val database = this.readableDatabase
         val cursor =
-            database.rawQuery("SELECT MAX(id) FROM cancion", null)
+            database.rawQuery("SELECT MAX(_id) FROM cancion", null)
         cursor.moveToFirst()
         return cursor.getInt(0)
     }
@@ -171,7 +171,7 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
     @SuppressLint("Recycle")
     fun lastFragment(type: String): Int {
         val database = this.readableDatabase
-        val cursor = database.rawQuery("SELECT MAX(id) FROM $type", null).apply {
+        val cursor = database.rawQuery("SELECT MAX(_id) FROM $type", null).apply {
             moveToFirst()
         }
         return cursor.getInt(0)

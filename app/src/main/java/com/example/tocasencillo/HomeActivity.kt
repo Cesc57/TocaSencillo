@@ -3,9 +3,12 @@ package com.example.tocasencillo
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences.*
+import android.database.Cursor
+import android.database.sqlite.SQLiteDatabase
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.SearchView
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tocasencillo.databinding.ActivityHomeBinding
 import com.google.firebase.auth.FirebaseAuth
 
@@ -17,19 +20,39 @@ enum class ProviderType {
 class HomeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHomeBinding
+    private lateinit var songsDBHelper: MySQLiteHelper
+    private lateinit var db: SQLiteDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        songsDBHelper = MySQLiteHelper(this)
+
+        db = songsDBHelper.readableDatabase
+        val cursor: Cursor = db.rawQuery(
+            "SELECT * FROM cancion ORDER BY _id",
+            null)
+
+        val adapter = RecyclerViewAdapterSongs()
+        adapter.RecyclerViewAdapterSongs(this, cursor)
+
+        binding.recyclerSongs.setHasFixedSize(true)
+        binding.recyclerSongs.layoutManager = LinearLayoutManager(this)
+        binding.recyclerSongs.adapter = adapter
 
 
 //VIDEO SEARCHVIEW:
-    //https://www.youtube.com/watch?v=oE8nZRJ9vxA&ab_channel=Foxandroid
-        binding.svSong.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+        //https://www.youtube.com/watch?v=oE8nZRJ9vxA&ab_channel=Foxandroid
+
+//VIDEO RECYCLER VIEW:
+        //https://www.youtube.com/watch?v=TKA01fXqzjg&list=PL0bfr51v6JJEh1xtggpg57wN6m5Us3cb1&index=54&ab_channel=NachoCabanes
+
+
+        binding.svSong.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 binding.mySearch.clearFocus()
-                binding.mySearch.text=query
+                binding.mySearch.text = query
                 return true
             }
 
@@ -61,6 +84,6 @@ class HomeActivity : AppCompatActivity() {
     private fun goEditor() {
         val intent = Intent(this, EditorActivity::class.java)
         startActivity(intent)
+        finish()
     }
-
 }
