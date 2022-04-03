@@ -32,7 +32,7 @@ class EditorActivity : AppCompatActivity() {
         binding.floatDelete.setOnClickListener {
             val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
-            posic=0
+            posic = 0
             finish()
         }
 
@@ -141,19 +141,18 @@ class EditorActivity : AppCompatActivity() {
             }
             val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
-            posic=0
+            posic = 0
             finish()
-            //super.onDestroy()
         } catch (e: Exception) {
             Toast.makeText(this, "ERROR, prueba otra vez a guardar", Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun loadFragment(fragment: Fragment) {
-        val fragmentIntercambio = supportFragmentManager.beginTransaction()
-        fragmentIntercambio.add(R.id.contFrag, fragment)
-        fragmentIntercambio.addToBackStack(null)
-        fragmentIntercambio.commit()
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        fragmentTransaction.add(R.id.contFrag, fragment)
+        fragmentTransaction.addToBackStack(null)
+        fragmentTransaction.commit()
         posic++
     }
 

@@ -29,22 +29,6 @@ class AuthActivity : AppCompatActivity() {
         analytics.logEvent("InitScreen", bundle)
 
 
-        //error sobre editText, aunque no m'agrada com respon...
-//        val fillName = binding.etName
-//        if (fillName.text.toString().isBlank()) {
-//            fillName.error = "Introduce tu nombre"
-//        }
-//
-//        val fillMail = binding.etMail
-//        if (fillMail.text.toString().isBlank()) {
-//            fillMail.error = "Introduce tu mail"
-//        }
-//
-//        val fillPass = binding.etPass
-//        if (fillPass.text.toString().isBlank()) {
-//            fillPass.error = "Introduce tu contraseña"
-//        }
-
         // Setup
         session()
         setup()

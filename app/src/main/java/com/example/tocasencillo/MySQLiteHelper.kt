@@ -176,10 +176,4 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
         }
         return cursor.getInt(0)
     }
-
-    /*fun showSongs(): Cursor? {
-        val db: SQLiteDatabase = this.readableDatabase
-        return db.rawQuery("""SELECT * FROM cancion""", null)
-    }*/
-
 }
