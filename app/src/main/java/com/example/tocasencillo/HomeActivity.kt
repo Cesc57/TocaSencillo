@@ -84,6 +84,5 @@ class HomeActivity : AppCompatActivity() {
     private fun goEditor() {
         val intent = Intent(this, EditorActivity::class.java)
         startActivity(intent)
-        finish()
     }
 }
