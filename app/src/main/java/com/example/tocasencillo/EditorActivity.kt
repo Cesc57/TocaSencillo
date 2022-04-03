@@ -32,6 +32,7 @@ class EditorActivity : AppCompatActivity() {
         binding.floatDelete.setOnClickListener {
             val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
+            posic=0
             finish()
         }
 
@@ -140,6 +141,7 @@ class EditorActivity : AppCompatActivity() {
             }
             val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
+            posic=0
             finish()
             //super.onDestroy()
         } catch (e: Exception) {
