@@ -23,23 +23,17 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var songsDBHelper: MySQLiteHelper
     private lateinit var db: SQLiteDatabase
 
+    companion object{
+        val me = HomeActivity
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
         songsDBHelper = MySQLiteHelper(this)
 
-        db = songsDBHelper.readableDatabase
-        val cursor: Cursor = db.rawQuery(
-            "SELECT * FROM cancion ORDER BY _id",
-            null)
-
-        val adapter = RecyclerViewAdapterSongs()
-        adapter.recyclerViewAdapterSongs(this, cursor)
-
-        binding.recyclerSongs.setHasFixedSize(true)
-        binding.recyclerSongs.layoutManager = LinearLayoutManager(this)
-        binding.recyclerSongs.adapter = adapter
+        fillRecyclerView()
 
 
 //VIDEO SEARCHVIEW:
@@ -71,7 +65,8 @@ class HomeActivity : AppCompatActivity() {
             val sharePrefs: Editor =
                 getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit()
 //OJO: Per eliminar sols alguna sharePref:
-            //sharePrefs.remove("key")
+            //sharePrefs.remove("mail")
+            //sharePrefs.remove("provider")
             sharePrefs.clear()
             sharePrefs.apply()
 
@@ -81,8 +76,23 @@ class HomeActivity : AppCompatActivity() {
 
     }
 
+    private fun fillRecyclerView() {
+        db = songsDBHelper.readableDatabase
+        val cursor: Cursor = db.rawQuery(
+            "SELECT * FROM cancion ORDER BY _id",
+            null)
+
+        val adapter = RecyclerViewAdapterSongs()
+        adapter.recyclerViewAdapterSongs(this, cursor)
+
+        binding.recyclerSongs.setHasFixedSize(true)
+        binding.recyclerSongs.layoutManager = LinearLayoutManager(this)
+        binding.recyclerSongs.adapter = adapter
+    }
+
     private fun goEditor() {
         val intent = Intent(this, EditorActivity::class.java)
         startActivity(intent)
+        finish()
     }
 }
