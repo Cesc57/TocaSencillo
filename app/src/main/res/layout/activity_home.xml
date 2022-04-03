@@ -19,7 +19,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="4dp"
-        android:background="@color/lightpink"/>
+        android:background="@drawable/search_bar_border"/>
 
     <Space
         android:layout_width="wrap_content"
@@ -37,8 +37,7 @@
         android:layout_width="match_parent"
         android:layout_height="460dp"
         android:layout_margin="4dp"
-        android:padding="2dp"
-        android:background="@color/lightpink"/>
+        android:background="@drawable/recycler_border"/>
 
     <Space
         android:layout_width="wrap_content"

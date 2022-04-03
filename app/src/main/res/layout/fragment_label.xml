@@ -9,14 +9,15 @@
     <TextView
         android:id="@+id/tvLabel"
         android:layout_width="wrap_content"
-        android:layout_height="12dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="6dp"
-        android:background="@color/primaryLightColor"
+        android:background="@drawable/label_border"
         android:textColor="@color/black"
         android:text="@string/tag"
         android:textSize="10sp"
         android:textStyle="bold"
-        tools:ignore="SmallSp" />
+        android:textAlignment="center"
+        tools:ignore="SmallSp"/>
 
 </LinearLayout>
