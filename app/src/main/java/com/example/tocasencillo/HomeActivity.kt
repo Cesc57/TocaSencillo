@@ -23,10 +23,6 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var songsDBHelper: MySQLiteHelper
     private lateinit var db: SQLiteDatabase
 
-    companion object{
-        val me = HomeActivity
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)

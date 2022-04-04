@@ -1,6 +1,7 @@
 package com.example.tocasencillo
 
 import android.content.Context
+import android.content.Intent
 import android.database.Cursor
 import android.view.LayoutInflater
 import android.view.View
@@ -24,6 +25,7 @@ class RecyclerViewAdapterSongs
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         return ViewHolder(inflater.inflate(R.layout.item_recycler, parent, false))
+
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -40,6 +42,13 @@ class RecyclerViewAdapterSongs
         }
     }
 
+    private fun reassembleSong(context: Context, idSong: String) {
+        val intent = Intent(context, AssemblyActivity::class.java)
+        intent.putExtra("idSong", idSong)
+        context.startActivity(intent)
+        //context.startActivity(Intent(context, AuthActivity::class.java))
+    }
+
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         val tvSong: TextView
@@ -48,6 +57,8 @@ class RecyclerViewAdapterSongs
             val bindingItemsRV = ItemRecyclerBinding.bind(view)
             tvSong = bindingItemsRV.recSong
             view.setOnClickListener {
+//HOLA
+                reassembleSong(context, cursor.getString(0))
                 Toast.makeText(context, "${tvSong.text}", Toast.LENGTH_SHORT).show()
             }
         }
