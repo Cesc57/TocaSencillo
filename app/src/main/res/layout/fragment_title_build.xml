@@ -5,7 +5,7 @@
     android:layout_height="60dp"
     android:layout_gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context=".TitleFragment">
+    tools:context=".TitleBuild">
 
 
     <LinearLayout
@@ -16,35 +16,32 @@
         android:weightSum="13"
         tools:ignore="UselessParent">
 
-        <EditText
+        <TextView
             android:id="@+id/tempo"
             android:layout_width="60dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:autofillHints="tempo"
             android:gravity="center"
-            android:hint="@string/default_tempo"
-            android:inputType="number" />
+            android:hint="@string/default_tempo" />
 
-        <EditText
+        <TextView
             android:id="@+id/title"
             android:layout_width="260dp"
             android:layout_height="match_parent"
             android:layout_weight="8"
             android:gravity="center"
             android:hint="@string/default_song"
-            android:importantForAutofill="no"
-            android:inputType="text" />
+            android:importantForAutofill="auto" />
 
-        <EditText
+        <TextView
             android:id="@+id/tune"
             android:layout_width="90dp"
             android:layout_height="match_parent"
             android:layout_weight="3"
             android:autofillHints="tune"
             android:gravity="center"
-            android:hint="@string/default_tune"
-            android:inputType="textCapCharacters" />
+            android:hint="@string/default_tune" />
 
     </LinearLayout>
 

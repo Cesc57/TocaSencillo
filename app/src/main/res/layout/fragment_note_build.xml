@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/myLayout"
+    tools:context=".NoteFragment">
+
+    <TextView
+        android:id="@+id/txtNote"
+        android:layout_width="match_parent"
+        android:minWidth="60dp"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:hint="@string/text_note"
+        android:gravity="center"
+        android:importantForAutofill="no" />
+
+</FrameLayout>
