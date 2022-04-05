@@ -21,7 +21,10 @@ class HomeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHomeBinding
     private lateinit var songsDBHelper: MySQLiteHelper
-    private lateinit var db: SQLiteDatabase
+    companion object{
+        private lateinit var db: SQLiteDatabase
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

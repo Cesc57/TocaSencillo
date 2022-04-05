@@ -1,10 +1,12 @@
 package com.example.tocasencillo
 
 import android.content.Intent
+import android.database.Cursor
 import android.os.Bundle
 import android.widget.PopupMenu
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.tocasencillo.databinding.ActivityEditorBinding
@@ -40,8 +42,14 @@ class EditorActivity : AppCompatActivity() {
             if (binding.etMainTitle.text.toString() == "") {
                 Toast.makeText(this, "Pon nombre a tu canción", Toast.LENGTH_SHORT).show()
             } else {
-                saving = true
-                saveSong()
+                if (!checkRepeatedSong(binding.etMainTitle.text.toString())) {
+                    saving = true
+                    saveSong()
+                } else {
+                    Toast.makeText(this, "Esta canción ya existe", Toast.LENGTH_SHORT).show()
+                    showAlert()
+                }
+
             }
 
         }
@@ -130,6 +138,38 @@ class EditorActivity : AppCompatActivity() {
             menuPopupMenu.show()
         }
 
+    }
+
+    private fun showAlert() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("ERROR")
+        builder.setMessage("Esta canción ya existe.\nPrueba otro nombre")
+        builder.setPositiveButton("OK", null)
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
+    }
+
+    private fun checkRepeatedSong(songName: String): Boolean {
+        var repeatedSong = false
+        val db = songsDBHelper.readableDatabase
+
+        val cursor: Cursor = db.rawQuery(
+            "SELECT nombre FROM cancion ORDER BY _id",
+            null)
+
+        cursor.moveToFirst()
+
+        while (!cursor.isAfterLast()) {
+            val songCursor: String = cursor.getString(0)
+
+            if (songCursor == songName) {
+                repeatedSong = true
+            }
+            cursor.moveToNext()
+        }
+
+        cursor.close()
+        return repeatedSong
     }
 
     private fun saveSong() {
