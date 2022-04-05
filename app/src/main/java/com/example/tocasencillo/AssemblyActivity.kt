@@ -13,7 +13,7 @@ class AssemblyActivity : AppCompatActivity() {
         binding = ActivityAssemblyBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val mySong: String = intent.getStringExtra("samplename").toString()
+        val mySong: String = intent.getStringExtra("songName").toString()
 
         binding.myAssembledSong.text = mySong
 

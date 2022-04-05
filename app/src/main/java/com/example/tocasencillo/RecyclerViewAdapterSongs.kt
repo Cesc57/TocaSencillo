@@ -42,11 +42,10 @@ class RecyclerViewAdapterSongs
         }
     }
 
-    private fun reassembleSong(context: Context, idSong: String) {
+    private fun reassembleSong(context: Context, songName: String) {
         val intent = Intent(context, AssemblyActivity::class.java)
-        intent.putExtra("idSong", idSong)
+        intent.putExtra("songName", songName)
         context.startActivity(intent)
-        //context.startActivity(Intent(context, AuthActivity::class.java))
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -56,11 +55,12 @@ class RecyclerViewAdapterSongs
         init {
             val bindingItemsRV = ItemRecyclerBinding.bind(view)
             tvSong = bindingItemsRV.recSong
+
             view.setOnClickListener {
-//HOLA
-                reassembleSong(context, cursor.getString(0))
+                reassembleSong(context, tvSong.text.toString())
                 Toast.makeText(context, "${tvSong.text}", Toast.LENGTH_SHORT).show()
             }
         }
     }
+
 }
