@@ -1,7 +1,7 @@
 package com.example.tocasencillo
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.example.tocasencillo.databinding.ActivityAssemblyBinding
 
 class AssemblyActivity : AppCompatActivity() {
@@ -16,6 +16,14 @@ class AssemblyActivity : AppCompatActivity() {
         val mySong: String = intent.getStringExtra("songName").toString()
 
         binding.myAssembledSong.text = mySong
+
+
+    //TODO:
+        //Search song (for name + id)
+        //Search all cancion_fragmento with id_song
+        // _id_fragmento, tipo TEXT -> Create Fragment (if (tipo = "tipo"))
+        //onCreate Fragment -> select * from "tipoQueSea" and .text in all fields
+
 
     }
 }

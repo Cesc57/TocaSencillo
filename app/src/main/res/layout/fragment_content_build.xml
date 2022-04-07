@@ -6,7 +6,7 @@
     android:id="@+id/viewRoot"
     android:orientation="horizontal"
     android:weightSum="29"
-    tools:context=".ContentFragment">
+    tools:context=".ContentBuild">
 
     <TextView
         android:id="@+id/tvLine1"
