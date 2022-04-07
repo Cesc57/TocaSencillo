@@ -15,7 +15,7 @@ class AssemblyActivity : AppCompatActivity() {
 
         val mySong: String = intent.getStringExtra("songName").toString()
 
-        binding.myAssembledSong.text = mySong
+        binding.tvMainTitle.text = mySong
 
 
     //TODO:

@@ -8,13 +8,17 @@
 
     <Space
         android:layout_width="wrap_content"
-        android:layout_height="32dp"/>
+        android:layout_height="12dp" />
 
     <TextView
-        android:id="@+id/myAssembledSong"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="@string/default_song"
-        android:layout_margin="12dp"/>
+        android:id="@+id/tvMainTitle"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_margin="8dp"
+        android:background="@color/lightpink"
+        android:gravity="center|center_vertical"
+        android:text="@string/default_song"
+        android:importantForAutofill="no"
+        android:textColor="@color/black" />
 
 </LinearLayout>

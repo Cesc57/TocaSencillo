@@ -61,7 +61,7 @@
                 android:layout_margin="8dp"
                 android:background="@color/lightpink"
                 android:gravity="center|center_vertical"
-                android:hint="@string/song_title"
+                android:hint="@string/default_song"
                 android:importantForAutofill="no"
                 android:textColorHint="@color/grayHint"
                 tools:ignore="TextFields,TouchTargetSizeCheck,TextContrastCheck" />
