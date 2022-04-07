@@ -32,6 +32,9 @@ class EditorActivity : AppCompatActivity() {
         songsDBHelper.readableDatabase
 
         binding.floatDelete.setOnClickListener {
+            for (fragment in supportFragmentManager.fragments) {
+                supportFragmentManager.beginTransaction().remove(fragment!!).commit()
+            }
             val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
             posic = 0
