@@ -70,16 +70,6 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
 
     }
 
-    /*private fun saveTags(tag: String) {
-        val data = ContentValues().apply {
-            put("tag", tag)
-        }
-
-        //Abrir BDD en modo escritura:
-        val myDB = this.writableDatabase
-        myDB.insert("etiqueta",null, data)
-    }*/
-
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         val dropTableSong = "DROP TABLE IF EXISTS cancion"
         db!!.execSQL(dropTableSong)
@@ -159,12 +149,14 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
         db.insert("cancion_fragmento", null, data)
     }
 
+
     @SuppressLint("Recycle")
     fun lastSong(): Int {
         val database = this.readableDatabase
         val cursor =
-            database.rawQuery("SELECT MAX(_id) FROM cancion", null)
-        cursor.moveToFirst()
+            database.rawQuery("SELECT MAX(_id) FROM cancion", null).apply {
+                moveToFirst()
+            }
         return cursor.getInt(0)
     }
 
