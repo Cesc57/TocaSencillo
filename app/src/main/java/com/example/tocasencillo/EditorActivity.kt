@@ -34,6 +34,10 @@ class EditorActivity : AppCompatActivity() {
         songsDBHelper = MySQLiteHelper(this)
         songsDBHelper.readableDatabase
 
+        tryNewFragments(fragment = BoxRepeatFragment())
+        tryNewFragments(fragment = RepeatTimeFragment())
+        tryNewFragments(fragment = AlternateEndingFragment())
+
         binding.floatDelete.setOnClickListener {
             for (fragment in supportFragmentManager.fragments) {
                 supportFragmentManager.beginTransaction().remove(fragment!!).commit()
@@ -131,8 +135,24 @@ class EditorActivity : AppCompatActivity() {
                         }
                     }
 
+                    "Final Alternativo" -> {
+                        loadFragment(fragment = AlternateEndingFragment())
+                    }
+
                     "Texto" -> {
                         loadFragment(fragment = NoteFragment())
+                    }
+
+                    "x3 veces" -> {
+                        loadFragment(fragment = RepeatTimeFragment())
+                    }
+
+                    "x4 veces" -> {
+                        loadFragment(fragment = RepeatTimeFragment())
+                    }
+
+                    "Casilla" -> {
+                        loadFragment(fragment = BoxRepeatFragment())
                     }
 
                     else -> {
@@ -144,6 +164,13 @@ class EditorActivity : AppCompatActivity() {
             menuPopupMenu.show()
         }
 
+    }
+
+    private fun tryNewFragments(fragment: Fragment) {
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        fragmentTransaction.add(R.id.contFrag, fragment)
+        fragmentTransaction.addToBackStack(null)
+        fragmentTransaction.commit()
     }
 
     private fun removeAllFragments() {
@@ -178,7 +205,7 @@ class EditorActivity : AppCompatActivity() {
 
         cursor.moveToFirst()
 
-        while (!cursor.isAfterLast()) {
+        while (!cursor.isAfterLast) {
             val songCursor: String = cursor.getString(0)
 
             if (songCursor == songName) {

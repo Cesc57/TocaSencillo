@@ -59,6 +59,27 @@
             <item
                 android:id="@+id/cc16"
                 android:title="@string/_16_cc" />
+
+            <item
+                android:id="@+id/ccAlternate"
+                android:title="@string/alternate_ending" />
+
+        </menu>
+    </item>
+
+    <item
+        android:id="@+id/itRepeat"
+        android:title="@string/repeat">
+        <menu>
+            <item
+                android:id="@+id/x3Box"
+                android:title="x3 veces" />
+            <item
+                android:id="@+id/x4Box"
+                android:title="x4 veces" />
+            <item
+                android:id="@+id/xTimes"
+                android:title="@string/box" />
         </menu>
     </item>
 
