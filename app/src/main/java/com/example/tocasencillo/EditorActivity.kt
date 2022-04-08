@@ -28,36 +28,27 @@ class EditorActivity : AppCompatActivity() {
         binding = ActivityEditorBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        saving= false
-        removeAllFragments()
+        posic = 0
+        saving = false
 
         songsDBHelper = MySQLiteHelper(this)
         songsDBHelper.readableDatabase
 
-        tryNewFragments(fragment = BoxRepeatFragment())
-        tryNewFragments(fragment = RepeatTimeFragment())
-        tryNewFragments(fragment = AlternateEndingFragment())
-
         binding.floatDelete.setOnClickListener {
-            for (fragment in supportFragmentManager.fragments) {
-                supportFragmentManager.beginTransaction().remove(fragment!!).commit()
-            }
             val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
-            posic = 0
             finish()
         }
 
         binding.btnSaveSong.setOnClickListener {
             if (binding.etMainTitle.text.toString() == "") {
-                Toast.makeText(this, "Pon nombre a tu canción", Toast.LENGTH_SHORT).show()
+                showAlert("Canción sin nombre","Ponle título a tu canción")
             } else {
                 if (!checkRepeatedSong(binding.etMainTitle.text.toString())) {
                     saving = true
                     saveSong()
                 } else {
-                    Toast.makeText(this, "Esta canción ya existe", Toast.LENGTH_SHORT).show()
-                    showAlert()
+                    showAlert("Esta canción ya existe","Prueba con otro nombre")
                 }
 
             }
@@ -166,30 +157,10 @@ class EditorActivity : AppCompatActivity() {
 
     }
 
-    private fun tryNewFragments(fragment: Fragment) {
-        val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.add(R.id.contFrag, fragment)
-        fragmentTransaction.addToBackStack(null)
-        fragmentTransaction.commit()
-    }
-
-    private fun removeAllFragments() {
-        supportFragmentManager.fragments.let {
-            if (it.isNotEmpty()) {
-                supportFragmentManager.beginTransaction().apply {
-                    for (fragment in it) {
-                        remove(fragment)
-                    }
-                    commit()
-                }
-            }
-        }
-    }
-
-    private fun showAlert() {
+    private fun showAlert(title: String,content: String) {
         val builder = AlertDialog.Builder(this)
-        builder.setTitle("ERROR")
-        builder.setMessage("Esta canción ya existe.\nPrueba otro nombre")
+        builder.setTitle(title)
+        builder.setMessage(content)
         builder.setPositiveButton("OK", null)
         val dialog: AlertDialog = builder.create()
         dialog.show()
@@ -201,7 +172,8 @@ class EditorActivity : AppCompatActivity() {
 
         val cursor: Cursor = db.rawQuery(
             "SELECT nombre FROM cancion ORDER BY _id",
-            null)
+            null
+        )
 
         cursor.moveToFirst()
 
