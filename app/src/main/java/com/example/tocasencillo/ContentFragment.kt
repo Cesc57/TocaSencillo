@@ -1,13 +1,13 @@
 package com.example.tocasencillo
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import com.example.tocasencillo.EditorActivity.Companion.saving
+import androidx.fragment.app.Fragment
 import com.example.tocasencillo.EditorActivity.Companion.posic
+import com.example.tocasencillo.EditorActivity.Companion.saving
 import com.example.tocasencillo.databinding.FragmentContentBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -86,9 +86,7 @@ class ContentFragment : Fragment() {
     }
 
     private fun byeFragContent() {
-        if (!saving) {
-            posic--
-        } else {
+        if (saving) {
             val ccBar1: String = binding.tvLine1.text.toString()
             val ccBar5: String = binding.tvLine5.text.toString()
             val txtCC1: String = binding.etBar1.text.toString()
@@ -102,6 +100,8 @@ class ContentFragment : Fragment() {
                     "contenido",
                     myPosic)
             }
+        } else {
+            posic--
         }
     }
 

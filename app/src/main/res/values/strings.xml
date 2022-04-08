@@ -20,7 +20,6 @@
     <string name="configuration">Configuración</string>
     <string name="add_frag">AGREGAR</string>
     <string name="save">GUARDAR</string>
-    <string name="song_title">Mi Canción</string>
     <string name="tag">tag</string>
     <string name="text_note">Introduce tu texto</string>
     <string name="title">Titulo</string>
@@ -39,6 +38,4 @@
     <string name="_16_cc">16 cc</string>
     <string name="text">Texto</string>
     <string name="try_search">Provant a buscar…</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

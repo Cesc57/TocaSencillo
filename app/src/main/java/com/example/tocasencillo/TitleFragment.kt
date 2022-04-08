@@ -1,12 +1,12 @@
 package com.example.tocasencillo
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.tocasencillo.EditorActivity.Companion.saving
+import androidx.fragment.app.Fragment
 import com.example.tocasencillo.EditorActivity.Companion.posic
+import com.example.tocasencillo.EditorActivity.Companion.saving
 import com.example.tocasencillo.databinding.FragmentTitleBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -56,9 +56,7 @@ class TitleFragment : Fragment() {
     }
 
     private fun byeFragTitle() {
-        if (!saving) {
-            posic--
-        } else {
+        if (saving) {
             val title: String = binding.title.text.toString()
             val tempo: String = binding.tempo.text.toString()
             val key: String = binding.tune.text.toString()
@@ -69,6 +67,8 @@ class TitleFragment : Fragment() {
                     "titulo",
                     myPosic)
             }
+        } else {
+            posic--
         }
     }
 
