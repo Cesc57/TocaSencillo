@@ -28,6 +28,9 @@ class EditorActivity : AppCompatActivity() {
         binding = ActivityEditorBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        saving= false
+        removeAllFragments()
+
         songsDBHelper = MySQLiteHelper(this)
         songsDBHelper.readableDatabase
 
@@ -141,6 +144,19 @@ class EditorActivity : AppCompatActivity() {
             menuPopupMenu.show()
         }
 
+    }
+
+    private fun removeAllFragments() {
+        supportFragmentManager.fragments.let {
+            if (it.isNotEmpty()) {
+                supportFragmentManager.beginTransaction().apply {
+                    for (fragment in it) {
+                        remove(fragment)
+                    }
+                    commit()
+                }
+            }
+        }
     }
 
     private fun showAlert() {
