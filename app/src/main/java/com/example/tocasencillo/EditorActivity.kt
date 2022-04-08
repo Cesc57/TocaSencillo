@@ -28,8 +28,7 @@ class EditorActivity : AppCompatActivity() {
         binding = ActivityEditorBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        posic = 0
-        saving = false
+        restartValues()
 
         songsDBHelper = MySQLiteHelper(this)
         songsDBHelper.readableDatabase
@@ -155,6 +154,11 @@ class EditorActivity : AppCompatActivity() {
             menuPopupMenu.show()
         }
 
+    }
+
+    private fun restartValues() {
+        posic = 0
+        saving = false
     }
 
     private fun showAlert(title: String,content: String) {
