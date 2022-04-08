@@ -46,4 +46,6 @@
     <string name="repeat">Repetición</string>
     <string name="x_times">xVeces</string>
     <string name="box">Casilla</string>
+    <string name="x3_times">x3 veces</string>
+    <string name="x4_times">x4 veces</string>
 </resources>

@@ -73,10 +73,10 @@
         <menu>
             <item
                 android:id="@+id/x3Box"
-                android:title="x3 veces" />
+                android:title="@string/x3_times" />
             <item
                 android:id="@+id/x4Box"
-                android:title="x4 veces" />
+                android:title="@string/x4_times" />
             <item
                 android:id="@+id/xTimes"
                 android:title="@string/box" />
