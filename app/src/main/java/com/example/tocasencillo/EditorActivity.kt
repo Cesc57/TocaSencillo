@@ -221,4 +221,13 @@ class EditorActivity : AppCompatActivity() {
         posic++
     }
 
+    override fun onBackPressed() {
+        if (supportFragmentManager.fragments.isEmpty()){
+            val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+        super.onBackPressed()
+    }
+
 }
