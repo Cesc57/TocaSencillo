@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="8dp"
-    tools:context=".BoxRepeatFragment">
+    tools:context=".BoxRepeatBuildFragment">
 
     <Space
         android:layout_width="198dp"
@@ -24,10 +24,7 @@
         android:paddingStart="0dp"
         android:paddingEnd="8dp"
         tools:ignore="LabelFor"
-        android:layout_marginStart="0dp"
-        android:layout_marginEnd="7dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="4dp"
+        android:layout_margin="4dp"
         android:background="@drawable/repeat_border"/>
 
 </LinearLayout>

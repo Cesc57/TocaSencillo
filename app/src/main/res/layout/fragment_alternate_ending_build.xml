@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".AlternateEndingBuildFragment">
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="242" />
+
+    <TextView
+        android:id="@+id/etBar1"
+        android:layout_width="77dp"
+        android:layout_height="match_parent"
+        android:layout_weight="6"
+        android:autoSizeTextType="uniform"
+        android:autofillHints="chord"
+        android:inputType="none"
+        android:singleLine="true"
+        android:text="@string/empty_bar"
+        android:textStyle="bold"
+        tools:ignore="LabelFor"
+        tools:targetApi="o" />
+
+    <TextView
+        android:id="@+id/tvLine1"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        android:padding="2sp"
+        android:text="@string/bar"
+        android:textSize="40sp" />
+
+    <TextView
+        android:id="@+id/etBar2"
+        android:layout_width="77dp"
+        android:layout_height="match_parent"
+        android:layout_weight="6"
+        android:autoSizeTextType="uniform"
+        android:autofillHints="chord"
+        android:inputType="none"
+        android:singleLine="true"
+        android:text="@string/empty_bar"
+        android:textStyle="bold"
+        tools:ignore="LabelFor"
+        tools:targetApi="o" />
+
+    <TextView
+        android:id="@+id/tvLine2"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        android:padding="2sp"
+        android:text="@string/bar"
+        android:textSize="40sp" />
+
+</LinearLayout>
