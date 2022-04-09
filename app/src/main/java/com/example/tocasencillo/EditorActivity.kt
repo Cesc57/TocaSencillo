@@ -18,6 +18,7 @@ class EditorActivity : AppCompatActivity() {
     companion object {
         var posic: Int = 0
         var label: String = "tag"
+        var reps: String = "x3"
         var saving = false   //In clickListener from btnSaveSong, this value change to true
         lateinit var songsDBHelper: MySQLiteHelper
 
@@ -134,10 +135,12 @@ class EditorActivity : AppCompatActivity() {
                     }
 
                     "x3 veces" -> {
+                        reps = "x3"
                         loadFragment(fragment = RepeatTimeFragment())
                     }
 
                     "x4 veces" -> {
+                        reps = "x4"
                         loadFragment(fragment = RepeatTimeFragment())
                     }
 

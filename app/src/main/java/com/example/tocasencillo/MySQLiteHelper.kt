@@ -7,7 +7,8 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
 class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
-    context, "cancionero.db", null, 3) {
+    context, "cancionero.db", null, 6
+) {
 
     override fun onCreate(db: SQLiteDatabase?) {
 
@@ -46,6 +47,22 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
                 posicion INTEGER,
                 FOREIGN KEY(_id_cancion) REFERENCES cancion(_id))"""
 
+        val createRepeatCommand =
+            """CREATE TABLE repeticion
+                (_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                veces TEXT)"""
+
+        val createBoxRepeatCommand =
+            """CREATE TABLE caja_repeticion
+                (_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                texto TEXT)"""
+
+        val createAlternateEndingCommand =
+            """CREATE TABLE final_alternativo 
+                (_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                ccBar2 TEXT, 
+                ccMusica1 TEXT,ccMusica2 TEXT)"""
+
 
         //exec create tables
         with(db) {
@@ -55,11 +72,15 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
             this.execSQL(createNoteCommand)
             this.execSQL(createTagCommand)
             this.execSQL(createSongFragmentCommand)
+            this.execSQL(createRepeatCommand)
+            this.execSQL(createBoxRepeatCommand)
+            this.execSQL(createAlternateEndingCommand)
         }
 
-        val tags = arrayOf("Intro", "Estrofa", "PreStrb", "Strb",
-            "Puente", "Solo", "Final")
-
+        val tags = arrayOf(
+            "Intro", "Estrofa", "PreStrb", "Strb",
+            "Puente", "Solo", "Final"
+        )
         for (tag in tags) {
             val insertTags = """INSERT INTO etiqueta (tipo) 
                 VALUES ('$tag')"""
@@ -68,6 +89,14 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
             }
         }
 
+        val reps = arrayOf("x3", "x4")
+        for (rep in reps) {
+            val insertReps = """INSERT INTO repeticion (veces) 
+                VALUES ('$rep')"""
+            with(db) {
+                this!!.execSQL(insertReps)
+            }
+        }
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
@@ -83,6 +112,12 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
         db.execSQL(dropTableLabel)
         val dropTableSongFragment = "DROP TABLE IF EXISTS cancion_fragmento"
         db.execSQL(dropTableSongFragment)
+        val dropTableRepeat = "DROP TABLE IF EXISTS repeticion"
+        db.execSQL(dropTableRepeat)
+        val dropTableBoxRepeat = "DROP TABLE IF EXISTS caja_repeticion"
+        db.execSQL(dropTableBoxRepeat)
+        val dropAlternateEndingRepeat = "DROP TABLE IF EXISTS final_alternativo"
+        db.execSQL(dropAlternateEndingRepeat)
         onCreate(db)
     }
 
@@ -115,6 +150,17 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
         db.insert("contenido", null, data)
     }
 
+    fun saveAlternateEnd(ccBar2: String, txtCC1: String, txtCC2: String) {
+        val data = ContentValues().apply {
+            put("ccBar2", ccBar2)
+            put("ccMusica1", txtCC1)
+            put("ccMusica2", txtCC2)
+        }
+
+        val db = this.writableDatabase
+        db.insert("final_alternativo", null, data)
+    }
+
     fun saveTitle(title: String, tempo: String, key: String) {
         val data = ContentValues().apply {
             put("nombre", title)
@@ -134,6 +180,15 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
 
         val db = this.writableDatabase
         db.insert("nota", null, data)
+    }
+
+    fun saveBoxRepeat(boxText: String) {
+        val data = ContentValues().apply {
+            put("texto", boxText)
+        }
+
+        val db = this.writableDatabase
+        db.insert("caja_repeticion", null, data)
     }
 
     fun saveSongFragment(song: Int, fragment: Int, type: String, posic: Int) {
@@ -168,5 +223,4 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
         }
         return cursor.getInt(0)
     }
-
 }

@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.tocasencillo.EditorActivity.Companion.posic
+import com.example.tocasencillo.EditorActivity.Companion.reps
 import com.example.tocasencillo.databinding.FragmentRepeatTimeBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -31,9 +33,14 @@ class RepeatTimeFragment : Fragment() {
     }
 
     private var _binding: FragmentRepeatTimeBinding? = null
+
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+
+    private val myPosic = posic
+
+    private var myId: Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,7 +48,42 @@ class RepeatTimeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentRepeatTimeBinding.inflate(inflater, container, false)
-        return binding.root
+        val view = binding.root
+
+        binding.tvTimes.text = reps
+
+        myId = when (reps) {
+            "x3" -> {
+                1
+            }
+            else -> {
+                2
+
+            }
+        }
+
+        return view
+    }
+
+    override fun onStop() {
+        byeFragRepeatTime()
+        super.onStop()
+    }
+
+    private fun byeFragRepeatTime() {
+        if (!EditorActivity.saving) {
+            posic--
+        } else {
+            //val title: String = (select id where = label)
+            MySQLiteHelper(this.requireContext()).apply {
+                saveSongFragment(
+                    lastSong(),
+                    myId,
+                    "repeticion",
+                    myPosic
+                )
+            }
+        }
     }
 
     override fun onDestroyView() {

@@ -50,12 +50,7 @@ class NoteFragment : Fragment() {
     }
 
     override fun onStop() {
-        if (!saving) {
-            posic--
-        } else {
-            byeFragNote()
-        }
-
+        byeFragNote()
         super.onStop()
     }
 

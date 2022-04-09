@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.tocasencillo.EditorActivity.Companion.posic
 import com.example.tocasencillo.databinding.FragmentBoxRepeatBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -31,9 +32,12 @@ class BoxRepeatFragment : Fragment() {
     }
 
     private var _binding: FragmentBoxRepeatBinding? = null
+
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+
+    private val myPosic = posic
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,6 +46,28 @@ class BoxRepeatFragment : Fragment() {
     ): View {
         _binding = FragmentBoxRepeatBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onStop() {
+        byeFragBoxRepeat()
+        super.onStop()
+    }
+
+    private fun byeFragBoxRepeat() {
+        if (EditorActivity.saving) {
+            val note: String = binding.rptText.text.toString()
+            MySQLiteHelper(this.requireContext()).apply {
+                saveBoxRepeat(note)
+                saveSongFragment(
+                    lastSong(),
+                    lastFragment("caja_repeticion"),
+                    "caja_repeticion",
+                    myPosic
+                )
+            }
+        } else {
+            posic--
+        }
     }
 
     override fun onDestroyView() {

@@ -1,13 +1,13 @@
 package com.example.tocasencillo
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.tocasencillo.EditorActivity.Companion.saving
+import androidx.fragment.app.Fragment
 import com.example.tocasencillo.EditorActivity.Companion.label
 import com.example.tocasencillo.EditorActivity.Companion.posic
+import com.example.tocasencillo.EditorActivity.Companion.saving
 import com.example.tocasencillo.databinding.FragmentLabelBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -91,10 +91,12 @@ class LabelFragment : Fragment() {
         } else {
             //val title: String = (select id where = label)
             MySQLiteHelper(this.requireContext()).apply {
-                saveSongFragment(lastSong(),
+                saveSongFragment(
+                    lastSong(),
                     myId,
                     "etiqueta",
-                    myPosic)
+                    myPosic
+                )
             }
         }
     }
