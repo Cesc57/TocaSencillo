@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.tocasencillo.EditorActivity.Companion.posic
 import com.example.tocasencillo.EditorActivity.Companion.saving
+import com.example.tocasencillo.MySQLiteHelper.Companion.NOTE_TABLE
 import com.example.tocasencillo.databinding.FragmentNoteBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -60,8 +61,8 @@ class NoteFragment : Fragment() {
             MySQLiteHelper(this.requireContext()).apply {
                 saveNote(note)
                 saveSongFragment(lastSong(),
-                    lastFragment("nota"),
-                    "nota",
+                    lastFragment(NOTE_TABLE),
+                    NOTE_TABLE,
                     myPosic)
             }
         } else {

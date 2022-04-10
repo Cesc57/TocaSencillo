@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="8dp"
     android:orientation="vertical"
-    tools:context=".RepeatTimeFragment">
+    tools:context=".RepeatFragment">
 
     <TextView
         android:id="@+id/tvTimes"

@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.tocasencillo.EditorActivity.Companion.posic
 import com.example.tocasencillo.EditorActivity.Companion.saving
+import com.example.tocasencillo.MySQLiteHelper.Companion.CONTENT_TABLE
 import com.example.tocasencillo.databinding.FragmentContentBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -96,8 +97,8 @@ class ContentFragment : Fragment() {
             MySQLiteHelper(this.requireContext()).apply {
                 saveContent(ccBar1, ccBar5, txtCC1, txtCC2, txtCC3, txtCC4)
                 saveSongFragment(lastSong(),
-                    lastFragment("contenido"),
-                    "contenido",
+                    lastFragment(CONTENT_TABLE),
+                    CONTENT_TABLE,
                     myPosic)
             }
         } else {

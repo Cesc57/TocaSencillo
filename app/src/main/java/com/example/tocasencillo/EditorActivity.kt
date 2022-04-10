@@ -9,6 +9,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.example.tocasencillo.MySQLiteHelper.Companion.ID_DB
+import com.example.tocasencillo.MySQLiteHelper.Companion.NAME
+import com.example.tocasencillo.MySQLiteHelper.Companion.SONG_TABLE
 import com.example.tocasencillo.databinding.ActivityEditorBinding
 
 class EditorActivity : AppCompatActivity() {
@@ -136,12 +139,12 @@ class EditorActivity : AppCompatActivity() {
 
                     "x3 veces" -> {
                         reps = "x3"
-                        loadFragment(fragment = RepeatTimeFragment())
+                        loadFragment(fragment = RepeatFragment())
                     }
 
                     "x4 veces" -> {
                         reps = "x4"
-                        loadFragment(fragment = RepeatTimeFragment())
+                        loadFragment(fragment = RepeatFragment())
                     }
 
                     "Casilla" -> {
@@ -178,7 +181,7 @@ class EditorActivity : AppCompatActivity() {
         val db = songsDBHelper.readableDatabase
 
         val cursor: Cursor = db.rawQuery(
-            "SELECT nombre FROM cancion ORDER BY _id",
+            "SELECT $NAME FROM $SONG_TABLE ORDER BY $ID_DB",
             null
         )
 

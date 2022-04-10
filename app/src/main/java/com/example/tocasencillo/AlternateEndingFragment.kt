@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.tocasencillo.EditorActivity.Companion.posic
+import com.example.tocasencillo.MySQLiteHelper.Companion.ALTERNATE_ENDING_TABLE
 import com.example.tocasencillo.databinding.FragmentAlternateEndingBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -52,7 +53,6 @@ class AlternateEndingFragment : Fragment() {
             when (bar2.text) {
                 "|" -> {
                     bar2.text = ":|"
-                    //bar5.autoSizeMaxTextSize()
                 }
                 else -> bar2.text = "|"
             }
@@ -74,8 +74,8 @@ class AlternateEndingFragment : Fragment() {
             MySQLiteHelper(this.requireContext()).apply {
                 saveAlternateEnd(ccBar2, txtCC1, txtCC2)
                 saveSongFragment(lastSong(),
-                    lastFragment("contenido"),
-                    "contenido",
+                    lastFragment(ALTERNATE_ENDING_TABLE),
+                    ALTERNATE_ENDING_TABLE,
                     myPosic)
             }
         } else {

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.tocasencillo.EditorActivity.Companion.posic
 import com.example.tocasencillo.EditorActivity.Companion.saving
+import com.example.tocasencillo.MySQLiteHelper.Companion.TITLE_TABLE
 import com.example.tocasencillo.databinding.FragmentTitleBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -63,8 +64,8 @@ class TitleFragment : Fragment() {
             MySQLiteHelper(this.requireContext()).apply {
                 saveTitle(title, tempo, key)
                 saveSongFragment(lastSong(),
-                    lastFragment("titulo"),
-                    "titulo",
+                    lastFragment(TITLE_TABLE),
+                    TITLE_TABLE,
                     myPosic)
             }
         } else {

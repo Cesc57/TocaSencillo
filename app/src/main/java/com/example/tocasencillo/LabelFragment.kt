@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import com.example.tocasencillo.EditorActivity.Companion.label
 import com.example.tocasencillo.EditorActivity.Companion.posic
 import com.example.tocasencillo.EditorActivity.Companion.saving
+import com.example.tocasencillo.MySQLiteHelper.Companion.LABEL_TABLE
 import com.example.tocasencillo.databinding.FragmentLabelBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -94,7 +95,7 @@ class LabelFragment : Fragment() {
                 saveSongFragment(
                     lastSong(),
                     myId,
-                    "etiqueta",
+                    LABEL_TABLE,
                     myPosic
                 )
             }

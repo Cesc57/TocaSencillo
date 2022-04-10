@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.tocasencillo.EditorActivity.Companion.posic
+import com.example.tocasencillo.MySQLiteHelper.Companion.BOX_REPEAT_TABLE
 import com.example.tocasencillo.databinding.FragmentBoxRepeatBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -60,8 +61,8 @@ class BoxRepeatFragment : Fragment() {
                 saveBoxRepeat(note)
                 saveSongFragment(
                     lastSong(),
-                    lastFragment("caja_repeticion"),
-                    "caja_repeticion",
+                    lastFragment(BOX_REPEAT_TABLE),
+                    BOX_REPEAT_TABLE,
                     myPosic
                 )
             }

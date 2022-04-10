@@ -2,13 +2,15 @@ package com.example.tocasencillo
 
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences.*
+import android.content.SharedPreferences.Editor
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.SearchView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.tocasencillo.MySQLiteHelper.Companion.ID_DB
+import com.example.tocasencillo.MySQLiteHelper.Companion.SONG_TABLE
 import com.example.tocasencillo.databinding.ActivityHomeBinding
 import com.google.firebase.auth.FirebaseAuth
 
@@ -78,7 +80,7 @@ class HomeActivity : AppCompatActivity() {
     private fun fillRecyclerView() {
         db = songsDBHelper.readableDatabase
         val cursor: Cursor = db.rawQuery(
-            "SELECT * FROM cancion ORDER BY _id",
+            "SELECT * FROM $SONG_TABLE ORDER BY $ID_DB",
             null)
 
         val adapter = RecyclerViewAdapterSongs()

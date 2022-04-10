@@ -127,14 +127,12 @@ class AuthActivity : AppCompatActivity() {
     }
 
     private fun showAlert(message: String) {
-
         val builder = AlertDialog.Builder(this)
         builder.setTitle("ERROR")
         builder.setMessage(message)
         builder.setPositiveButton("OK", null)
         val dialog: AlertDialog = builder.create()
         dialog.show()
-
     }
 
     private fun showHome(name: String, mail: String, provider: ProviderType) {
