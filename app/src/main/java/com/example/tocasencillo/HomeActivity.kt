@@ -1,5 +1,6 @@
 package com.example.tocasencillo
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences.Editor
@@ -95,5 +96,29 @@ class HomeActivity : AppCompatActivity() {
         val intent = Intent(this, EditorActivity::class.java)
         startActivity(intent)
         finish()
+    }
+
+    override fun onBackPressed() {
+        // build alert dialog
+        val dialogBuilder = AlertDialog.Builder(this)
+
+        // set title of alert dialog
+        dialogBuilder.setTitle("SALIR")
+            // if the dialog is cancelable
+            .setCancelable(false)
+            // set message of alert dialog
+            .setMessage("¿Estás seguro?")
+            // positive button text and action
+            .setPositiveButton("SI") { _, _ ->
+                finish()
+                super.onBackPressed()
+            }
+            // negative button text and action
+            .setNegativeButton("NO") { dialog, _ ->
+                dialog.cancel()
+            }
+
+        val alert = dialogBuilder.create()
+        alert.show()
     }
 }

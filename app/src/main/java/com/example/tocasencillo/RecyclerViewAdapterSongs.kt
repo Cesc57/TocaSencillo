@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tocasencillo.databinding.ItemRecyclerBinding
 
@@ -58,7 +57,6 @@ class RecyclerViewAdapterSongs
 
             view.setOnClickListener {
                 reassembleSong(context, tvSong.text.toString())
-                Toast.makeText(context, "${tvSong.text}", Toast.LENGTH_SHORT).show()
             }
         }
     }

@@ -233,12 +233,27 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
         db.insert(SONG_FRAGMENT_TABLE, null, data)
     }
 
+    @SuppressLint("Recycle")
+    fun searchSongIdByName(songName: String): Int {
+        val database = this.readableDatabase
+        val cursor = database.rawQuery(
+            "SELECT $ID_DB " +
+                    "FROM $SONG_TABLE " +
+                    "WHERE $NAME = '$songName'", null
+        ).apply {
+            moveToFirst()
+        }
+        return cursor.getInt(0)
+    }
 
     @SuppressLint("Recycle")
     fun lastSong(): Int {
         val database = this.readableDatabase
         val cursor =
-            database.rawQuery("SELECT MAX($ID_DB) FROM $SONG_TABLE", null).apply {
+            database.rawQuery(
+                "SELECT MAX($ID_DB) " +
+                        "FROM $SONG_TABLE", null
+            ).apply {
                 moveToFirst()
             }
         return cursor.getInt(0)
@@ -247,7 +262,10 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
     @SuppressLint("Recycle")
     fun lastFragment(type: String): Int {
         val database = this.readableDatabase
-        val cursor = database.rawQuery("SELECT MAX($ID_DB) FROM $type", null).apply {
+        val cursor = database.rawQuery(
+            "SELECT MAX($ID_DB) " +
+                    "FROM $type", null
+        ).apply {
             moveToFirst()
         }
         return cursor.getInt(0)

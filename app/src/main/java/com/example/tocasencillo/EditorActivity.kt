@@ -1,5 +1,6 @@
 package com.example.tocasencillo
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.database.Cursor
 import android.os.Bundle
@@ -24,7 +25,6 @@ class EditorActivity : AppCompatActivity() {
         var reps: String = "x3"
         var saving = false   //In clickListener from btnSaveSong, this value change to true
         lateinit var songsDBHelper: MySQLiteHelper
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,20 +38,36 @@ class EditorActivity : AppCompatActivity() {
         songsDBHelper.readableDatabase
 
         binding.floatDelete.setOnClickListener {
-            val intent = Intent(this, HomeActivity::class.java)
-            startActivity(intent)
-            finish()
+            // build alert dialog
+            val dialogBuilder = android.app.AlertDialog.Builder(this)
+            // set message of alert dialog
+            dialogBuilder.setMessage("¿Seguro que quieres salir sin guardar?")
+                // if the dialog is cancelable
+                .setCancelable(false)
+                // positive button text and action
+                .setPositiveButton("SI") { _, _ ->
+                    val intent = Intent(this, HomeActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
+                // negative button text and action
+                .setNegativeButton("NO") { dialog, _ ->
+                    dialog.cancel()
+                }
+
+            val alert = dialogBuilder.create()
+            alert.show()
         }
 
         binding.btnSaveSong.setOnClickListener {
             if (binding.etMainTitle.text.toString() == "") {
-                showAlert("Canción sin nombre","Ponle título a tu canción")
+                showAlert("Canción sin nombre", "Ponle título a tu canción")
             } else {
                 if (!checkRepeatedSong(binding.etMainTitle.text.toString())) {
                     saving = true
                     saveSong()
                 } else {
-                    showAlert("Esta canción ya existe","Prueba con otro nombre")
+                    showAlert("Esta canción ya existe", "Prueba con otro nombre")
                 }
 
             }
@@ -167,7 +183,7 @@ class EditorActivity : AppCompatActivity() {
         saving = false
     }
 
-    private fun showAlert(title: String,content: String) {
+    private fun showAlert(title: String, content: String) {
         val builder = AlertDialog.Builder(this)
         builder.setTitle(title)
         builder.setMessage(content)
@@ -176,6 +192,7 @@ class EditorActivity : AppCompatActivity() {
         dialog.show()
     }
 
+    @SuppressLint("Recycle")
     private fun checkRepeatedSong(songName: String): Boolean {
         var repeatedSong = false
         val db = songsDBHelper.readableDatabase
@@ -195,8 +212,6 @@ class EditorActivity : AppCompatActivity() {
             }
             cursor.moveToNext()
         }
-
-        cursor.close()
         return repeatedSong
     }
 
@@ -225,7 +240,7 @@ class EditorActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        if (supportFragmentManager.fragments.isEmpty()){
+        if (supportFragmentManager.fragments.isEmpty()) {
             val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
             finish()
