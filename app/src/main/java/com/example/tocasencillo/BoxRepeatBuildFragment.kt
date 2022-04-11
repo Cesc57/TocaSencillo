@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.tocasencillo.AssemblyActivity.Companion.positionInSong
 import com.example.tocasencillo.databinding.FragmentBoxRepeatBuildBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -21,6 +22,8 @@ class BoxRepeatBuildFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+
+    private val myPosic: Int = positionInSong
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +46,7 @@ class BoxRepeatBuildFragment : Fragment() {
         _binding = FragmentBoxRepeatBuildBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        val text = "Logical HERE"
+        dataRecovery()
 
         return view
     }
@@ -53,6 +56,13 @@ class BoxRepeatBuildFragment : Fragment() {
         _binding = null
     }
 
+    private fun dataRecovery() {
+
+        MySQLiteHelper(this.requireContext()).apply {
+            binding.rptText.text = searchBoxRepeatById(myPosic)
+        }
+
+    }
 
     companion object {
         /**

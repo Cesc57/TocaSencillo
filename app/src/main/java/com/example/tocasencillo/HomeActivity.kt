@@ -101,7 +101,6 @@ class HomeActivity : AppCompatActivity() {
     override fun onBackPressed() {
         // build alert dialog
         val dialogBuilder = AlertDialog.Builder(this)
-
         // set title of alert dialog
         dialogBuilder.setTitle("SALIR")
             // if the dialog is cancelable

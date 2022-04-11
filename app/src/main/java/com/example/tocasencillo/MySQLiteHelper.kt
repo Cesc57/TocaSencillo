@@ -5,6 +5,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import java.util.*
 
 class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
     context, DATABASE, null, 6
@@ -269,5 +270,35 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
             moveToFirst()
         }
         return cursor.getInt(0)
+    }
+
+    @SuppressLint("Recycle")
+    fun searchAlternateEndingById(myPosic: Int): ArrayList<String> {
+        val database = this.readableDatabase
+        val cursor = database.rawQuery(
+            "SELECT * " +
+                    "FROM $ALTERNATE_ENDING_TABLE " +
+                    "WHERE $ID_DB = '$myPosic'", null
+        ).apply {
+            moveToFirst()
+        }
+        val mArrayList = ArrayList<String>()
+        mArrayList.add(cursor.getString(1))
+        mArrayList.add(cursor.getString(2))
+        mArrayList.add(cursor.getString(3))
+        return mArrayList
+    }
+
+    @SuppressLint("Recycle")
+    fun searchBoxRepeatById(myPosic: Int): String {
+        val database = this.readableDatabase
+        val cursor = database.rawQuery(
+            "SELECT * " +
+                    "FROM $BOX_REPEAT_TABLE " +
+                    "WHERE $ID_DB = '$myPosic'", null
+        ).apply {
+            moveToFirst()
+        }
+        return cursor.getString(1)
     }
 }

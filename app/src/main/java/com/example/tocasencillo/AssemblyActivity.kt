@@ -5,9 +5,13 @@ import android.app.AlertDialog
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.example.tocasencillo.EditorActivity.Companion.label
+import com.example.tocasencillo.EditorActivity.Companion.reps
+import com.example.tocasencillo.EditorActivity.Companion.saving
 import com.example.tocasencillo.MySQLiteHelper.Companion.ALTERNATE_ENDING_TABLE
 import com.example.tocasencillo.MySQLiteHelper.Companion.BOX_REPEAT_TABLE
 import com.example.tocasencillo.MySQLiteHelper.Companion.CONTENT_TABLE
@@ -26,6 +30,7 @@ class AssemblyActivity : AppCompatActivity() {
 
     companion object {
         private lateinit var songsDBHelper: MySQLiteHelper
+        var positionInSong: Int = 0
     }
 
     @SuppressLint("Recycle")
@@ -34,8 +39,7 @@ class AssemblyActivity : AppCompatActivity() {
         binding = ActivityAssemblyBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //val mySong: String = intent.getStringExtra("songName").toString()
-        //binding.tvMainTitle.text = mySong
+        saving = false
 
         songsDBHelper = MySQLiteHelper(this)
         songsDBHelper.readableDatabase
@@ -58,6 +62,15 @@ class AssemblyActivity : AppCompatActivity() {
         while (!cursor.isAfterLast) {
             //LOGICAL FOR BUILD FRAGMENT
             val type: String = cursor.getString(2)
+            if (type == LABEL_TABLE) {
+                val valueTable: Int = cursor.getString(1).toInt()
+                valueLabel(valueTable)
+            } else if (type == REPEAT_TABLE) {
+                val valueTable: Int = cursor.getString(1).toInt()
+                valueRepeat(valueTable)
+            }else{
+                positionInSong = cursor.getString(1).toInt()
+            }
             rebuildFragment(type)
             cursor.moveToNext()
         }
@@ -70,6 +83,50 @@ class AssemblyActivity : AppCompatActivity() {
         // _id_fragmento, tipo TEXT -> Create Fragment (if (tipo = "tipo"))
         //onCreate Fragment -> select * from "tipoQueSea" and .text in all fields
 
+    }
+
+    private fun valueLabel(valueTable: Int) {
+        label = when (valueTable) {
+            1 -> {
+                "Intro"
+            }
+            2 -> {
+                "Estrofa"
+            }
+            3 -> {
+                "PreStrb"
+            }
+            4 -> {
+                "Strb"
+            }
+            5 -> {
+                "Puente"
+            }
+            6 -> {
+                "Solo"
+            }
+            7 -> {
+                "Final"
+            }
+            else -> {
+                "<3"
+            }
+        }
+        Log.d("tag", label)
+    }
+
+    private fun valueRepeat(valueTable: Int) {
+        reps = when (valueTable) {
+            1 -> {
+                "x3"
+            }
+            2 -> {
+                "x4"
+            }
+            else -> {
+                "<3"
+            }
+        }
     }
 
     private fun rebuildFragment(type: String) {
@@ -132,7 +189,6 @@ class AssemblyActivity : AppCompatActivity() {
     override fun onBackPressed() {
         // build alert dialog
         val dialogBuilder = AlertDialog.Builder(this)
-
         // set message of alert dialog
         dialogBuilder.setMessage("¿Seguro que quieres salir?")
             // if the dialog is cancelable

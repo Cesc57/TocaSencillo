@@ -25,6 +25,8 @@ class RepeatFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    private val myValue = reps
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -51,7 +53,7 @@ class RepeatFragment : Fragment() {
         _binding = FragmentRepeatBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        binding.tvTimes.text = reps
+        binding.tvTimes.text = myValue
 
         myId = when (reps) {
             "x3" -> {

@@ -10,14 +10,12 @@
         android:layout_width="198dp"
         android:layout_height="wrap_content" />
 
-    <EditText
+    <TextView
         android:id="@+id/rptText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:autofillHints="name"
-        android:hint="@string/repeat_times"
-        android:textColorHint="@color/primaryColor"
-        android:inputType="text"
+        android:text="@string/repeat_times"
         android:textAlignment="textEnd"
         android:textStyle="bold"
         android:textSize="16sp"

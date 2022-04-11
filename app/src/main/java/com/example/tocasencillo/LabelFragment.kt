@@ -26,6 +26,8 @@ class LabelFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    private val myValue = label
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -52,7 +54,7 @@ class LabelFragment : Fragment() {
         _binding = FragmentLabelBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        binding.tvLabel.text = label
+        binding.tvLabel.text = myValue
 
         myId = when (label) {
             "Intro" -> {

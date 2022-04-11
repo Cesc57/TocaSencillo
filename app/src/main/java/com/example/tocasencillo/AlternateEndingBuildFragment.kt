@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.tocasencillo.AssemblyActivity.Companion.positionInSong
 import com.example.tocasencillo.databinding.FragmentAlternateEndingBuildBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -21,6 +22,9 @@ class AlternateEndingBuildFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+
+    private val myPosic: Int = positionInSong
+    private lateinit var data: ArrayList<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +47,7 @@ class AlternateEndingBuildFragment : Fragment() {
         _binding = FragmentAlternateEndingBuildBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        val text = "Logical HERE"
+        dataRecovery()
 
         return view
     }
@@ -53,6 +57,15 @@ class AlternateEndingBuildFragment : Fragment() {
         _binding = null
     }
 
+    private fun dataRecovery() {
+
+            MySQLiteHelper(this.requireContext()).apply {
+                data = searchAlternateEndingById(myPosic)
+            }
+        binding.tvLine2.text = data[0]
+        binding.etBar1.text = data[1]
+        binding.etBar2.text = data[2]
+    }
 
     companion object {
         /**
