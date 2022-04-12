@@ -47,7 +47,7 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
         val createSongCommand =
             """CREATE TABLE $SONG_TABLE
                 ($ID_DB INTEGER PRIMARY KEY AUTOINCREMENT,
-                $NAME TEXT)"""
+                $NAME TEXT UNIQUE)"""
 
         val createTitleCommand =
             """CREATE TABLE $TITLE_TABLE
@@ -107,13 +107,17 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
             this.execSQL(createAlternateEndingCommand)
         }
 
+        insertPrefabData(db)
+    }
+
+    private fun insertPrefabData(db: SQLiteDatabase?) {
         val tags = arrayOf(
             "Intro", "Estrofa", "PreStrb", "Strb",
             "Puente", "Solo", "Final"
         )
         for (tag in tags) {
             val insertTags = """INSERT INTO $LABEL_TABLE ($TYPE) 
-                VALUES ('$tag')"""
+                    VALUES ('$tag')"""
             with(db) {
                 this!!.execSQL(insertTags)
             }
@@ -122,7 +126,7 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
         val reps = arrayOf("x3", "x4")
         for (rep in reps) {
             val insertReps = """INSERT INTO $REPEAT_TABLE (veces) 
-                VALUES ('$rep')"""
+                    VALUES ('$rep')"""
             with(db) {
                 this!!.execSQL(insertReps)
             }
@@ -130,6 +134,10 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
+        dropAndRebuildTables(db)
+    }
+
+    private fun dropAndRebuildTables(db: SQLiteDatabase?) {
         val dropTableSong = "DROP TABLE IF EXISTS $SONG_TABLE"
         db!!.execSQL(dropTableSong)
         val dropTableTitle = "DROP TABLE IF EXISTS $TITLE_TABLE"
