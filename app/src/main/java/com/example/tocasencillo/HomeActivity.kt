@@ -1,14 +1,17 @@
 package com.example.tocasencillo
 
 import android.app.AlertDialog
-import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences.Editor
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.SearchView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tocasencillo.MySQLiteHelper.Companion.ID_DB
 import com.example.tocasencillo.MySQLiteHelper.Companion.NAME
@@ -37,6 +40,10 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+
         songsDBHelper = MySQLiteHelper(this)
 
         fillRecyclerView()
@@ -63,19 +70,43 @@ class HomeActivity : AppCompatActivity() {
         }
 
         binding.btnExit.setOnClickListener {
-            //Delete data from sharPref
-            val sharePrefs: Editor =
-                getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit()
-//OJO: Per eliminar sols alguna sharePref:
-            //sharePrefs.remove("mail")
-            //sharePrefs.remove("provider")
-            sharePrefs.clear()
-            sharePrefs.apply()
-
-            FirebaseAuth.getInstance().signOut()
             onBackPressed()
         }
 
+    }
+
+    private fun clearSignAuth() {
+        //Delete data from sharPref
+        val sharePrefs: Editor =
+            getSharedPreferences(getString(R.string.prefs_file), MODE_PRIVATE).edit()
+        //OJO: Per eliminar sols alguna sharePref:
+        //sharePrefs.remove("mail")
+        //sharePrefs.remove("provider")
+        sharePrefs.clear()
+        sharePrefs.apply()
+
+        FirebaseAuth.getInstance().signOut()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.toolbar_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when {
+            item.toString() == "Opciones" -> {
+                Toast.makeText(this, item.toString(), Toast.LENGTH_SHORT).show()
+            }
+            item.toString() == "Cerrar sesión" -> {
+                onBackPressed()
+            }
+            else -> {
+                Toast.makeText(this, "¿Que has pulsado...?", Toast.LENGTH_SHORT).show()
+            }
+        }
+        return true
     }
 
     private fun fillRecyclerView() {
@@ -125,6 +156,7 @@ class HomeActivity : AppCompatActivity() {
             .setMessage("¿Estás seguro?")
             // positive button text and action
             .setPositiveButton("SI") { _, _ ->
+                clearSignAuth()
                 finish()
                 super.onBackPressed()
             }

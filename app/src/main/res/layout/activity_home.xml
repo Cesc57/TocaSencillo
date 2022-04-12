@@ -7,34 +7,38 @@
     android:orientation="vertical"
     tools:context=".HomeActivity">
 
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+
     <Space
         android:layout_width="wrap_content"
-        android:layout_height="8dp"/>
+        android:layout_height="16dp" />
 
     <SearchView
         android:id="@+id/svSong"
-        android:autofillHints="name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginTop="4dp"
-        android:background="@drawable/search_bar_border"/>
+        android:layout_marginRight="8dp"
+        android:autofillHints="name"
+        android:background="@drawable/search_bar_border" />
 
     <Space
         android:layout_width="wrap_content"
-        android:layout_height="24dp"/>
+        android:layout_height="16dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerSongs"
         android:layout_width="match_parent"
         android:layout_height="460dp"
         android:layout_margin="4dp"
-        android:background="@drawable/recycler_border"/>
+        android:background="@drawable/recycler_border" />
 
     <Space
         android:layout_width="wrap_content"
-        android:layout_height="24dp"/>
+        android:layout_height="24dp" />
 
 
     <LinearLayout
@@ -44,6 +48,7 @@
 
         <Button
             android:id="@+id/btnSong"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="36dp"
@@ -51,25 +56,24 @@
             android:layout_weight="1"
             android:backgroundTint="@color/lightpink"
             android:text="@string/create_song"
-            android:textColor="#212121"
-            style="?android:attr/buttonBarButtonStyle" />
+            android:textColor="#212121" />
 
         <Button
             android:id="@+id/btnExit"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginEnd="36dp"
             android:layout_weight="1"
             android:backgroundTint="@color/darkpink"
-            android:textColor="#212121"
             android:text="@string/exit"
-            style="?android:attr/buttonBarButtonStyle" />
+            android:textColor="#212121" />
 
     </LinearLayout>
 
     <Space
         android:layout_width="wrap_content"
-        android:layout_height="36dp"/>
+        android:layout_height="36dp" />
 
 </LinearLayout>

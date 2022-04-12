@@ -47,4 +47,6 @@
     <string name="box">Casilla</string>
     <string name="x3_times">x3 veces</string>
     <string name="x4_times">x4 veces</string>
+    <string name="options">Opciones</string>
+    <string name="sign_out">Cerrar sesión</string>
 </resources>
