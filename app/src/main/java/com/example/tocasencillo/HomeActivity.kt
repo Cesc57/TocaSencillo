@@ -11,6 +11,7 @@ import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tocasencillo.MySQLiteHelper.Companion.ID_DB
+import com.example.tocasencillo.MySQLiteHelper.Companion.NAME
 import com.example.tocasencillo.MySQLiteHelper.Companion.SONG_TABLE
 import com.example.tocasencillo.databinding.ActivityHomeBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -21,10 +22,13 @@ enum class ProviderType {
 }
 
 class HomeActivity : AppCompatActivity() {
+    //ADD TOOLBAR (Options menu and close session)
+    //https://www.youtube.com/watch?v=DMkzIOLppf4&ab_channel=CodinginFlow
 
     private lateinit var binding: ActivityHomeBinding
     private lateinit var songsDBHelper: MySQLiteHelper
-    companion object{
+
+    companion object {
         private lateinit var db: SQLiteDatabase
     }
 
@@ -37,22 +41,18 @@ class HomeActivity : AppCompatActivity() {
 
         fillRecyclerView()
 
-
-//VIDEO SEARCHVIEW:
-        //https://www.youtube.com/watch?v=oE8nZRJ9vxA&ab_channel=Foxandroid
-
-//VIDEO RECYCLER VIEW:
-        //https://www.youtube.com/watch?v=TKA01fXqzjg&list=PL0bfr51v6JJEh1xtggpg57wN6m5Us3cb1&index=54&ab_channel=NachoCabanes
-
-
         binding.svSong.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                binding.mySearch.clearFocus()
-                binding.mySearch.text = query
+                customSearchRecyclerView(query.toString())
                 return true
             }
 
-            override fun onQueryTextChange(p0: String?): Boolean {
+            override fun onQueryTextChange(query: String?): Boolean {
+                if (query.toString().length < 3) {
+                    fillRecyclerView()
+                } else {
+                    customSearchRecyclerView(query.toString())
+                }
                 return false
             }
 
@@ -82,7 +82,23 @@ class HomeActivity : AppCompatActivity() {
         db = songsDBHelper.readableDatabase
         val cursor: Cursor = db.rawQuery(
             "SELECT * FROM $SONG_TABLE ORDER BY $ID_DB",
-            null)
+            null
+        )
+
+        val adapter = RecyclerViewAdapterSongs()
+        adapter.recyclerViewAdapterSongs(this, cursor)
+
+        binding.recyclerSongs.setHasFixedSize(true)
+        binding.recyclerSongs.layoutManager = LinearLayoutManager(this)
+        binding.recyclerSongs.adapter = adapter
+    }
+
+    private fun customSearchRecyclerView(query: String) {
+        db = songsDBHelper.readableDatabase
+        val cursor: Cursor = db.rawQuery(
+            "SELECT * FROM $SONG_TABLE WHERE $NAME LIKE '%$query%' ORDER BY $ID_DB",
+            null
+        )
 
         val adapter = RecyclerViewAdapterSongs()
         adapter.recyclerViewAdapterSongs(this, cursor)
