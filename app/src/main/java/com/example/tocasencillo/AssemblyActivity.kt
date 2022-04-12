@@ -5,7 +5,6 @@ import android.app.AlertDialog
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -47,7 +46,7 @@ class AssemblyActivity : AppCompatActivity() {
         val songName: String = intent.getStringExtra("songName").toString()
         val songId: Int = songsDBHelper.searchSongIdByName(songName)
 
-        binding.tvMainTitle.text = songId.toString()
+        binding.tvMainTitle.text = songName
 
         db = songsDBHelper.readableDatabase
         val cursor: Cursor = db.rawQuery(
@@ -62,27 +61,22 @@ class AssemblyActivity : AppCompatActivity() {
         while (!cursor.isAfterLast) {
             //LOGICAL FOR BUILD FRAGMENT
             val type: String = cursor.getString(2)
-            if (type == LABEL_TABLE) {
-                val valueTable: Int = cursor.getString(1).toInt()
-                valueLabel(valueTable)
-            } else if (type == REPEAT_TABLE) {
-                val valueTable: Int = cursor.getString(1).toInt()
-                valueRepeat(valueTable)
-            }else{
-                positionInSong = cursor.getString(1).toInt()
+            when (type) {
+                LABEL_TABLE -> {
+                    val valueTable: Int = cursor.getString(1).toInt()
+                    valueLabel(valueTable)
+                }
+                REPEAT_TABLE -> {
+                    val valueTable: Int = cursor.getString(1).toInt()
+                    valueRepeat(valueTable)
+                }
+                else -> {
+                    positionInSong = cursor.getString(1).toInt()
+                }
             }
             rebuildFragment(type)
             cursor.moveToNext()
         }
-
-        //cursor.close()
-
-        //TODO:
-        //OK//Search song (for name + id)
-        //Search all cancion_fragmento with id_song
-        // _id_fragmento, tipo TEXT -> Create Fragment (if (tipo = "tipo"))
-        //onCreate Fragment -> select * from "tipoQueSea" and .text in all fields
-
     }
 
     private fun valueLabel(valueTable: Int) {
@@ -112,7 +106,6 @@ class AssemblyActivity : AppCompatActivity() {
                 "<3"
             }
         }
-        Log.d("tag", label)
     }
 
     private fun valueRepeat(valueTable: Int) {

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.tocasencillo.AssemblyActivity.Companion.positionInSong
 import com.example.tocasencillo.databinding.FragmentContentBuildBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -21,6 +22,9 @@ class ContentBuildFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+
+    private val myPosic: Int = positionInSong
+    private lateinit var data: ArrayList<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +45,24 @@ class ContentBuildFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentContentBuildBinding.inflate(inflater, container, false)
-        return binding.root
+
+        val view = binding.root
+
+        dataRecovery()
+
+        return view
+    }
+
+    private fun dataRecovery() {
+        MySQLiteHelper(this.requireContext()).apply {
+            data = searchContentById(myPosic)
+        }
+        binding.tvLine1.text = data[0]
+        binding.tvLine5.text = data[1]
+        binding.tvBar1.text = data[2]
+        binding.tvBar2.text = data[3]
+        binding.tvBar3.text = data[4]
+        binding.tvBar4.text = data[5]
     }
 
     override fun onDestroyView() {

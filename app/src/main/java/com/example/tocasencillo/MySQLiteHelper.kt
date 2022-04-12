@@ -290,11 +290,61 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
     }
 
     @SuppressLint("Recycle")
+    fun searchTitleById(myPosic: Int): ArrayList<String> {
+        val database = this.readableDatabase
+        val cursor = database.rawQuery(
+            "SELECT * " +
+                    "FROM $TITLE_TABLE " +
+                    "WHERE $ID_DB = '$myPosic'", null
+        ).apply {
+            moveToFirst()
+        }
+        val mArrayList = ArrayList<String>()
+        mArrayList.add(cursor.getString(1))
+        mArrayList.add(cursor.getString(2))
+        mArrayList.add(cursor.getString(3))
+        return mArrayList
+    }
+
+    @SuppressLint("Recycle")
+    fun searchContentById(myPosic: Int): ArrayList<String> {
+        val database = this.readableDatabase
+        val cursor = database.rawQuery(
+            "SELECT * " +
+                    "FROM $CONTENT_TABLE " +
+                    "WHERE $ID_DB = '$myPosic'", null
+        ).apply {
+            moveToFirst()
+        }
+        val mArrayList = ArrayList<String>()
+        mArrayList.add(cursor.getString(1))
+        mArrayList.add(cursor.getString(2))
+        mArrayList.add(cursor.getString(3))
+        mArrayList.add(cursor.getString(4))
+        mArrayList.add(cursor.getString(5))
+        mArrayList.add(cursor.getString(6))
+        return mArrayList
+    }
+
+    @SuppressLint("Recycle")
     fun searchBoxRepeatById(myPosic: Int): String {
         val database = this.readableDatabase
         val cursor = database.rawQuery(
             "SELECT * " +
                     "FROM $BOX_REPEAT_TABLE " +
+                    "WHERE $ID_DB = '$myPosic'", null
+        ).apply {
+            moveToFirst()
+        }
+        return cursor.getString(1)
+    }
+
+    @SuppressLint("Recycle")
+    fun searchNoteById(myPosic: Int): String {
+        val database = this.readableDatabase
+        val cursor = database.rawQuery(
+            "SELECT * " +
+                    "FROM $NOTE_TABLE " +
                     "WHERE $ID_DB = '$myPosic'", null
         ).apply {
             moveToFirst()

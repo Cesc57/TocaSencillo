@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.tocasencillo.AssemblyActivity.Companion.positionInSong
 import com.example.tocasencillo.databinding.FragmentNoteBuildBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -21,6 +22,8 @@ class NoteBuildFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+
+    private val myPosic: Int = positionInSong
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +44,17 @@ class NoteBuildFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentNoteBuildBinding.inflate(inflater, container, false)
-        return binding.root
+        val view = binding.root
+
+        dataRecovery()
+
+        return view
+    }
+
+    private fun dataRecovery() {
+        MySQLiteHelper(this.requireContext()).apply {
+            binding.txtNote.text = searchNoteById(myPosic)
+        }
     }
 
     override fun onDestroyView() {

@@ -63,8 +63,8 @@ class AlternateEndingBuildFragment : Fragment() {
                 data = searchAlternateEndingById(myPosic)
             }
         binding.tvLine2.text = data[0]
-        binding.etBar1.text = data[1]
-        binding.etBar2.text = data[2]
+        binding.tvBar1.text = data[1]
+        binding.tvBar2.text = data[2]
     }
 
     companion object {

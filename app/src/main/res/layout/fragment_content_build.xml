@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="50dp"
     android:id="@+id/viewRoot"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:weightSum="29"
     tools:context=".ContentBuildFragment">
@@ -13,99 +13,116 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:gravity="bottom"
-        android:text="@string/bar"
-        android:textSize="40sp"
         android:padding="2sp"
-        android:layout_weight="1"/>
+        android:text="@string/bar"
+        android:textSize="40sp" />
 
     <TextView
         android:id="@+id/tvBar1"
         android:layout_width="77dp"
         android:layout_height="match_parent"
-        android:autoSizeTextType="uniform"
+        android:layout_weight="6"
+        android:autofillHints="chord"
         android:inputType="none"
+        android:paddingStart="4dp"
+        android:paddingTop="14dp"
+        android:paddingEnd="0dp"
         android:singleLine="true"
         android:text="@string/empty_bar"
+        android:textAlignment="viewStart"
+        android:textSize="28sp"
         android:textStyle="bold"
-        tools:ignore="LabelFor,DuplicateSpeakableTextCheck"
-        tools:targetApi="o"
-        android:layout_weight="6"/>
+        tools:ignore="LabelFor"
+        tools:targetApi="o" />
 
     <TextView
         android:id="@+id/tvLine2"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:gravity="bottom"
-        android:text="@string/bar"
-        android:textSize="40sp"
         android:padding="2sp"
-        android:layout_weight="1"/>
+        android:text="@string/bar"
+        android:textSize="40sp" />
 
     <TextView
         android:id="@+id/tvBar2"
         android:layout_width="77dp"
         android:layout_height="match_parent"
-        android:autoSizeTextType="uniform"
+        android:layout_weight="6"
+        android:autofillHints="chord"
         android:inputType="none"
+        android:paddingStart="4dp"
+        android:paddingTop="14dp"
+        android:paddingEnd="0dp"
         android:singleLine="true"
-        android:text=""
+        android:text="@string/empty_bar"
+        android:textAlignment="viewStart"
+        android:textSize="28sp"
         android:textStyle="bold"
-        tools:targetApi="o"
-        tools:ignore="Autofill,LabelFor"
-        android:layout_weight="6"/>
+        tools:ignore="LabelFor"
+        tools:targetApi="o" />
 
     <TextView
         android:id="@+id/tvLine3"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:gravity="bottom"
-        android:text="@string/bar"
-        android:textSize="40sp"
         android:padding="2sp"
-        android:layout_weight="1"/>
+        android:text="@string/bar"
+        android:textSize="40sp" />
 
     <TextView
         android:id="@+id/tvBar3"
         android:layout_width="77dp"
         android:layout_height="match_parent"
-        android:autoSizeTextType="uniform"
+        android:layout_weight="6"
+        android:autofillHints="chord"
         android:inputType="none"
+        android:paddingStart="4dp"
+        android:paddingTop="14dp"
+        android:paddingEnd="0dp"
         android:singleLine="true"
-        android:text=""
+        android:text="@string/empty_bar"
+        android:textAlignment="viewStart"
+        android:textSize="28sp"
         android:textStyle="bold"
-        tools:targetApi="o"
         tools:ignore="LabelFor"
-        android:layout_weight="6"/>
+        tools:targetApi="o" />
 
     <TextView
         android:id="@+id/tvLine4"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:gravity="bottom"
+        android:padding="2sp"
         android:text="@string/bar"
-        android:textSize="40sp"
-        android:padding="2sp"/>
+        android:textSize="40sp" />
 
     <TextView
         android:id="@+id/tvBar4"
         android:layout_width="77dp"
         android:layout_height="match_parent"
-        android:autoSizeTextType="uniform"
+        android:layout_weight="6"
+        android:autofillHints="chord"
         android:inputType="none"
+        android:paddingStart="4dp"
+        android:paddingTop="14dp"
+        android:paddingEnd="0dp"
         android:singleLine="true"
-        android:text=""
+        android:text="@string/empty_bar"
+        android:textAlignment="viewStart"
+        android:textSize="28sp"
         android:textStyle="bold"
-        tools:targetApi="o"
         tools:ignore="LabelFor"
-        android:layout_weight="6"/>
+        tools:targetApi="o" />
 
     <TextView
         android:id="@+id/tvLine5"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:gravity="bottom"
+        android:padding="2sp"
         android:text="@string/bar"
-        android:textSize="40sp"
-        android:padding="2sp"/>
+        android:textSize="40sp" />
 
 </LinearLayout>

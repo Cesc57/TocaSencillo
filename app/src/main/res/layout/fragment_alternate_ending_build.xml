@@ -11,20 +11,20 @@
         android:layout_weight="242" />
 
     <TextView
-        android:id="@+id/etBar1"
+        android:id="@+id/tvBar1"
         android:layout_width="77dp"
         android:layout_height="match_parent"
         android:layout_weight="6"
         android:autofillHints="chord"
         android:inputType="none"
+        android:paddingStart="4dp"
+        android:paddingTop="14dp"
+        android:paddingEnd="0dp"
         android:singleLine="true"
         android:text="@string/empty_bar"
-        android:textStyle="bold"
-        android:textSize="28sp"
-        android:paddingStart="4dp"
-        android:paddingEnd="0dp"
-        android:paddingTop="14dp"
         android:textAlignment="viewStart"
+        android:textSize="28sp"
+        android:textStyle="bold"
         tools:ignore="LabelFor"
         tools:targetApi="o" />
 
@@ -38,7 +38,7 @@
         android:textSize="40sp" />
 
     <TextView
-        android:id="@+id/etBar2"
+        android:id="@+id/tvBar2"
         android:layout_width="77dp"
         android:layout_height="match_parent"
         android:layout_weight="6"

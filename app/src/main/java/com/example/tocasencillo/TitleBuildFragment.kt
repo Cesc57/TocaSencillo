@@ -22,6 +22,9 @@ class TitleBuildFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    private val myPosic: Int = AssemblyActivity.positionInSong
+    private lateinit var data: ArrayList<String>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -41,7 +44,20 @@ class TitleBuildFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentTitleBuildBinding.inflate(inflater, container, false)
-        return binding.root
+        val view = binding.root
+
+        dataRecovery()
+
+        return view
+    }
+
+    private fun dataRecovery() {
+        MySQLiteHelper(this.requireContext()).apply {
+            data = searchTitleById(myPosic)
+        }
+        binding.title.text = data[0]
+        binding.tempo.text = data[1]
+        binding.tune.text = data[2]
     }
 
     override fun onDestroyView() {
