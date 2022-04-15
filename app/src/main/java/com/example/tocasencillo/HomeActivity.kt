@@ -97,7 +97,9 @@ class HomeActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when {
             item.toString() == "Opciones" -> {
-                Toast.makeText(this, item.toString(), Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, SettingsActivity::class.java)
+                startActivity(intent)
+                //Toast.makeText(this, item.toString(), Toast.LENGTH_SHORT).show()
             }
             item.toString() == "Cerrar sesión" -> {
                 onBackPressed()

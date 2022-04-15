@@ -11,6 +11,9 @@
         android:theme="@style/Theme.TocaSencillo"
         tools:ignore="AllowBackup">
         <activity
+            android:name=".SettingsActivity"
+            android:exported="false" />
+        <activity
             android:name=".AssemblyActivity"
             android:exported="false" />
         <activity
