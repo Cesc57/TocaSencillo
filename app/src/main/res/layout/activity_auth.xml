@@ -65,21 +65,22 @@
         android:layout_width="wrap_content"
         android:layout_height="36dp"/>
 
-    <EditText
-        android:id="@+id/etPass"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/etNewPass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="36dp"
-        android:layout_marginRight="36dp"
-        android:ems="10"
-        android:hint="@string/password"
-        android:textAlignment="center"
-        android:autofillHints="password"
-        android:background="@color/white"
-        android:textColorHint="@color/grayHint"
-        android:textColor="@color/black"
-        android:inputType="textPassword"
-        android:minHeight="48dp"/>
+        app:endIconMode="password_toggle">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etPass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="36dp"
+            android:layout_marginRight="36dp"
+            android:hint="@string/password"
+            android:inputType="textPassword" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Space
         android:layout_width="wrap_content"

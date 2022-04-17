@@ -28,11 +28,9 @@ class AuthActivity : AppCompatActivity() {
         bundle.putString("message", "Integración de Firebase completada")
         analytics.logEvent("InitScreen", bundle)
 
-
         // Setup
         session()
         setup()
-
     }
 
     override fun onStart() {
@@ -52,7 +50,6 @@ class AuthActivity : AppCompatActivity() {
             binding.authLayout.visibility = View.INVISIBLE
             showHome(name, mail, ProviderType.valueOf(provider))
         }
-
     }
 
     private fun setup() {
@@ -60,25 +57,30 @@ class AuthActivity : AppCompatActivity() {
         binding.btnRegister.setOnClickListener {
             if (binding.etName.text.isNotEmpty() &&
                 binding.etMail.text.isNotEmpty() &&
-                binding.etPass.text.isNotEmpty()
+                binding.etPass.text!!.isNotEmpty()
             ) {
 
                 FirebaseAuth.getInstance()
                     .createUserWithEmailAndPassword(
                         binding.etMail.text.toString(),
-                        binding.etPass.text.toString()).addOnCompleteListener {
+                        binding.etPass.text.toString()
+                    ).addOnCompleteListener {
 
                         if (it.isSuccessful) {
 
-                            showHome(binding.etName.toString(),
+                            showHome(
+                                binding.etName.toString(),
                                 it.result?.user?.email ?: "",
-                                ProviderType.BASIC)
+                                ProviderType.BASIC
+                            )
 
                             savePrefs()
 
                         } else {
-                            showAlert("Usuario ya registrado\n" +
-                                    "prueba pulsando ENTRAR")
+                            showAlert(
+                                "Usuario ya registrado\n" +
+                                        "prueba pulsando ENTRAR"
+                            )
                         }
 
                     }
@@ -89,25 +91,30 @@ class AuthActivity : AppCompatActivity() {
         binding.btnEnter.setOnClickListener {
             if (binding.etName.text.isNotEmpty() &&
                 binding.etMail.text.isNotEmpty() &&
-                binding.etPass.text.isNotEmpty()
+                binding.etPass.text!!.isNotEmpty()
             ) {
 
                 FirebaseAuth.getInstance()
                     .signInWithEmailAndPassword(
                         binding.etMail.text.toString(),
-                        binding.etPass.text.toString()).addOnCompleteListener {
+                        binding.etPass.text.toString()
+                    ).addOnCompleteListener {
 
                         if (it.isSuccessful) {
 
-                            showHome(binding.etName.toString(),
+                            showHome(
+                                binding.etName.toString(),
                                 it.result?.user?.email ?: "",
-                                ProviderType.BASIC)
+                                ProviderType.BASIC
+                            )
 
                             savePrefs()
 
                         } else {
-                            showAlert("Asegúrate de que la contraseña es correcta " +
-                                    "o prueba a registrarte primero")
+                            showAlert(
+                                "Asegúrate de que la contraseña es correcta " +
+                                        "o prueba a registrarte primero"
+                            )
                         }
 
                     }
@@ -143,5 +150,4 @@ class AuthActivity : AppCompatActivity() {
         }
         startActivity(homeIntent)
     }
-
 }
