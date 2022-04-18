@@ -42,7 +42,7 @@
             android:inputType="textPersonName" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatInstrument"
+            android:id="@+id/floatName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -86,7 +86,7 @@
             android:inputType="textPersonName" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatName"
+            android:id="@+id/floatInstrument"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

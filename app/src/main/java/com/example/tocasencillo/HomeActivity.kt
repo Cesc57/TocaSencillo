@@ -99,7 +99,6 @@ class HomeActivity : AppCompatActivity() {
             item.toString() == "Opciones" -> {
                 val intent = Intent(this, SettingsActivity::class.java)
                 startActivity(intent)
-                //Toast.makeText(this, item.toString(), Toast.LENGTH_SHORT).show()
             }
             item.toString() == "Cerrar sesión" -> {
                 onBackPressed()
