@@ -60,7 +60,7 @@
 
     <Space
         android:layout_width="wrap_content"
-        android:layout_height="24dp" />
+        android:layout_height="12dp" />
 
     <TextView
         android:id="@+id/tvInstrument"
@@ -108,12 +108,28 @@
         android:layout_height="24dp" />
 
     <TextView
-        android:id="@+id/tvChangePass"
+        android:id="@+id/changePass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
         android:background="@color/primaryLightColor"
         android:text="@string/change_password" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:endIconMode="password_toggle">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etOldPass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:hint="@string/old_password"
+            android:imeOptions="actionDone"
+            android:inputType="textPassword" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
