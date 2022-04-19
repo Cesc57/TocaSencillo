@@ -49,6 +49,9 @@ class SettingsActivity : AppCompatActivity() {
             }
         }
 
+
+        //PASSWORD:
+        //https://www.youtube.com/watch?v=J9o3gVAx-Qk&ab_channel=CodeAndroid
         //FirebaseAuth.getInstance().currentUser?.updatePassword(binding.etNewPass.text.toString())
         //FirebaseAuth.getInstance().currentUser?.updatePassword("pepe")
 
