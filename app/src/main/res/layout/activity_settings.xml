@@ -13,7 +13,7 @@
 
     <Space
         android:layout_width="wrap_content"
-        android:layout_height="18dp"/>
+        android:layout_height="18dp" />
 
     <TextView
         android:id="@+id/tvName"
@@ -39,6 +39,7 @@
             android:layout_weight="20"
             android:autofillHints="username"
             android:hint="@string/new_name"
+            android:imeOptions="actionDone"
             android:inputType="textPersonName" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -59,7 +60,7 @@
 
     <Space
         android:layout_width="wrap_content"
-        android:layout_height="12dp" />
+        android:layout_height="24dp" />
 
     <TextView
         android:id="@+id/tvInstrument"
@@ -83,6 +84,7 @@
             android:layout_weight="20"
             android:autofillHints="username"
             android:hint="@string/new_instrument"
+            android:imeOptions="actionDone"
             android:inputType="textPersonName" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -106,7 +108,7 @@
         android:layout_height="24dp" />
 
     <TextView
-        android:id="@+id/changePass"
+        android:id="@+id/tvChangePass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
@@ -119,26 +121,12 @@
         app:endIconMode="password_toggle">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etOldPass"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:hint="@string/old_password"
-            android:inputType="textPassword" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:endIconMode="password_toggle">
-
-        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etConfirmNewPass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:hint="@string/new_password"
+            android:imeOptions="actionDone"
             android:inputType="textPassword"
             app:endIconMode="password_toggle" />
 
@@ -155,6 +143,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:hint="@string/repeat_password"
+            android:imeOptions="actionDone"
             android:inputType="textPassword"
             app:endIconMode="password_toggle" />
 
@@ -162,7 +151,7 @@
 
     <Space
         android:layout_width="wrap_content"
-        android:layout_height="6dp"/>
+        android:layout_height="6dp" />
 
     <Button
         android:id="@+id/btnPassword"
@@ -173,6 +162,6 @@
 
     <Space
         android:layout_width="wrap_content"
-        android:layout_height="18dp"/>
+        android:layout_height="18dp" />
 
 </LinearLayout>

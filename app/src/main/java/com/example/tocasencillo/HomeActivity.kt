@@ -1,6 +1,7 @@
 package com.example.tocasencillo
 
 import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences.Editor
 import android.database.Cursor
@@ -41,7 +42,10 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val name = intent.getStringExtra("name")
+
         val toolbar: Toolbar = findViewById(R.id.toolbar)
+        toolbar.title = name
         setSupportActionBar(toolbar)
 
         songsDBHelper = MySQLiteHelper(this)
@@ -65,12 +69,8 @@ class HomeActivity : AppCompatActivity() {
 
         })
 
-        binding.btnSong.setOnClickListener {
+        binding.floatSong.setOnClickListener {
             goEditor()
-        }
-
-        binding.btnExit.setOnClickListener {
-            onBackPressed()
         }
 
     }
@@ -80,9 +80,10 @@ class HomeActivity : AppCompatActivity() {
         val sharePrefs: Editor =
             getSharedPreferences(getString(R.string.prefs_file), MODE_PRIVATE).edit()
         //OJO: Per eliminar sols alguna sharePref:
-        //sharePrefs.remove("mail")
-        //sharePrefs.remove("provider")
-        sharePrefs.clear()
+        sharePrefs.remove("name")
+        sharePrefs.remove("mail")
+        sharePrefs.remove("provider")
+        //sharePrefs.clear()
         sharePrefs.apply()
 
         FirebaseAuth.getInstance().signOut()
@@ -169,4 +170,15 @@ class HomeActivity : AppCompatActivity() {
         val alert = dialogBuilder.create()
         alert.show()
     }
+
+    override fun onResume() {
+
+        val sharePrefs =
+            getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
+
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        toolbar.title = sharePrefs.getString("name", null)
+        super.onResume()
+    }
+
 }
