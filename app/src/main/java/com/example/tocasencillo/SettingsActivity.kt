@@ -10,10 +10,14 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.example.tocasencillo.databinding.ActivitySettingsBinding
+import com.google.firebase.auth.EmailAuthProvider
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 
 class SettingsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySettingsBinding
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,6 +28,8 @@ class SettingsActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         restore("")
+
+        auth = FirebaseAuth.getInstance()
 
         binding.floatName.setOnClickListener {
             val prefs: SharedPreferences.Editor =
@@ -42,19 +48,67 @@ class SettingsActivity : AppCompatActivity() {
         }
 
         binding.btnPassword.setOnClickListener {
-            if (binding.etNewPass.text.toString() == binding.etConfirmNewPass.text.toString()) {
-                Toast.makeText(this, "Encara no funciona...", Toast.LENGTH_SHORT).show()
-            }else {
-                Toast.makeText(this, "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show()
-            }
+            changePassword()
         }
 
+    }
 
-        //PASSWORD:
-        //https://www.youtube.com/watch?v=J9o3gVAx-Qk&ab_channel=CodeAndroid
-        //FirebaseAuth.getInstance().currentUser?.updatePassword(binding.etNewPass.text.toString())
-        //FirebaseAuth.getInstance().currentUser?.updatePassword("pepe")
+    private fun changePassword() {
+        if (binding.etOldPass.text.toString().isNotEmpty() &&
+            binding.etNewPass.text.toString().isNotEmpty() &&
+            binding.etConfirmNewPass.text.toString().isNotEmpty()
+        ) {
 
+            if (binding.etNewPass.text.toString() == binding.etConfirmNewPass.text.toString()
+            ) {
+                val user: FirebaseUser? = auth.currentUser
+                if (user != null && user.email != null) {
+                    val credential = EmailAuthProvider.getCredential(
+                        user.email!!,
+                        binding.etNewPass.text.toString()
+                    )
+
+                    user.reauthenticate(credential).addOnCompleteListener {
+                        if (it.isSuccessful) {
+                            user.updatePassword(binding.etNewPass.text.toString())
+                                .addOnCompleteListener { task ->
+                                    if (task.isSuccessful) {
+                                        Toast.makeText(
+                                            this,
+                                            "Contraseña cambiada",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    }
+                                }
+                        } else {
+                            Toast.makeText(
+                                this,
+                                "No se ha podido cambiar la contraseña",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+
+                    }
+
+                } else {
+                    Toast.makeText(
+                        this,
+                        "Ha ocurrido un error cambiando la contraseña",
+                        Toast.LENGTH_SHORT
+                    )
+                        .show()
+                }
+            } else {
+                Toast.makeText(this, "Las contraseñas no coinciden", Toast.LENGTH_SHORT)
+
+                    .show()
+            }
+
+
+        } else {
+            Toast.makeText(this, "Rellena todos los campos, por favor", Toast.LENGTH_SHORT)
+                .show()
+        }
     }
 
     @SuppressLint("SetTextI18n")
