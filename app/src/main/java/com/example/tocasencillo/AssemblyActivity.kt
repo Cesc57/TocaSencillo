@@ -26,6 +26,7 @@ class AssemblyActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAssemblyBinding
     private lateinit var db: SQLiteDatabase
+    private var posicNow: Int = 1
 
     companion object {
         private lateinit var songsDBHelper: MySQLiteHelper
@@ -39,6 +40,8 @@ class AssemblyActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         saving = false
+
+        loadAd()
 
         songsDBHelper = MySQLiteHelper(this)
         songsDBHelper.readableDatabase
@@ -60,6 +63,9 @@ class AssemblyActivity : AppCompatActivity() {
 
         while (!cursor.isAfterLast) {
             //LOGICAL FOR BUILD FRAGMENT
+            if (posicNow%8==0){
+                loadAd()
+            }
             val type: String = cursor.getString(2)
             when (type) {
                 LABEL_TABLE -> {
@@ -76,7 +82,16 @@ class AssemblyActivity : AppCompatActivity() {
             }
             rebuildFragment(type)
             cursor.moveToNext()
+            posicNow++
         }
+    }
+
+    private fun loadAd() {
+        val fragment = AdMobFragment()
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        fragmentTransaction.add(R.id.assemblySong, fragment)
+        fragmentTransaction.addToBackStack(null)
+        fragmentTransaction.commit()
     }
 
     private fun valueLabel(valueTable: Int) {
