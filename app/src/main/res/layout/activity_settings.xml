@@ -13,7 +13,7 @@
 
     <Space
         android:layout_width="wrap_content"
-        android:layout_height="18dp" />
+        android:layout_height="36dp" />
 
     <TextView
         android:id="@+id/tvName"
@@ -60,7 +60,7 @@
 
     <Space
         android:layout_width="wrap_content"
-        android:layout_height="12dp" />
+        android:layout_height="36dp" />
 
     <TextView
         android:id="@+id/tvInstrument"
@@ -105,7 +105,7 @@
 
     <Space
         android:layout_width="wrap_content"
-        android:layout_height="24dp" />
+        android:layout_height="36dp" />
 
     <TextView
         android:id="@+id/changePass"
@@ -115,55 +115,19 @@
         android:background="@color/primaryLightColor"
         android:text="@string/change_password" />
 
-    <com.google.android.material.textfield.TextInputLayout
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="6dp" />
+
+    <EditText
+        android:id="@+id/etMail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:endIconMode="password_toggle">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etOldPass"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:hint="@string/old_password"
-            android:imeOptions="actionDone"
-            android:inputType="textPassword" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:endIconMode="password_toggle">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etNewPass"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:hint="@string/new_password"
-            android:imeOptions="actionDone"
-            android:inputType="textPassword"
-            app:endIconMode="password_toggle" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:endIconMode="password_toggle">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etConfirmNewPass"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:hint="@string/repeat_password"
-            android:imeOptions="actionDone"
-            android:inputType="textPassword"
-            app:endIconMode="password_toggle" />
-
-    </com.google.android.material.textfield.TextInputLayout>
+        android:autofillHints="username"
+        android:hint="@string/mail"
+        android:layout_margin="8dp"
+        android:imeOptions="actionDone"
+        android:inputType="textPersonName" />
 
     <Space
         android:layout_width="wrap_content"
@@ -174,7 +138,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="@string/change" />
+        android:text="@string/send_mail" />
 
     <Space
         android:layout_width="wrap_content"

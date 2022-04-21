@@ -10,9 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.example.tocasencillo.databinding.ActivitySettingsBinding
-import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 
 class SettingsActivity : AppCompatActivity() {
 
@@ -48,66 +46,24 @@ class SettingsActivity : AppCompatActivity() {
         }
 
         binding.btnPassword.setOnClickListener {
-            changePassword()
-        }
-
-    }
-
-    private fun changePassword() {
-        if (binding.etOldPass.text.toString().isNotEmpty() &&
-            binding.etNewPass.text.toString().isNotEmpty() &&
-            binding.etConfirmNewPass.text.toString().isNotEmpty()
-        ) {
-
-            if (binding.etNewPass.text.toString() == binding.etConfirmNewPass.text.toString()
-            ) {
-                val user: FirebaseUser? = auth.currentUser
-                if (user != null && user.email != null) {
-                    val credential = EmailAuthProvider.getCredential(
-                        user.email!!,
-                        binding.etNewPass.text.toString()
-                    )
-
-                    user.reauthenticate(credential).addOnCompleteListener {
-                        if (it.isSuccessful) {
-                            user.updatePassword(binding.etNewPass.text.toString())
-                                .addOnCompleteListener { task ->
-                                    if (task.isSuccessful) {
-                                        Toast.makeText(
-                                            this,
-                                            "Contraseña cambiada",
-                                            Toast.LENGTH_SHORT
-                                        ).show()
-                                    }
-                                }
-                        } else {
-                            Toast.makeText(
-                                this,
-                                "No se ha podido cambiar la contraseña",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
-
-                    }
-
-                } else {
-                    Toast.makeText(
-                        this,
-                        "Ha ocurrido un error cambiando la contraseña",
-                        Toast.LENGTH_SHORT
-                    )
-                        .show()
-                }
+            if (binding.etMail.text.toString().isNotEmpty()) {
+                resetPassword()
             } else {
-                Toast.makeText(this, "Las contraseñas no coinciden", Toast.LENGTH_SHORT)
-
-                    .show()
+                Toast.makeText(this, "Introduce tu email", Toast.LENGTH_SHORT).show()
             }
 
+        }
+    }
 
-        } else {
-            Toast.makeText(this, "Rellena todos los campos, por favor", Toast.LENGTH_SHORT)
-                .show()
+    private fun resetPassword() {
+        auth.setLanguageCode("es")
+        auth.sendPasswordResetEmail(binding.etMail.text.toString()).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                Toast.makeText(this, "Se ha enviado un email, revisa tu correo", Toast.LENGTH_SHORT)
+                    .show()
+            } else {
+                Toast.makeText(this, "No se ha podido enviar el email", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
