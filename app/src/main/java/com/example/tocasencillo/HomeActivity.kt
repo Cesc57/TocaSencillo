@@ -26,8 +26,6 @@ enum class ProviderType {
 }
 
 class HomeActivity : AppCompatActivity() {
-    //ADD TOOLBAR (Options menu and close session)
-    //https://www.youtube.com/watch?v=DMkzIOLppf4&ab_channel=CodinginFlow
 
     private lateinit var binding: ActivityHomeBinding
     private lateinit var songsDBHelper: MySQLiteHelper
@@ -79,7 +77,7 @@ class HomeActivity : AppCompatActivity() {
         //Delete data from sharPref
         val sharePrefs: Editor =
             getSharedPreferences(getString(R.string.prefs_file), MODE_PRIVATE).edit()
-        //OJO: Per eliminar sols alguna sharePref:
+        //Delete some sharePref:
         sharePrefs.remove("name")
         sharePrefs.remove("mail")
         sharePrefs.remove("provider")

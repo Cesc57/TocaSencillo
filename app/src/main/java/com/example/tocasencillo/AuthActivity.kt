@@ -21,8 +21,8 @@ class AuthActivity : AppCompatActivity() {
         binding = ActivityAuthBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //Lanzamos eventos personalizados a Google Analytics
-        //para consultarlo en nuestra consola de Firebase
+        //Launching Custom Events to Google Analytics
+        //to check it in the Firebase console
         val analytics: FirebaseAnalytics = FirebaseAnalytics.getInstance(this)
         val bundle = Bundle()
         bundle.putString("message", "Integración de Firebase completada")
