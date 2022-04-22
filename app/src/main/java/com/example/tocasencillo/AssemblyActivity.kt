@@ -5,8 +5,11 @@ import android.app.AlertDialog
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import com.example.tocasencillo.EditorActivity.Companion.label
 import com.example.tocasencillo.EditorActivity.Companion.reps
@@ -27,6 +30,7 @@ class AssemblyActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAssemblyBinding
     private lateinit var db: SQLiteDatabase
     private var posicNow: Int = 1
+    private lateinit var songName: String
 
     companion object {
         private lateinit var songsDBHelper: MySQLiteHelper
@@ -40,6 +44,12 @@ class AssemblyActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         saving = false
+
+        val name = intent.getStringExtra("songName")
+        songName = name!!
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        toolbar.title = name
+        setSupportActionBar(toolbar)
 
         loadAd()
 
@@ -63,7 +73,7 @@ class AssemblyActivity : AppCompatActivity() {
 
         while (!cursor.isAfterLast) {
             //LOGICAL FOR BUILD FRAGMENT
-            if (posicNow%8==0){
+            if (posicNow % 8 == 0) {
                 loadAd()
             }
             val type: String = cursor.getString(2)
@@ -85,6 +95,52 @@ class AssemblyActivity : AppCompatActivity() {
             posicNow++
         }
     }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.assembly_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when {
+            item.toString() == "Editar" -> {
+                Toast.makeText(this, "Función no disponible por el momento", Toast.LENGTH_SHORT)
+                    .show()
+            }
+            item.toString() == "Eliminar" -> {
+                showAlert()
+            }
+            else -> {
+                Toast.makeText(this, "¿Que has pulsado...?", Toast.LENGTH_SHORT).show()
+            }
+        }
+        return true
+    }
+
+    private fun showAlert() {
+        // build alert dialog
+        val dialogBuilder = AlertDialog.Builder(this)
+        // set title of alert dialog
+        dialogBuilder.setTitle("ELIMINAR CANCIÓN")
+            // if the dialog is cancelable
+            .setCancelable(false)
+            // set message of alert dialog
+            .setMessage("¿Estás seguro?")
+            // positive button text and action
+            .setPositiveButton("SI") { _, _ ->
+                songsDBHelper.deleteSong(songName)
+                Toast.makeText(this, "Ací anirà eliminar cançó", Toast.LENGTH_SHORT).show()
+            }
+            // negative button text and action
+            .setNegativeButton("NO") { dialog, _ ->
+                dialog.cancel()
+            }
+
+        val alert = dialogBuilder.create()
+        alert.show()
+    }
+
 
     private fun loadAd() {
         val fragment = AdMobFragment()
