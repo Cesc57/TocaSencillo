@@ -31,10 +31,12 @@ class AssemblyActivity : AppCompatActivity() {
     private lateinit var db: SQLiteDatabase
     private var posicNow: Int = 1
     private lateinit var songName: String
+    private var songId: Int = 0
 
     companion object {
         private lateinit var songsDBHelper: MySQLiteHelper
         var positionInSong: Int = 0
+        var delete = false
     }
 
     @SuppressLint("Recycle")
@@ -43,7 +45,7 @@ class AssemblyActivity : AppCompatActivity() {
         binding = ActivityAssemblyBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        saving = false
+        restartValues()
 
         val name = intent.getStringExtra("songName")
         songName = name!!
@@ -57,7 +59,7 @@ class AssemblyActivity : AppCompatActivity() {
         songsDBHelper.readableDatabase
 
         val songName: String = intent.getStringExtra("songName").toString()
-        val songId: Int = songsDBHelper.searchSongIdByName(songName)
+        songId = songsDBHelper.searchSongIdByName(songName)
 
         binding.tvMainTitle.text = songName
 
@@ -96,6 +98,11 @@ class AssemblyActivity : AppCompatActivity() {
         }
     }
 
+    private fun restartValues() {
+        saving = false
+        delete = false
+    }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater = menuInflater
         inflater.inflate(R.menu.assembly_menu, menu)
@@ -129,8 +136,9 @@ class AssemblyActivity : AppCompatActivity() {
             .setMessage("¿Estás seguro?")
             // positive button text and action
             .setPositiveButton("SI") { _, _ ->
+                delete = true
+                deleteSong()
                 songsDBHelper.deleteSong(songName)
-                Toast.makeText(this, "Ací anirà eliminar cançó", Toast.LENGTH_SHORT).show()
             }
             // negative button text and action
             .setNegativeButton("NO") { dialog, _ ->
@@ -139,6 +147,20 @@ class AssemblyActivity : AppCompatActivity() {
 
         val alert = dialogBuilder.create()
         alert.show()
+    }
+
+    private fun deleteSong() {
+        //Try-catch in case the DB fails
+        try {
+            for (fragment in supportFragmentManager.fragments) {
+                supportFragmentManager.beginTransaction().remove(fragment!!).commit()
+            }
+            songsDBHelper.deleteSongFragment(songId)
+            songsDBHelper.deleteSong(songName)
+            finish()
+        } catch (e: Exception) {
+            Toast.makeText(this, "ERROR, prueba otra vez a guardar", Toast.LENGTH_SHORT).show()
+        }
     }
 
 

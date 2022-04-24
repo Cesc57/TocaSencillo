@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.tocasencillo.EditorActivity.Companion.posic
+import com.example.tocasencillo.EditorActivity.Companion.saving
 import com.example.tocasencillo.MySQLiteHelper.Companion.BOX_REPEAT_TABLE
 import com.example.tocasencillo.databinding.FragmentBoxRepeatBinding
 
@@ -55,7 +56,7 @@ class BoxRepeatFragment : Fragment() {
     }
 
     private fun byeFragBoxRepeat() {
-        if (EditorActivity.saving) {
+        if (saving) {
             val note: String = binding.rptText.text.toString()
             MySQLiteHelper(this.requireContext()).apply {
                 saveBoxRepeat(note)

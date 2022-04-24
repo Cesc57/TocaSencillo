@@ -3,13 +3,12 @@ package com.example.tocasencillo
 import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
-import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import java.util.*
 
 class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
-    context, DATABASE, null, 6
+    context, DATABASE, null, 9
 ) {
 
     companion object {
@@ -361,22 +360,25 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
         return cursor.getString(1)
     }
 
-    @SuppressLint("Recycle")
-    fun deleteSong(songName: String) {
-        val idSong = searchSongIdByName(songName)
-        val database = this.readableDatabase
+    fun deleteSong(name: String) {
+        val args = arrayOf(name)
         val db = this.writableDatabase
-        val cursor: Cursor = database.rawQuery(
-            "SELECT * " +
-                    "FROM $SONG_FRAGMENT_TABLE " +
-                    "WHERE $ID_SONG = '$idSong'",
-            null
-        )
-        cursor.moveToFirst()
-        while (!cursor.isAfterLast) {
-            db.delete(cursor.getString(2), "$ID_DB = ?", arrayOf(cursor.getString(1)))
-        }
-        db.delete(SONG_FRAGMENT_TABLE, "$ID_SONG = ?", arrayOf(cursor.getString(2)))
-        db.delete(SONG_TABLE, "$ID_SONG = ?", arrayOf(idSong.toString()))
+        db.delete(SONG_TABLE, "$NAME = ?", args)
+        //db.execSQL("DELETE FROM $SONG_TABLE WHERE $NAME = '$name'")
+        db.close()
+    }
+
+    fun deleteSongFragment(fragId: Int) {
+        val args = arrayOf(fragId.toString())
+        val db = this.writableDatabase
+        db.delete(SONG_FRAGMENT_TABLE, "$ID_SONG = ?", args)
+        db.close()
+    }
+
+    fun deleteFragment(idFrag: Int, table: String) {
+        val args = arrayOf(idFrag.toString())
+        val db = this.writableDatabase
+        db.delete(table, "$ID_DB = ?", args)
+        db.close()
     }
 }

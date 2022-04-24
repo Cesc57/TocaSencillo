@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.tocasencillo.EditorActivity.Companion.posic
+import com.example.tocasencillo.EditorActivity.Companion.saving
 import com.example.tocasencillo.MySQLiteHelper.Companion.ALTERNATE_ENDING_TABLE
 import com.example.tocasencillo.databinding.FragmentAlternateEndingBinding
 
@@ -67,7 +68,7 @@ class AlternateEndingFragment : Fragment() {
     }
 
     private fun byeFragAlternateEnding() {
-        if (EditorActivity.saving) {
+        if (saving) {
             val ccBar2: String = binding.tvLine2.text.toString()
             val txtCC1: String = binding.etBar1.text.toString()
             val txtCC2: String = binding.etBar2.text.toString()

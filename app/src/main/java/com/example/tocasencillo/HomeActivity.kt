@@ -173,9 +173,12 @@ class HomeActivity : AppCompatActivity() {
 
         val sharePrefs =
             getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
-
+        binding.svSong.setQuery("", false)
+        binding.svSong.clearFocus()
+        fillRecyclerView()
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         toolbar.title = sharePrefs.getString("name", null)
+
         super.onResume()
     }
 

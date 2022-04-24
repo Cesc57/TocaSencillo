@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.tocasencillo.AssemblyActivity.Companion.delete
 import com.example.tocasencillo.AssemblyActivity.Companion.positionInSong
+import com.example.tocasencillo.MySQLiteHelper.Companion.NOTE_TABLE
 import com.example.tocasencillo.databinding.FragmentNoteBuildBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -49,6 +51,19 @@ class NoteBuildFragment : Fragment() {
         dataRecovery()
 
         return view
+    }
+
+    override fun onStop() {
+        deleteFrag()
+        super.onStop()
+    }
+
+    private fun deleteFrag() {
+        if (delete) {
+            MySQLiteHelper(this.requireContext()).apply {
+                deleteFragment(myPosic, NOTE_TABLE)
+            }
+        }
     }
 
     private fun dataRecovery() {

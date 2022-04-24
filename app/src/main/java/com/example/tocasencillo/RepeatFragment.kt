@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.tocasencillo.EditorActivity.Companion.posic
 import com.example.tocasencillo.EditorActivity.Companion.reps
+import com.example.tocasencillo.EditorActivity.Companion.saving
 import com.example.tocasencillo.MySQLiteHelper.Companion.REPEAT_TABLE
 import com.example.tocasencillo.databinding.FragmentRepeatBinding
 
@@ -74,7 +75,7 @@ class RepeatFragment : Fragment() {
     }
 
     private fun byeFragRepeatTime() {
-        if (!EditorActivity.saving) {
+        if (!saving) {
             posic--
         } else {
             //val title: String = (select id where = label)

@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.tocasencillo.AssemblyActivity.Companion.delete
+import com.example.tocasencillo.MySQLiteHelper.Companion.TITLE_TABLE
 import com.example.tocasencillo.databinding.FragmentTitleBuildBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -49,6 +51,19 @@ class TitleBuildFragment : Fragment() {
         dataRecovery()
 
         return view
+    }
+
+    override fun onStop() {
+        deleteFrag()
+        super.onStop()
+    }
+
+    private fun deleteFrag() {
+        if (delete) {
+            MySQLiteHelper(this.requireContext()).apply {
+                deleteFragment(myPosic, TITLE_TABLE)
+            }
+        }
     }
 
     private fun dataRecovery() {

@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.tocasencillo.AssemblyActivity.Companion.delete
 import com.example.tocasencillo.AssemblyActivity.Companion.positionInSong
+import com.example.tocasencillo.MySQLiteHelper.Companion.ALTERNATE_ENDING_TABLE
 import com.example.tocasencillo.databinding.FragmentAlternateEndingBuildBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -35,6 +37,7 @@ class AlternateEndingBuildFragment : Fragment() {
     }
 
     private var _binding: FragmentAlternateEndingBuildBinding? = null
+
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -52,6 +55,19 @@ class AlternateEndingBuildFragment : Fragment() {
         return view
     }
 
+    override fun onStop() {
+        deleteFrag()
+        super.onStop()
+    }
+
+    private fun deleteFrag() {
+        if (delete) {
+            MySQLiteHelper(this.requireContext()).apply {
+                deleteFragment(myPosic, ALTERNATE_ENDING_TABLE)
+            }
+        }
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -59,9 +75,9 @@ class AlternateEndingBuildFragment : Fragment() {
 
     private fun dataRecovery() {
 
-            MySQLiteHelper(this.requireContext()).apply {
-                data = searchAlternateEndingById(myPosic)
-            }
+        MySQLiteHelper(this.requireContext()).apply {
+            data = searchAlternateEndingById(myPosic)
+        }
         binding.tvLine2.text = data[0]
         binding.tvBar1.text = data[1]
         binding.tvBar2.text = data[2]
