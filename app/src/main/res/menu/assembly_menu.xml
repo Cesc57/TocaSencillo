@@ -2,6 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/itExit"
+        android:title="@string/exit_camel_case"/>
+
+    <item
         android:id="@+id/itIntro"
         android:title="@string/edit" />
 

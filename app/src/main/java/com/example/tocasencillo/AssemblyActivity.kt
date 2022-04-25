@@ -111,6 +111,11 @@ class AssemblyActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when {
+
+            item.toString() == "Salir" -> {
+                onBackPressed()
+            }
+
             item.toString() == "Editar" -> {
                 Toast.makeText(this, "Función no disponible por el momento", Toast.LENGTH_SHORT)
                     .show()

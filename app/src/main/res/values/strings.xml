@@ -7,6 +7,7 @@
     <string name="enter">ENTRAR</string>
     <string name="logo">Logo</string>
     <string name="exit">SALIR</string>
+    <string name="exit_camel_case">Salir</string>
     <string name="create_song">CREAR CANCIÓN</string>
     <string name="or_buttons">o</string>
     <string name="prefs_file">com.example.tocasencillo.PREFERENCE_FILE_KEY</string>
