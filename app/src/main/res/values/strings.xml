@@ -61,4 +61,7 @@
     <string name="edit">Editar</string>
     <string name="delete">Eliminar</string>
     <string name="forgotten_password">¿Has olvidado tu contraseña?</string>
+    <string name="order_by_date">order by date</string>
+    <string name="order_alphabetically">order alphabetically</string>
+    <string name="asc_desc_sort">asc or desc sort</string>
 </resources>

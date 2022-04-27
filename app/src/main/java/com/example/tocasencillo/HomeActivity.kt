@@ -50,6 +50,10 @@ class HomeActivity : AppCompatActivity() {
 
         fillRecyclerView()
 
+        binding.ivASCorDESC.setOnClickListener {
+            Toast.makeText(this, "HOLA", Toast.LENGTH_SHORT).show()
+        }
+
         binding.svSong.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 customSearchRecyclerView(query.toString())
