@@ -48,6 +48,7 @@ class SettingsActivity : AppCompatActivity() {
         binding.btnPassword.setOnClickListener {
             if (binding.etMail.text.toString().isNotEmpty()) {
                 resetPassword()
+                binding.etMail.setText("")
             } else {
                 Toast.makeText(this, "Introduce tu email", Toast.LENGTH_SHORT).show()
             }
