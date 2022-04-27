@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/authLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/secondaryDarkColor"
     android:orientation="vertical"
-    tools:context=".AuthActivity"
-    android:background="@color/secondaryDarkColor">
+    tools:context=".AuthActivity">
 
     <Space
         android:layout_width="wrap_content"
-        android:layout_height="24dp"/>
+        android:layout_height="20dp" />
 
     <ImageView
         android:id="@+id/ivLogo"
         android:layout_width="180dp"
         android:layout_height="180dp"
         android:layout_gravity="center"
-        app:srcCompat="@mipmap/logo_transparent"
-        android:contentDescription="@string/logo"/>
+        android:contentDescription="@string/logo"
+        app:srcCompat="@mipmap/logo_transparent" />
 
     <Space
         android:layout_width="wrap_content"
-        android:layout_height="24dp"/>
+        android:layout_height="36dp" />
 
     <EditText
         android:id="@+id/etName"
@@ -31,19 +31,19 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="36dp"
         android:layout_marginRight="36dp"
-        android:ems="10"
-        android:hint="@string/name"
-        android:textAlignment="center"
         android:autofillHints="name"
         android:background="@color/white"
-        android:textColorHint="@color/grayHint"
-        android:textColor="@color/black"
+        android:ems="10"
+        android:hint="@string/name"
         android:inputType="textPersonName"
-        android:minHeight="48dp"/>
+        android:minHeight="48dp"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textColorHint="@color/grayHint" />
 
     <Space
         android:layout_width="wrap_content"
-        android:layout_height="36dp"/>
+        android:layout_height="24dp" />
 
     <EditText
         android:id="@+id/etMail"
@@ -51,19 +51,19 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="36dp"
         android:layout_marginRight="36dp"
-        android:ems="10"
-        android:hint="@string/mail"
-        android:textAlignment="center"
         android:autofillHints="emailAddress"
         android:background="@color/white"
-        android:textColorHint="@color/grayHint"
-        android:textColor="@color/black"
+        android:ems="10"
+        android:hint="@string/mail"
         android:inputType="textEmailAddress"
-        android:minHeight="48dp" />
+        android:minHeight="48dp"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textColorHint="@color/grayHint" />
 
     <Space
         android:layout_width="wrap_content"
-        android:layout_height="36dp"/>
+        android:layout_height="24dp" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/etNewPass"
@@ -84,49 +84,50 @@
 
     <Space
         android:layout_width="wrap_content"
-        android:layout_height="36dp"/>
+        android:layout_height="36dp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/btnEnter"
+        style="?android:attr/buttonBarButtonStyle"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_gravity="center"
+        android:backgroundTint="@color/darkpink"
+        android:text="@string/enter"
+        android:textColor="#212121" />
 
-        <Button
-            android:id="@+id/btnRegister"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="36dp"
-            android:layout_marginEnd="24dp"
-            android:layout_weight="1"
-            android:backgroundTint="@color/lightpink"
-            android:text="@string/login"
-            android:textColor="#212121"
-            style="?android:attr/buttonBarButtonStyle" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/or_buttons"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/or_buttons"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:textSize="20sp"/>
-
-        <Button
-            android:id="@+id/btnEnter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="36dp"
-            android:layout_weight="1"
-            android:backgroundTint="@color/darkpink"
-            android:textColor="#212121"
-            android:text="@string/enter"
-            style="?android:attr/buttonBarButtonStyle" />
-
-    </LinearLayout>
+    <Button
+        android:id="@+id/btnRegister"
+        style="?android:attr/buttonBarButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:backgroundTint="@color/lightpink"
+        android:text="@string/login"
+        android:textColor="#212121" />
 
     <Space
         android:layout_width="wrap_content"
-        android:layout_height="36dp"/>
+        android:layout_height="12dp" />
+
+    <TextView
+        android:id="@+id/tvForgottenPass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="@string/forgotten_password"
+        android:textColor="@color/lightpink"
+        android:background="@drawable/forgotten_password"
+        android:textStyle="italic" />
 
 </LinearLayout>

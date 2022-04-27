@@ -60,4 +60,5 @@
     <string name="send_mail">ENVIAR CORREO</string>
     <string name="edit">Editar</string>
     <string name="delete">Eliminar</string>
+    <string name="forgotten_password">¿Has olvidado tu contraseña?</string>
 </resources>

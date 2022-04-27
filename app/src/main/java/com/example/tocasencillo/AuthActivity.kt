@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tocasencillo.databinding.ActivityAuthBinding
@@ -31,6 +32,24 @@ class AuthActivity : AppCompatActivity() {
         // Setup
         session()
         setup()
+
+        binding.tvForgottenPass.setOnClickListener {
+            resetPassword()
+        }
+
+    }
+
+    private fun resetPassword() {
+        val auth = FirebaseAuth.getInstance()
+        auth.setLanguageCode("es")
+        auth.sendPasswordResetEmail(binding.etMail.text.toString()).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                Toast.makeText(this, "Se ha enviado un email, revisa tu correo", Toast.LENGTH_SHORT)
+                    .show()
+            } else {
+                Toast.makeText(this, "No se ha podido enviar el email", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     override fun onStart() {
