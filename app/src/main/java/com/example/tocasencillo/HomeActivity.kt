@@ -32,11 +32,11 @@ class HomeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHomeBinding
     private lateinit var songsDBHelper: MySQLiteHelper
+    private var orderBy: String = "_id"
+    private var order: String = "ASC"
 
     companion object {
         private lateinit var db: SQLiteDatabase
-        private var orderBy: String = "_id"
-        private var order: String = "ASC"
     }
 
 
