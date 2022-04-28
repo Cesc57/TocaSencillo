@@ -9,6 +9,9 @@ import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -32,6 +35,8 @@ class HomeActivity : AppCompatActivity() {
 
     companion object {
         private lateinit var db: SQLiteDatabase
+        private var orderBy: String = "_id"
+        private var order: String = "ASC"
     }
 
 
@@ -50,8 +55,55 @@ class HomeActivity : AppCompatActivity() {
 
         fillRecyclerView()
 
-        binding.ivASCorDESC.setOnClickListener {
-            Toast.makeText(this, "HOLA", Toast.LENGTH_SHORT).show()
+        val spinner = binding.spOrder
+        val adapter: ArrayAdapter<*> = ArrayAdapter.createFromResource(
+            this, R.array.order_by, android.R.layout.simple_spinner_item
+        )
+        adapter.setDropDownViewResource(
+            android.R.layout.simple_spinner_item
+        )
+        spinner.adapter = adapter
+
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View,
+                position: Int,
+                id: Long
+            ) {
+                val selectedItem = parent.getItemAtPosition(position).toString()
+                Toast.makeText(this@HomeActivity, selectedItem, Toast.LENGTH_SHORT).show()
+                when (selectedItem) {
+                    "fecha ascendente" -> {
+                        orderBy = ID_DB
+                        order = "ASC"
+                        rebuildRecycler()
+                    }
+                    "fecha descendente" -> {
+                        orderBy = ID_DB
+                        order = "DESC"
+                        rebuildRecycler()
+                    }
+                    "nombre ascendente" -> {
+                        orderBy = NAME
+                        order = "ASC"
+                        rebuildRecycler()
+                    }
+                    "nombre descendente" -> {
+                        orderBy = NAME
+                        order = "DESC"
+                        rebuildRecycler()
+                    }
+                    else -> {
+                        Toast.makeText(this@HomeActivity, "Error al ordenar", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+
+            }
         }
 
         binding.svSong.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -116,7 +168,7 @@ class HomeActivity : AppCompatActivity() {
     private fun fillRecyclerView() {
         db = songsDBHelper.readableDatabase
         val cursor: Cursor = db.rawQuery(
-            "SELECT * FROM $SONG_TABLE ORDER BY $ID_DB",
+            "SELECT * FROM $SONG_TABLE ORDER BY $orderBy $order",
             null
         )
 
@@ -131,7 +183,7 @@ class HomeActivity : AppCompatActivity() {
     private fun customSearchRecyclerView(query: String) {
         db = songsDBHelper.readableDatabase
         val cursor: Cursor = db.rawQuery(
-            "SELECT * FROM $SONG_TABLE WHERE $NAME LIKE '%$query%' ORDER BY $ID_DB",
+            "SELECT * FROM $SONG_TABLE WHERE $NAME LIKE '%$query%' ORDER BY $orderBy $order",
             null
         )
 
@@ -177,13 +229,17 @@ class HomeActivity : AppCompatActivity() {
 
         val sharePrefs =
             getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
-        binding.svSong.setQuery("", false)
-        binding.svSong.clearFocus()
-        fillRecyclerView()
+        rebuildRecycler()
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         toolbar.title = sharePrefs.getString("name", null)
 
         super.onResume()
+    }
+
+    private fun rebuildRecycler() {
+        binding.svSong.setQuery("", false)
+        binding.svSong.clearFocus()
+        fillRecyclerView()
     }
 
 }

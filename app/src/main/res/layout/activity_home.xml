@@ -30,55 +30,12 @@
         android:layout_width="wrap_content"
         android:layout_height="16dp" />
 
-    <LinearLayout
-        android:id="@+id/llOrder"
+    <Spinner
+        android:id="@+id/spOrder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Space
-            android:layout_width="36dp"
-            android:layout_height="match_parent" />
-
-        <ImageView
-            android:id="@+id/ivDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/lightpink"
-            android:contentDescription="@string/order_by_date"
-            app:srcCompat="@android:drawable/ic_menu_my_calendar" />
-
-        <Space
-            android:layout_width="24dp"
-            android:layout_height="match_parent" />
-
-        <ImageView
-            android:id="@+id/ivName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/lightpink"
-            android:contentDescription="@string/order_alphabetically"
-            app:srcCompat="@android:drawable/ic_menu_sort_alphabetically" />
-
-        <Space
-            android:layout_width="24dp"
-            android:layout_height="match_parent" />
-
-        <ImageView
-            android:id="@+id/ivASCorDESC"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@color/secondaryColor"
-            android:contentDescription="@string/asc_desc_sort"
-            app:srcCompat="@android:drawable/stat_sys_upload" />
-
-        <Space
-            android:layout_width="24dp"
-            android:layout_height="match_parent" />
-
-
-    </LinearLayout>
+        android:textAlignment="center"
+        android:prompt="@string/order_by"/>
 
     <Space
         android:layout_width="match_parent"
