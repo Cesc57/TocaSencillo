@@ -74,22 +74,22 @@ class HomeActivity : AppCompatActivity() {
                 val selectedItem = parent.getItemAtPosition(position).toString()
                 Toast.makeText(this@HomeActivity, selectedItem, Toast.LENGTH_SHORT).show()
                 when (selectedItem) {
-                    "fecha ascendente" -> {
+                    "Fecha Ascendente" -> {
                         orderBy = ID_DB
                         order = "ASC"
                         rebuildRecycler()
                     }
-                    "fecha descendente" -> {
+                    "Fecha Descendente" -> {
                         orderBy = ID_DB
                         order = "DESC"
                         rebuildRecycler()
                     }
-                    "nombre ascendente" -> {
+                    "Nombre Ascendente" -> {
                         orderBy = NAME
                         order = "ASC"
                         rebuildRecycler()
                     }
-                    "nombre descendente" -> {
+                    "Nombre Descendente" -> {
                         orderBy = NAME
                         order = "DESC"
                         rebuildRecycler()
