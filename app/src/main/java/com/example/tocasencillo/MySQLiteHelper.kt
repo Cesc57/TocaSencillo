@@ -8,12 +8,13 @@ import android.database.sqlite.SQLiteOpenHelper
 import java.util.*
 
 class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
-    context, DATABASE, null, 9
+    context, DATABASE, null, 14
 ) {
 
     companion object {
         const val DATABASE = "cancionero.db"
         const val SONG_TABLE = "cancion"
+        const val USER_TABLE = "usuario"
         const val TITLE_TABLE = "titulo"
         const val CONTENT_TABLE = "contenido"
         const val NOTE_TABLE = "nota"
@@ -23,7 +24,9 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
         const val BOX_REPEAT_TABLE = "caja_repeticion"
         const val ALTERNATE_ENDING_TABLE = "final_alternativo"
         const val ID_DB = "_id"
+        const val ID_USER = "id_usuario"
         const val NAME = "nombre"
+        const val MAIL = "mail"
         const val TEMPO = "velocidad"
         const val SONG_KEY = "tonalidad"
         const val CC_BAR_1 = "ccBar1"
@@ -39,44 +42,66 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
         const val POSITION = "posicion"
         const val ID_SONG = "_id_cancion"
         const val ID_FRAGMENT = "_id_fragmento"
+        const val ID_SONG_FRAGMENT = "_id_cancion_fragmento"
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
 
         //defining our DB
+
+        val createUserCommand =
+            """CREATE TABLE $USER_TABLE
+                ($ID_DB INTEGER PRIMARY KEY AUTOINCREMENT,
+                $MAIL TEXT UNIQUE)"""
+
         val createSongCommand =
             """CREATE TABLE $SONG_TABLE
                 ($ID_DB INTEGER PRIMARY KEY AUTOINCREMENT,
-                $NAME TEXT UNIQUE)"""
+                $NAME TEXT UNIQUE,
+                $ID_USER INTEGER,
+                FOREIGN KEY($ID_USER) REFERENCES $SONG_TABLE($ID_DB))"""
+
+        val createSongFragmentCommand =
+            """CREATE TABLE $SONG_FRAGMENT_TABLE
+                ($ID_DB INTEGER PRIMARY KEY AUTOINCREMENT,
+                $ID_SONG INTEGER,
+                $TYPE TEXT,
+                $POSITION INTEGER,
+                FOREIGN KEY($ID_SONG) REFERENCES $SONG_TABLE($ID_DB))"""
 
         val createTitleCommand =
             """CREATE TABLE $TITLE_TABLE
                 ($ID_DB INTEGER PRIMARY KEY AUTOINCREMENT,
-                $NAME TEXT, $TEMPO INTEGER, $SONG_KEY TEXT)"""
+                $NAME TEXT,
+                $TEMPO INTEGER,
+                $SONG_KEY TEXT,
+                $ID_SONG_FRAGMENT INTEGER,
+                FOREIGN KEY($ID_SONG_FRAGMENT) REFERENCES $SONG_FRAGMENT_TABLE($ID_DB))"""
 
         val createContentCommand =
             """CREATE TABLE $CONTENT_TABLE
                 ($ID_DB INTEGER PRIMARY KEY AUTOINCREMENT,
-                $CC_BAR_1 TEXT, $CC_BAR_5 TEXT, 
-                $CC_MUSIC_1 TEXT,$CC_MUSIC_2 TEXT, $CC_MUSIC_3 TEXT, $CC_MUSIC_4 TEXT )"""
+                $CC_BAR_1 TEXT,
+                $CC_BAR_5 TEXT,
+                $CC_MUSIC_1 TEXT,
+                $CC_MUSIC_2 TEXT,
+                $CC_MUSIC_3 TEXT,
+                $CC_MUSIC_4 TEXT,
+                $ID_SONG_FRAGMENT INTEGER,
+                FOREIGN KEY($ID_SONG_FRAGMENT) REFERENCES $SONG_FRAGMENT_TABLE($ID_DB))"""
 
         val createNoteCommand =
             """CREATE TABLE $NOTE_TABLE
                 ($ID_DB INTEGER PRIMARY KEY AUTOINCREMENT,
-                $TEXT TEXT)"""
+                $TEXT TEXT,
+                $ID_SONG_FRAGMENT INTEGER,
+                FOREIGN KEY($ID_SONG_FRAGMENT) REFERENCES $SONG_FRAGMENT_TABLE($ID_DB))"""
 
         val createTagCommand =
             """CREATE TABLE $LABEL_TABLE
                 ($ID_DB INTEGER PRIMARY KEY AUTOINCREMENT,
-                $TYPE TEXT)"""
-
-        val createSongFragmentCommand =
-            """CREATE TABLE $SONG_FRAGMENT_TABLE
-                ($ID_SONG INTEGER,
-                $ID_FRAGMENT INTEGER,
                 $TYPE TEXT,
-                $POSITION INTEGER,
-                FOREIGN KEY($ID_SONG) REFERENCES $SONG_TABLE($ID_DB))"""
+                $ID_SONG_FRAGMENT INTEGER)"""
 
         val createRepeatCommand =
             """CREATE TABLE $REPEAT_TABLE
@@ -86,17 +111,23 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
         val createBoxRepeatCommand =
             """CREATE TABLE $BOX_REPEAT_TABLE
                 ($ID_DB INTEGER PRIMARY KEY AUTOINCREMENT,
-                $TEXT TEXT)"""
+                $TEXT TEXT,
+                $ID_SONG_FRAGMENT INTEGER,
+                FOREIGN KEY($ID_SONG_FRAGMENT) REFERENCES $SONG_FRAGMENT_TABLE($ID_DB))"""
 
         val createAlternateEndingCommand =
             """CREATE TABLE $ALTERNATE_ENDING_TABLE 
                 ($ID_DB INTEGER PRIMARY KEY AUTOINCREMENT,
                 $CC_BAR_2 TEXT, 
-                $CC_MUSIC_1 TEXT,$CC_MUSIC_2 TEXT)"""
+                $CC_MUSIC_1 TEXT,
+                $CC_MUSIC_2 TEXT,
+                $ID_SONG_FRAGMENT INTEGER,
+                FOREIGN KEY($ID_SONG_FRAGMENT) REFERENCES $SONG_FRAGMENT_TABLE($ID_DB))"""
 
         //exec create tables
         with(db) {
-            this!!.execSQL(createSongCommand)
+            this!!.execSQL(createUserCommand)
+            this.execSQL(createSongCommand)
             this.execSQL(createTitleCommand)
             this.execSQL(createContentCommand)
             this.execSQL(createNoteCommand)
@@ -125,7 +156,7 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
 
         val reps = arrayOf("x3", "x4")
         for (rep in reps) {
-            val insertReps = """INSERT INTO $REPEAT_TABLE (veces) 
+            val insertReps = """INSERT INTO $REPEAT_TABLE ($TIMES) 
                     VALUES ('$rep')"""
             with(db) {
                 this!!.execSQL(insertReps)
@@ -138,8 +169,12 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
     }
 
     private fun dropAndRebuildTables(db: SQLiteDatabase?) {
+        val dropTableUser = "DROP TABLE IF EXISTS $USER_TABLE"
+        db!!.execSQL(dropTableUser)
         val dropTableSong = "DROP TABLE IF EXISTS $SONG_TABLE"
-        db!!.execSQL(dropTableSong)
+        db.execSQL(dropTableSong)
+        val dropTableSongFragment = "DROP TABLE IF EXISTS $SONG_FRAGMENT_TABLE"
+        db.execSQL(dropTableSongFragment)
         val dropTableTitle = "DROP TABLE IF EXISTS $TITLE_TABLE"
         db.execSQL(dropTableTitle)
         val dropTableContent = "DROP TABLE IF EXISTS $CONTENT_TABLE"
@@ -148,8 +183,6 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
         db.execSQL(dropTableNote)
         val dropTableLabel = "DROP TABLE IF EXISTS $LABEL_TABLE"
         db.execSQL(dropTableLabel)
-        val dropTableSongFragment = "DROP TABLE IF EXISTS $SONG_FRAGMENT_TABLE"
-        db.execSQL(dropTableSongFragment)
         val dropTableRepeat = "DROP TABLE IF EXISTS $REPEAT_TABLE"
         db.execSQL(dropTableRepeat)
         val dropTableBoxRepeat = "DROP TABLE IF EXISTS $BOX_REPEAT_TABLE"
@@ -157,6 +190,14 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
         val dropAlternateEndingRepeat = "DROP TABLE IF EXISTS $ALTERNATE_ENDING_TABLE"
         db.execSQL(dropAlternateEndingRepeat)
         onCreate(db)
+    }
+
+    fun saveUser(mail: String) {
+        val userMail = ContentValues().apply {
+            put(MAIL, mail)
+        }
+        val db = this.writableDatabase
+        db.insert(USER_TABLE, null, userMail)
     }
 
     fun saveSong(song: String) {
@@ -249,6 +290,19 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
             "SELECT $ID_DB " +
                     "FROM $SONG_TABLE " +
                     "WHERE $NAME = '$songName'", null
+        ).apply {
+            moveToFirst()
+        }
+        return cursor.getInt(0)
+    }
+
+    @SuppressLint("Recycle")
+    fun searchUserIdByMail(mail: String): Int {
+        val database = this.readableDatabase
+        val cursor = database.rawQuery(
+            "SELECT $ID_DB " +
+                    "FROM $USER_TABLE " +
+                    "WHERE $MAIL = '$mail'", null
         ).apply {
             moveToFirst()
         }

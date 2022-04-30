@@ -1,5 +1,6 @@
 package com.example.tocasencillo
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
@@ -7,6 +8,7 @@ import android.content.SharedPreferences.Editor
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -20,6 +22,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tocasencillo.MySQLiteHelper.Companion.ID_DB
 import com.example.tocasencillo.MySQLiteHelper.Companion.NAME
 import com.example.tocasencillo.MySQLiteHelper.Companion.SONG_TABLE
+import com.example.tocasencillo.MySQLiteHelper.Companion.USER_TABLE
 import com.example.tocasencillo.databinding.ActivityHomeBinding
 import com.google.firebase.auth.FirebaseAuth
 
@@ -32,8 +35,10 @@ class HomeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHomeBinding
     private lateinit var songsDBHelper: MySQLiteHelper
+    private var meId: Int = 0
     private var orderBy: String = "_id"
     private var order: String = "ASC"
+    private var isRegistered: Boolean = false
 
     companion object {
         private lateinit var db: SQLiteDatabase
@@ -53,6 +58,7 @@ class HomeActivity : AppCompatActivity() {
 
         songsDBHelper = MySQLiteHelper(this)
 
+        saveUserAndGetUserId()
         fillRecyclerView()
 
         val spinner = binding.spOrder
@@ -71,9 +77,8 @@ class HomeActivity : AppCompatActivity() {
                 position: Int,
                 id: Long
             ) {
-                val selectedItem = parent.getItemAtPosition(position).toString()
-                Toast.makeText(this@HomeActivity, selectedItem, Toast.LENGTH_SHORT).show()
-                when (selectedItem) {
+
+                when (parent.getItemAtPosition(position).toString()) {
                     "Fecha Ascendente" -> {
                         orderBy = ID_DB
                         order = "ASC"
@@ -127,6 +132,32 @@ class HomeActivity : AppCompatActivity() {
             goEditor()
         }
 
+    }
+
+    @SuppressLint("Recycle")
+    private fun saveUserAndGetUserId() {
+        val sharePrefs = getSharedPreferences(getString(R.string.prefs_file), MODE_PRIVATE)
+        val mail: String? = sharePrefs.getString("mail", null)
+        Log.d("mail", mail.toString())
+        db = songsDBHelper.readableDatabase
+        val cursor: Cursor = db.rawQuery(
+            "SELECT * FROM $USER_TABLE",
+            null
+        )
+        if (cursor.moveToFirst()) {
+            do {
+                if (cursor.getString(1) == mail.toString()) {
+                    isRegistered = true
+                }
+            } while (cursor.moveToNext())
+        }
+        Log.d("isRegistered", isRegistered.toString())
+        meId = if (isRegistered) {
+            songsDBHelper.searchUserIdByMail(mail.toString())
+        } else {
+            songsDBHelper.saveUser(mail.toString())
+            songsDBHelper.searchUserIdByMail(mail.toString())
+        }
     }
 
     private fun clearSignAuth() {
