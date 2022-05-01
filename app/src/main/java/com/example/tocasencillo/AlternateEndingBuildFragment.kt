@@ -6,13 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.tocasencillo.AssemblyActivity.Companion.delete
-import com.example.tocasencillo.AssemblyActivity.Companion.positionInSong
+import com.example.tocasencillo.AssemblyActivity.Companion.id_song_frag
 import com.example.tocasencillo.MySQLiteHelper.Companion.ALTERNATE_ENDING_TABLE
 import com.example.tocasencillo.databinding.FragmentAlternateEndingBuildBinding
 
 class AlternateEndingBuildFragment : Fragment() {
 
-    private val myPosic: Int = positionInSong
+    private val myId: Int = id_song_frag
     private lateinit var data: ArrayList<String>
 
     private var _binding: FragmentAlternateEndingBuildBinding? = null
@@ -42,7 +42,7 @@ class AlternateEndingBuildFragment : Fragment() {
     private fun deleteFrag() {
         if (delete) {
             MySQLiteHelper(this.requireContext()).apply {
-                deleteFragment(myPosic, ALTERNATE_ENDING_TABLE)
+                deleteFragment(myId, ALTERNATE_ENDING_TABLE)
             }
         }
     }
@@ -55,7 +55,7 @@ class AlternateEndingBuildFragment : Fragment() {
     private fun dataRecovery() {
 
         MySQLiteHelper(this.requireContext()).apply {
-            data = searchAlternateEndingById(myPosic)
+            data = searchAlternateEndingById(myId)
         }
         binding.tvLine2.text = data[0]
         binding.tvBar1.text = data[1]

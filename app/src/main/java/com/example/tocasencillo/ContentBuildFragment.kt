@@ -6,13 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.tocasencillo.AssemblyActivity.Companion.delete
-import com.example.tocasencillo.AssemblyActivity.Companion.positionInSong
+import com.example.tocasencillo.AssemblyActivity.Companion.id_song_frag
 import com.example.tocasencillo.MySQLiteHelper.Companion.CONTENT_TABLE
 import com.example.tocasencillo.databinding.FragmentContentBuildBinding
 
 class ContentBuildFragment : Fragment() {
 
-    private val myPosic: Int = positionInSong
+    private val myId: Int = id_song_frag
     private lateinit var data: ArrayList<String>
 
     private var _binding: FragmentContentBuildBinding? = null
@@ -42,14 +42,14 @@ class ContentBuildFragment : Fragment() {
     private fun deleteFrag() {
         if (delete) {
             MySQLiteHelper(this.requireContext()).apply {
-                deleteFragment(myPosic, CONTENT_TABLE)
+                deleteFragment(myId, CONTENT_TABLE)
             }
         }
     }
 
     private fun dataRecovery() {
         MySQLiteHelper(this.requireContext()).apply {
-            data = searchContentById(myPosic)
+            data = searchContentById(myId)
         }
         binding.tvLine1.text = data[0]
         binding.tvLine5.text = data[1]

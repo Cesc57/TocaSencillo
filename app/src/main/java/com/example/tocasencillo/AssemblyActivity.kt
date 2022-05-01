@@ -35,7 +35,7 @@ class AssemblyActivity : AppCompatActivity() {
 
     companion object {
         private lateinit var songsDBHelper: MySQLiteHelper
-        var positionInSong: Int = 0
+        var id_song_frag: Int = 0
         var delete = false
     }
 
@@ -81,15 +81,13 @@ class AssemblyActivity : AppCompatActivity() {
             val type: String = cursor.getString(2)
             when (type) {
                 LABEL_TABLE -> {
-                    val valueTable: Int = cursor.getString(1).toInt()
-                    valueLabel(valueTable)
+                    valueLabel(songsDBHelper.searchLabelValue(cursor.getString(0).toInt()))
                 }
                 REPEAT_TABLE -> {
-                    val valueTable: Int = cursor.getString(1).toInt()
-                    valueRepeat(valueTable)
+                    valueRepeat(songsDBHelper.searchRepeatValue(cursor.getString(0).toInt()))
                 }
                 else -> {
-                    positionInSong = cursor.getString(1).toInt()
+                    id_song_frag = cursor.getString(0).toInt()
                 }
             }
             rebuildFragment(type)

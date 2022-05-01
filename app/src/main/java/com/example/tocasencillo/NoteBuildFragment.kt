@@ -6,13 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.tocasencillo.AssemblyActivity.Companion.delete
-import com.example.tocasencillo.AssemblyActivity.Companion.positionInSong
+import com.example.tocasencillo.AssemblyActivity.Companion.id_song_frag
 import com.example.tocasencillo.MySQLiteHelper.Companion.NOTE_TABLE
 import com.example.tocasencillo.databinding.FragmentNoteBuildBinding
 
 class NoteBuildFragment : Fragment() {
 
-    private val myPosic: Int = positionInSong
+    private val myId: Int = id_song_frag
 
     private var _binding: FragmentNoteBuildBinding? = null
     // This property is only valid between onCreateView and
@@ -40,14 +40,14 @@ class NoteBuildFragment : Fragment() {
     private fun deleteFrag() {
         if (delete) {
             MySQLiteHelper(this.requireContext()).apply {
-                deleteFragment(myPosic, NOTE_TABLE)
+                deleteFragment(myId, NOTE_TABLE)
             }
         }
     }
 
     private fun dataRecovery() {
         MySQLiteHelper(this.requireContext()).apply {
-            binding.txtNote.text = searchNoteById(myPosic)
+            binding.txtNote.text = searchNoteById(myId)
         }
     }
 

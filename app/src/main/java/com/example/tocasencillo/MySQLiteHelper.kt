@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper
 import java.util.*
 
 class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
-    context, DATABASE, null, 15
+    context, DATABASE, null, 16
 ) {
 
     companion object {
@@ -377,6 +377,35 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
     }
 
     @SuppressLint("Recycle")
+    fun searchLabelValue(id: Int): Int {
+        val database = this.readableDatabase
+        val cursor =
+            database.rawQuery(
+                "SELECT * " +
+                        "FROM $LABEL_TABLE " +
+                        "WHERE $ID_SONG_FRAGMENT = $id", null
+            ).apply {
+                moveToFirst()
+            }
+        return cursor.getInt(2)
+    }
+
+
+    @SuppressLint("Recycle")
+    fun searchRepeatValue(id: Int): Int {
+        val database = this.readableDatabase
+        val cursor =
+            database.rawQuery(
+                "SELECT * " +
+                        "FROM $REPEAT_TABLE " +
+                        "WHERE $ID_SONG_FRAGMENT = $id", null
+            ).apply {
+                moveToFirst()
+            }
+        return cursor.getInt(2)
+    }
+
+    @SuppressLint("Recycle")
     fun lastSongFragment(): Int {
         val database = this.readableDatabase
         val cursor =
@@ -390,12 +419,12 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
     }
 
     @SuppressLint("Recycle")
-    fun searchAlternateEndingById(myPosic: Int): ArrayList<String> {
+    fun searchAlternateEndingById(myId: Int): ArrayList<String> {
         val database = this.readableDatabase
         val cursor = database.rawQuery(
             "SELECT * " +
                     "FROM $ALTERNATE_ENDING_TABLE " +
-                    "WHERE $ID_DB = '$myPosic'", null
+                    "WHERE $ID_SONG_FRAGMENT = '$myId'", null
         ).apply {
             moveToFirst()
         }
@@ -407,12 +436,12 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
     }
 
     @SuppressLint("Recycle")
-    fun searchTitleById(myPosic: Int): ArrayList<String> {
+    fun searchTitleById(myId: Int): ArrayList<String> {
         val database = this.readableDatabase
         val cursor = database.rawQuery(
             "SELECT * " +
                     "FROM $TITLE_TABLE " +
-                    "WHERE $ID_DB = '$myPosic'", null
+                    "WHERE $ID_SONG_FRAGMENT = '$myId'", null
         ).apply {
             moveToFirst()
         }
@@ -424,12 +453,12 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
     }
 
     @SuppressLint("Recycle")
-    fun searchContentById(myPosic: Int): ArrayList<String> {
+    fun searchContentById(myId: Int): ArrayList<String> {
         val database = this.readableDatabase
         val cursor = database.rawQuery(
             "SELECT * " +
                     "FROM $CONTENT_TABLE " +
-                    "WHERE $ID_DB = '$myPosic'", null
+                    "WHERE $ID_SONG_FRAGMENT = '$myId'", null
         ).apply {
             moveToFirst()
         }
@@ -444,12 +473,12 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
     }
 
     @SuppressLint("Recycle")
-    fun searchBoxRepeatById(myPosic: Int): String {
+    fun searchBoxRepeatById(myId: Int): String {
         val database = this.readableDatabase
         val cursor = database.rawQuery(
             "SELECT * " +
                     "FROM $BOX_REPEAT_TABLE " +
-                    "WHERE $ID_DB = '$myPosic'", null
+                    "WHERE $ID_SONG_FRAGMENT = '$myId'", null
         ).apply {
             moveToFirst()
         }
@@ -457,12 +486,12 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
     }
 
     @SuppressLint("Recycle")
-    fun searchNoteById(myPosic: Int): String {
+    fun searchNoteById(myId: Int): String {
         val database = this.readableDatabase
         val cursor = database.rawQuery(
             "SELECT * " +
                     "FROM $NOTE_TABLE " +
-                    "WHERE $ID_DB = '$myPosic'", null
+                    "WHERE $ID_SONG_FRAGMENT = '$myId'", null
         ).apply {
             moveToFirst()
         }

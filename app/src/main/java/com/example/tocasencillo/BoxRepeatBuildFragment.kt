@@ -6,13 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.tocasencillo.AssemblyActivity.Companion.delete
-import com.example.tocasencillo.AssemblyActivity.Companion.positionInSong
+import com.example.tocasencillo.AssemblyActivity.Companion.id_song_frag
 import com.example.tocasencillo.MySQLiteHelper.Companion.BOX_REPEAT_TABLE
 import com.example.tocasencillo.databinding.FragmentBoxRepeatBuildBinding
 
 class BoxRepeatBuildFragment : Fragment() {
 
-    private val myPosic: Int = positionInSong
+    private val myPosic: Int = id_song_frag
 
     private var _binding: FragmentBoxRepeatBuildBinding? = null
     // This property is only valid between onCreateView and
