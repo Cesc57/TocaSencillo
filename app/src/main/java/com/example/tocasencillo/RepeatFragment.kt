@@ -82,10 +82,10 @@ class RepeatFragment : Fragment() {
             MySQLiteHelper(this.requireContext()).apply {
                 saveSongFragment(
                     lastSong(),
-                    myId,
                     REPEAT_TABLE,
                     myPosic
                 )
+                saveRepeat(lastSongFragment(), myId)
             }
         }
     }

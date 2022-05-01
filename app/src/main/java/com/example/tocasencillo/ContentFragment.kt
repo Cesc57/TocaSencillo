@@ -95,11 +95,12 @@ class ContentFragment : Fragment() {
             val txtCC3: String = binding.etBar3.text.toString()
             val txtCC4: String = binding.etBar4.text.toString()
             MySQLiteHelper(this.requireContext()).apply {
-                saveContent(ccBar1, ccBar5, txtCC1, txtCC2, txtCC3, txtCC4)
-                saveSongFragment(lastSong(),
-                    lastFragment(CONTENT_TABLE),
+                saveSongFragment(
+                    lastSong(),
                     CONTENT_TABLE,
-                    myPosic)
+                    myPosic
+                )
+                saveContent(ccBar1, ccBar5, txtCC1, txtCC2, txtCC3, txtCC4, lastSongFragment())
             }
         } else {
             posic--

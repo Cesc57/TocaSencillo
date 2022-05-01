@@ -62,11 +62,10 @@ class TitleFragment : Fragment() {
             val tempo: String = binding.tempo.text.toString()
             val key: String = binding.tune.text.toString()
             MySQLiteHelper(this.requireContext()).apply {
-                saveTitle(title, tempo, key)
                 saveSongFragment(lastSong(),
-                    lastFragment(TITLE_TABLE),
                     TITLE_TABLE,
                     myPosic)
+                saveTitle(title, tempo, key, lastSongFragment())
             }
         } else {
             posic--

@@ -59,13 +59,12 @@ class BoxRepeatFragment : Fragment() {
         if (saving) {
             val note: String = binding.rptText.text.toString()
             MySQLiteHelper(this.requireContext()).apply {
-                saveBoxRepeat(note)
                 saveSongFragment(
                     lastSong(),
-                    lastFragment(BOX_REPEAT_TABLE),
                     BOX_REPEAT_TABLE,
                     myPosic
                 )
+                saveBoxRepeat(note, lastSongFragment())
             }
         } else {
             posic--

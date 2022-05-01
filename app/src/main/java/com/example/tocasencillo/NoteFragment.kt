@@ -59,11 +59,10 @@ class NoteFragment : Fragment() {
         if (saving) {
             val note: String = binding.txtNote.text.toString()
             MySQLiteHelper(this.requireContext()).apply {
-                saveNote(note)
                 saveSongFragment(lastSong(),
-                    lastFragment(NOTE_TABLE),
                     NOTE_TABLE,
                     myPosic)
+                saveNote(note, lastSongFragment())
             }
         } else {
             posic--

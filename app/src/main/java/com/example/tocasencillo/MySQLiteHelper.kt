@@ -43,7 +43,7 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
         const val TIMES = "veces"
         const val POSITION = "posicion"
         const val ID_SONG = "_id_cancion"
-        const val ID_FRAGMENT = "_id_fragmento"
+        //const val ID_FRAGMENT = "_id_fragmento"
         const val ID_SONG_FRAGMENT = "_id_cancion_fragmento"
         const val ID_REPEAT_VALUE = "_id_valor_repeticion"
         const val ID_TAG_VALUE = "_id_valor_etiqueta"
@@ -243,6 +243,8 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
         txtCC2: String,
         txtCC3: String,
         txtCC4: String,
+        lastSongFragment: Int
+
     ) {
         val data = ContentValues().apply {
             put(CC_BAR_1, ccBar1)
@@ -251,28 +253,31 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
             put(CC_MUSIC_2, txtCC2)
             put(CC_MUSIC_3, txtCC3)
             put(CC_MUSIC_4, txtCC4)
+            put(ID_SONG_FRAGMENT, lastSongFragment)
         }
 
         val db = this.writableDatabase
         db.insert(CONTENT_TABLE, null, data)
     }
 
-    fun saveAlternateEnd(ccBar2: String, txtCC1: String, txtCC2: String) {
+    fun saveAlternateEnd(ccBar2: String, txtCC1: String, txtCC2: String, lastSongFragment: Int) {
         val data = ContentValues().apply {
             put(CC_BAR_2, ccBar2)
             put(CC_MUSIC_1, txtCC1)
             put(CC_MUSIC_2, txtCC2)
+            put(ID_SONG_FRAGMENT, lastSongFragment)
         }
 
         val db = this.writableDatabase
         db.insert(ALTERNATE_ENDING_TABLE, null, data)
     }
 
-    fun saveTitle(title: String, tempo: String, key: String) {
+    fun saveTitle(title: String, tempo: String, key: String, lastSongFragment: Int) {
         val data = ContentValues().apply {
             put(NAME, title)
             put(TEMPO, tempo)
             put(SONG_KEY, key)
+            put(ID_SONG_FRAGMENT, lastSongFragment)
 
         }
 
@@ -280,28 +285,29 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
         db.insert(TITLE_TABLE, null, data)
     }
 
-    fun saveNote(note: String) {
+    fun saveNote(note: String, lastSongFragment: Int) {
         val data = ContentValues().apply {
             put(TEXT, note)
+            put(ID_SONG_FRAGMENT, lastSongFragment)
         }
 
         val db = this.writableDatabase
         db.insert(NOTE_TABLE, null, data)
     }
 
-    fun saveBoxRepeat(boxText: String) {
+    fun saveBoxRepeat(boxText: String, lastSongFragment: Int) {
         val data = ContentValues().apply {
             put(TEXT, boxText)
+            put(ID_SONG_FRAGMENT, lastSongFragment)
         }
 
         val db = this.writableDatabase
         db.insert(BOX_REPEAT_TABLE, null, data)
     }
 
-    fun saveSongFragment(song: Int, fragment: Int, type: String, posic: Int) {
+    fun saveSongFragment(song: Int, type: String, posic: Int) {
         val data = ContentValues().apply {
             put(ID_SONG, song)
-            put(ID_FRAGMENT, fragment)
             put(TYPE, type)
             put(POSITION, posic)
 
@@ -309,6 +315,26 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
 
         val db = this.writableDatabase
         db.insert(SONG_FRAGMENT_TABLE, null, data)
+    }
+
+    fun saveLabel(lastSongFragment: Int, myId: Int) {
+        val data = ContentValues().apply {
+            put(ID_SONG_FRAGMENT, lastSongFragment)
+            put(ID_TAG_VALUE, myId)
+        }
+
+        val db = this.writableDatabase
+        db.insert(LABEL_TABLE, null, data)
+    }
+
+    fun saveRepeat(lastSongFragment: Int, myId: Int) {
+        val data = ContentValues().apply {
+            put(ID_SONG_FRAGMENT, lastSongFragment)
+            put(ID_REPEAT_VALUE, myId)
+        }
+
+        val db = this.writableDatabase
+        db.insert(REPEAT_TABLE, null, data)
     }
 
     @SuppressLint("Recycle")
@@ -351,14 +377,15 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
     }
 
     @SuppressLint("Recycle")
-    fun lastFragment(type: String): Int {
+    fun lastSongFragment(): Int {
         val database = this.readableDatabase
-        val cursor = database.rawQuery(
-            "SELECT MAX($ID_DB) " +
-                    "FROM $type", null
-        ).apply {
-            moveToFirst()
-        }
+        val cursor =
+            database.rawQuery(
+                "SELECT MAX($ID_DB) " +
+                        "FROM $SONG_FRAGMENT_TABLE", null
+            ).apply {
+                moveToFirst()
+            }
         return cursor.getInt(0)
     }
 

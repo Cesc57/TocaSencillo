@@ -96,10 +96,10 @@ class LabelFragment : Fragment() {
             MySQLiteHelper(this.requireContext()).apply {
                 saveSongFragment(
                     lastSong(),
-                    myId,
                     LABEL_TABLE,
                     myPosic
                 )
+                saveLabel(lastSongFragment(), myId)
             }
         }
     }
