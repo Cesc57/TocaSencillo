@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper
 import java.util.*
 
 class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
-    context, DATABASE, null, 14
+    context, DATABASE, null, 15
 ) {
 
     companion object {
@@ -23,6 +23,8 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
         const val REPEAT_TABLE = "repeticion"
         const val BOX_REPEAT_TABLE = "caja_repeticion"
         const val ALTERNATE_ENDING_TABLE = "final_alternativo"
+        const val LABEL_VALUE_TABLE = "valor_etiqueta"
+        const val REPEAT_VALUE_TABLE = "valor_repeticion"
         const val ID_DB = "_id"
         const val ID_USER = "id_usuario"
         const val NAME = "nombre"
@@ -43,6 +45,8 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
         const val ID_SONG = "_id_cancion"
         const val ID_FRAGMENT = "_id_fragmento"
         const val ID_SONG_FRAGMENT = "_id_cancion_fragmento"
+        const val ID_REPEAT_VALUE = "_id_valor_repeticion"
+        const val ID_TAG_VALUE = "_id_valor_etiqueta"
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
@@ -59,7 +63,7 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
                 ($ID_DB INTEGER PRIMARY KEY AUTOINCREMENT,
                 $NAME TEXT UNIQUE,
                 $ID_USER INTEGER,
-                FOREIGN KEY($ID_USER) REFERENCES $SONG_TABLE($ID_DB))"""
+                FOREIGN KEY($ID_USER) REFERENCES $USER_TABLE($ID_DB))"""
 
         val createSongFragmentCommand =
             """CREATE TABLE $SONG_FRAGMENT_TABLE
@@ -97,17 +101,6 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
                 $ID_SONG_FRAGMENT INTEGER,
                 FOREIGN KEY($ID_SONG_FRAGMENT) REFERENCES $SONG_FRAGMENT_TABLE($ID_DB))"""
 
-        val createTagCommand =
-            """CREATE TABLE $LABEL_TABLE
-                ($ID_DB INTEGER PRIMARY KEY AUTOINCREMENT,
-                $TYPE TEXT,
-                $ID_SONG_FRAGMENT INTEGER)"""
-
-        val createRepeatCommand =
-            """CREATE TABLE $REPEAT_TABLE
-                ($ID_DB INTEGER PRIMARY KEY AUTOINCREMENT,
-                $TIMES TEXT)"""
-
         val createBoxRepeatCommand =
             """CREATE TABLE $BOX_REPEAT_TABLE
                 ($ID_DB INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -124,6 +117,32 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
                 $ID_SONG_FRAGMENT INTEGER,
                 FOREIGN KEY($ID_SONG_FRAGMENT) REFERENCES $SONG_FRAGMENT_TABLE($ID_DB))"""
 
+        val createValueTagCommand =
+            """CREATE TABLE $LABEL_VALUE_TABLE
+                ($ID_DB INTEGER PRIMARY KEY AUTOINCREMENT,
+                $TYPE TEXT)"""
+
+        val createValueRepeatCommand =
+            """CREATE TABLE $REPEAT_VALUE_TABLE
+                ($ID_DB INTEGER PRIMARY KEY AUTOINCREMENT,
+                $TIMES TEXT)"""
+
+        val createTagCommand =
+            """CREATE TABLE $LABEL_TABLE
+                ($ID_DB INTEGER PRIMARY KEY AUTOINCREMENT,
+                $ID_SONG_FRAGMENT INTEGER,
+                $ID_TAG_VALUE,
+                FOREIGN KEY($ID_SONG_FRAGMENT) REFERENCES $SONG_FRAGMENT_TABLE($ID_DB),
+                FOREIGN KEY($ID_TAG_VALUE) REFERENCES $LABEL_VALUE_TABLE($ID_DB))"""
+
+        val createRepeatCommand =
+            """CREATE TABLE $REPEAT_TABLE
+                ($ID_DB INTEGER PRIMARY KEY AUTOINCREMENT,
+                $ID_SONG_FRAGMENT INTEGER,
+                $ID_REPEAT_VALUE,
+                FOREIGN KEY($ID_SONG_FRAGMENT) REFERENCES $SONG_FRAGMENT_TABLE($ID_DB),
+                FOREIGN KEY($ID_REPEAT_VALUE) REFERENCES $REPEAT_VALUE_TABLE($ID_DB))"""
+
         //exec create tables
         with(db) {
             this!!.execSQL(createUserCommand)
@@ -131,11 +150,13 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
             this.execSQL(createTitleCommand)
             this.execSQL(createContentCommand)
             this.execSQL(createNoteCommand)
-            this.execSQL(createTagCommand)
             this.execSQL(createSongFragmentCommand)
-            this.execSQL(createRepeatCommand)
             this.execSQL(createBoxRepeatCommand)
             this.execSQL(createAlternateEndingCommand)
+            this.execSQL(createValueRepeatCommand)
+            this.execSQL(createRepeatCommand)
+            this.execSQL(createValueTagCommand)
+            this.execSQL(createTagCommand)
         }
 
         insertPrefabData(db)
@@ -147,7 +168,7 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
             "Puente", "Solo", "Final"
         )
         for (tag in tags) {
-            val insertTags = """INSERT INTO $LABEL_TABLE ($TYPE) 
+            val insertTags = """INSERT INTO $LABEL_VALUE_TABLE ($TYPE) 
                     VALUES ('$tag')"""
             with(db) {
                 this!!.execSQL(insertTags)
@@ -156,7 +177,7 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
 
         val reps = arrayOf("x3", "x4")
         for (rep in reps) {
-            val insertReps = """INSERT INTO $REPEAT_TABLE ($TIMES) 
+            val insertReps = """INSERT INTO $REPEAT_VALUE_TABLE ($TIMES) 
                     VALUES ('$rep')"""
             with(db) {
                 this!!.execSQL(insertReps)
@@ -189,6 +210,12 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
         db.execSQL(dropTableBoxRepeat)
         val dropAlternateEndingRepeat = "DROP TABLE IF EXISTS $ALTERNATE_ENDING_TABLE"
         db.execSQL(dropAlternateEndingRepeat)
+
+        val dropValueRepeat = "DROP TABLE IF EXISTS $REPEAT_VALUE_TABLE"
+        db.execSQL(dropValueRepeat)
+        val dropValueTag = "DROP TABLE IF EXISTS $LABEL_VALUE_TABLE"
+        db.execSQL(dropValueTag)
+
         onCreate(db)
     }
 
