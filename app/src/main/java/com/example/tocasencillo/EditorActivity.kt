@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.example.tocasencillo.HomeActivity.Companion.meId
 import com.example.tocasencillo.MySQLiteHelper.Companion.ID_DB
 import com.example.tocasencillo.MySQLiteHelper.Companion.NAME
 import com.example.tocasencillo.MySQLiteHelper.Companion.SONG_TABLE
@@ -218,7 +219,7 @@ class EditorActivity : AppCompatActivity() {
     private fun saveSong() {
         //Try-catch in case the DB fails
         try {
-            songsDBHelper.saveSong(binding.etMainTitle.text.toString())
+            songsDBHelper.saveSong(binding.etMainTitle.text.toString(), meId)
             for (fragment in supportFragmentManager.fragments) {
                 supportFragmentManager.beginTransaction().remove(fragment!!).commit()
             }

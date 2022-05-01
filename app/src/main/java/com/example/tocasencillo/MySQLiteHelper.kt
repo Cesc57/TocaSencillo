@@ -227,9 +227,10 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
         db.insert(USER_TABLE, null, userMail)
     }
 
-    fun saveSong(song: String) {
+    fun saveSong(song: String, userId: Int) {
         val songName = ContentValues().apply {
             put(NAME, song)
+            put(ID_USER, userId)
         }
         val db = this.writableDatabase
         db.insert(SONG_TABLE, null, songName)

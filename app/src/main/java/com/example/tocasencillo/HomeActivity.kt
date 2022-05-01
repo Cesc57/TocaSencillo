@@ -20,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tocasencillo.MySQLiteHelper.Companion.ID_DB
+import com.example.tocasencillo.MySQLiteHelper.Companion.ID_USER
 import com.example.tocasencillo.MySQLiteHelper.Companion.NAME
 import com.example.tocasencillo.MySQLiteHelper.Companion.SONG_TABLE
 import com.example.tocasencillo.MySQLiteHelper.Companion.USER_TABLE
@@ -35,13 +36,13 @@ class HomeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHomeBinding
     private lateinit var songsDBHelper: MySQLiteHelper
-    private var meId: Int = 0
     private var orderBy: String = "_id"
     private var order: String = "ASC"
     private var isRegistered: Boolean = false
+    private lateinit var db: SQLiteDatabase
 
     companion object {
-        private lateinit var db: SQLiteDatabase
+        var meId: Int = 0
     }
 
 
@@ -100,8 +101,7 @@ class HomeActivity : AppCompatActivity() {
                         rebuildRecycler()
                     }
                     else -> {
-                        Toast.makeText(this@HomeActivity, "Error al ordenar", Toast.LENGTH_SHORT)
-                            .show()
+                        Toast.makeText(this@HomeActivity, "Error al ordenar", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
@@ -199,7 +199,10 @@ class HomeActivity : AppCompatActivity() {
     private fun fillRecyclerView() {
         db = songsDBHelper.readableDatabase
         val cursor: Cursor = db.rawQuery(
-            "SELECT * FROM $SONG_TABLE ORDER BY $orderBy $order",
+            "SELECT * " +
+                    "FROM $SONG_TABLE " +
+                    "WHERE $SONG_TABLE.$ID_USER = $meId " +
+                    "ORDER BY $orderBy $order",
             null
         )
 
@@ -214,7 +217,11 @@ class HomeActivity : AppCompatActivity() {
     private fun customSearchRecyclerView(query: String) {
         db = songsDBHelper.readableDatabase
         val cursor: Cursor = db.rawQuery(
-            "SELECT * FROM $SONG_TABLE WHERE $NAME LIKE '%$query%' ORDER BY $orderBy $order",
+            "SELECT * " +
+                    "FROM $SONG_TABLE " +
+                    "WHERE $NAME LIKE '%$query%' " +
+                    "AND $SONG_TABLE.$ID_USER = $meId " +
+                    "ORDER BY $orderBy $order",
             null
         )
 
