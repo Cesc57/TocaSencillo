@@ -516,7 +516,7 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
     fun deleteFragment(idFrag: Int, table: String) {
         val args = arrayOf(idFrag.toString())
         val db = this.writableDatabase
-        db.delete(table, "$ID_DB = ?", args)
+        db.delete(table, "$ID_SONG_FRAGMENT = ?", args)
         db.close()
     }
 }
