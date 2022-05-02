@@ -34,7 +34,12 @@ class AuthActivity : AppCompatActivity() {
         setup()
 
         binding.tvForgottenPass.setOnClickListener {
-            resetPassword()
+            if (binding.etMail.text.toString().isNotEmpty()) {
+                resetPassword()
+            } else {
+                Toast.makeText(this, "Introduce tu email", Toast.LENGTH_SHORT).show()
+            }
+
         }
 
     }

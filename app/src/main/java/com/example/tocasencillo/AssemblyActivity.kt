@@ -162,7 +162,7 @@ class AssemblyActivity : AppCompatActivity() {
             songsDBHelper.deleteSong(songName)
             finish()
         } catch (e: Exception) {
-            Toast.makeText(this, "ERROR, prueba otra vez a guardar", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "ERROR, prueba otra vez a eliminar", Toast.LENGTH_SHORT).show()
         }
     }
 

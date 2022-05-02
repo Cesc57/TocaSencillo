@@ -8,8 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper
 import java.util.*
 
 class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
-    context, DATABASE, null, 16
-) {
+    context, DATABASE, null, 29) {
 
     companion object {
         const val DATABASE = "cancionero.db"
