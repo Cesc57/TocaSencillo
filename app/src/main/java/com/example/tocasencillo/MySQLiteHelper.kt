@@ -5,6 +5,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.util.Log
 import java.util.*
 
 class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
@@ -515,6 +516,14 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
     fun deleteFragment(idFrag: Int, table: String) {
         val args = arrayOf(idFrag.toString())
         val db = this.writableDatabase
+        db.delete(table, "$ID_SONG_FRAGMENT = ?", args)
+        db.close()
+    }
+
+    fun deletePrefabs(table: String, songTableId: Int) {
+        val args = arrayOf(songTableId.toString())
+        val db = this.writableDatabase
+        Log.d("labelitos", songTableId.toString())
         db.delete(table, "$ID_SONG_FRAGMENT = ?", args)
         db.close()
     }

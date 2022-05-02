@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.tocasencillo.AssemblyActivity.Companion.delete
+import com.example.tocasencillo.AssemblyActivity.Companion.id_song_frag
 import com.example.tocasencillo.EditorActivity.Companion.posic
 import com.example.tocasencillo.EditorActivity.Companion.reps
 import com.example.tocasencillo.EditorActivity.Companion.saving
@@ -24,6 +26,8 @@ class RepeatFragment : Fragment() {
     private val myPosic = posic
 
     private var myId: Int = 0
+
+    private val myTableId: Int = id_song_frag
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,6 +53,11 @@ class RepeatFragment : Fragment() {
     }
 
     override fun onStop() {
+        if (delete) {
+            MySQLiteHelper(this.requireContext()).apply {
+                deletePrefabs(REPEAT_TABLE, myTableId)
+            }
+        }
         byeFragRepeatTime()
         super.onStop()
     }

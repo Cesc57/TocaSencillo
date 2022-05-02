@@ -81,9 +81,11 @@ class AssemblyActivity : AppCompatActivity() {
             val type: String = cursor.getString(2)
             when (type) {
                 LABEL_TABLE -> {
+                    id_song_frag = cursor.getString(0).toInt()
                     valueLabel(songsDBHelper.searchLabelValue(cursor.getString(0).toInt()))
                 }
                 REPEAT_TABLE -> {
+                    id_song_frag = cursor.getString(0).toInt()
                     valueRepeat(songsDBHelper.searchRepeatValue(cursor.getString(0).toInt()))
                 }
                 else -> {

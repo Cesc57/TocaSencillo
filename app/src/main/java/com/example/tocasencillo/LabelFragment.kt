@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.tocasencillo.AssemblyActivity.Companion.delete
+import com.example.tocasencillo.AssemblyActivity.Companion.id_song_frag
 import com.example.tocasencillo.EditorActivity.Companion.label
 import com.example.tocasencillo.EditorActivity.Companion.posic
 import com.example.tocasencillo.EditorActivity.Companion.saving
@@ -24,6 +26,8 @@ class LabelFragment : Fragment() {
     private val myPosic = posic
 
     private var myId: Int = 0
+
+    private val myTableId: Int = id_song_frag
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -63,6 +67,11 @@ class LabelFragment : Fragment() {
     }
 
     override fun onStop() {
+        if (delete){
+            MySQLiteHelper(this.requireContext()).apply {
+                deletePrefabs(LABEL_TABLE, myTableId )
+            }
+        }
         byeFragLabel()
         super.onStop()
     }
