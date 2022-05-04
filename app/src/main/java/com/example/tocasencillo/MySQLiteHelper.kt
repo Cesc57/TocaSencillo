@@ -9,7 +9,7 @@ import android.util.Log
 import java.util.*
 
 class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
-    context, DATABASE, null, 29) {
+    context, DATABASE, null, 30) {
 
     companion object {
         const val DATABASE = "cancionero.db"
@@ -31,19 +31,18 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
         const val MAIL = "mail"
         const val TEMPO = "velocidad"
         const val SONG_KEY = "tonalidad"
-        const val CC_BAR_1 = "ccBar1"
-        const val CC_BAR_2 = "ccBar2"
-        const val CC_BAR_5 = "ccBar5"
-        const val CC_MUSIC_1 = "ccMusica1"
-        const val CC_MUSIC_2 = "ccMusica2"
-        const val CC_MUSIC_3 = "ccMusica3"
-        const val CC_MUSIC_4 = "ccMusica4"
+        const val CC_BAR_1 = "cc_bar1"
+        const val CC_BAR_2 = "cc_bar2"
+        const val CC_BAR_5 = "cc_ar_5"
+        const val CC_MUSIC_1 = "cc_musica1"
+        const val CC_MUSIC_2 = "cc_musica2"
+        const val CC_MUSIC_3 = "cc_musica3"
+        const val CC_MUSIC_4 = "cc_musica4"
         const val TEXT = "texto"
         const val TYPE = "tipo"
         const val TIMES = "veces"
         const val POSITION = "posicion"
         const val ID_SONG = "_id_cancion"
-        //const val ID_FRAGMENT = "_id_fragmento"
         const val ID_SONG_FRAGMENT = "_id_cancion_fragmento"
         const val ID_REPEAT_VALUE = "_id_valor_repeticion"
         const val ID_TAG_VALUE = "_id_valor_etiqueta"
