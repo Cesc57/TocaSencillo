@@ -26,7 +26,7 @@ class AuthActivity : AppCompatActivity() {
         //to check it in the Firebase console
         val analytics: FirebaseAnalytics = FirebaseAnalytics.getInstance(this)
         val bundle = Bundle()
-        bundle.putString("message", "Integración de Firebase completada")
+        bundle.putString("message", getString(R.string.fb_integration))
         analytics.logEvent("InitScreen", bundle)
 
         // Setup
@@ -37,7 +37,7 @@ class AuthActivity : AppCompatActivity() {
             if (binding.etMail.text.toString().isNotEmpty()) {
                 resetPassword()
             } else {
-                Toast.makeText(this, "Introduce tu email", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.enter_mail), Toast.LENGTH_SHORT).show()
             }
 
         }
@@ -49,10 +49,10 @@ class AuthActivity : AppCompatActivity() {
         auth.setLanguageCode("es")
         auth.sendPasswordResetEmail(binding.etMail.text.toString()).addOnCompleteListener { task ->
             if (task.isSuccessful) {
-                Toast.makeText(this, "Se ha enviado un email, revisa tu correo", Toast.LENGTH_SHORT)
+                Toast.makeText(this, getString(R.string.email_sent), Toast.LENGTH_SHORT)
                     .show()
             } else {
-                Toast.makeText(this, "No se ha podido enviar el email", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.email_not_sent), Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -102,8 +102,7 @@ class AuthActivity : AppCompatActivity() {
 
                         } else {
                             showAlert(
-                                "Usuario ya registrado\n" +
-                                        "prueba pulsando ENTRAR"
+                                getString(R.string.already_registered)
                             )
                         }
 
@@ -136,8 +135,7 @@ class AuthActivity : AppCompatActivity() {
 
                         } else {
                             showAlert(
-                                "Asegúrate de que la contraseña es correcta " +
-                                        "o prueba a registrarte primero"
+                                getString(R.string.pass_or_register)
                             )
                         }
 
@@ -159,9 +157,9 @@ class AuthActivity : AppCompatActivity() {
 
     private fun showAlert(message: String) {
         val builder = AlertDialog.Builder(this)
-        builder.setTitle("ERROR")
+        builder.setTitle(getString(R.string.error))
         builder.setMessage(message)
-        builder.setPositiveButton("OK", null)
+        builder.setPositiveButton(getString(R.string.ok), null)
         val dialog: AlertDialog = builder.create()
         dialog.show()
     }

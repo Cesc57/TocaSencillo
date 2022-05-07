@@ -42,17 +42,17 @@ class EditorActivity : AppCompatActivity() {
             // build alert dialog
             val dialogBuilder = android.app.AlertDialog.Builder(this)
             // set message of alert dialog
-            dialogBuilder.setMessage("¿Seguro que quieres salir sin guardar?")
+            dialogBuilder.setMessage(getString(R.string.exit_without_save))
                 // if the dialog is cancelable
                 .setCancelable(false)
                 // positive button text and action
-                .setPositiveButton("SI") { _, _ ->
+                .setPositiveButton(getString(R.string.yes)) { _, _ ->
                     val intent = Intent(this, HomeActivity::class.java)
                     startActivity(intent)
                     finish()
                 }
                 // negative button text and action
-                .setNegativeButton("NO") { dialog, _ ->
+                .setNegativeButton(getString(R.string.no)) { dialog, _ ->
                     dialog.cancel()
                 }
 
@@ -62,13 +62,13 @@ class EditorActivity : AppCompatActivity() {
 
         binding.btnSaveSong.setOnClickListener {
             if (binding.etMainTitle.text.toString() == "") {
-                showAlert("Canción sin nombre", "Ponle título a tu canción")
+                showAlert(getString(R.string.nameless_song), getString(R.string.title_your_song))
             } else {
                 if (!checkRepeatedSong(binding.etMainTitle.text.toString())) {
                     saving = true
                     saveSong()
                 } else {
-                    showAlert("Esta canción ya existe", "Prueba con otro nombre")
+                    showAlert(getString(R.string.already_exists), getString(R.string.another_name))
                 }
 
             }
@@ -85,86 +85,86 @@ class EditorActivity : AppCompatActivity() {
 
                 when (it.title) {
 
-                    "Titulo" -> {
+                    getString(R.string.title) -> {
                         loadFragment(fragment = TitleFragment())
                     }
 
-                    "Intro" -> {
-                        label = "Intro"
+                    getString(R.string.intro) -> {
+                        label = getString(R.string.intro)
                         loadFragment(fragment = LabelFragment())
                     }
 
-                    "Estrofa" -> {
-                        label = "Estrofa"
+                    getString(R.string.verse) -> {
+                        label = getString(R.string.verse)
                         loadFragment(fragment = LabelFragment())
                     }
 
-                    "PreEstribillo" -> {
-                        label = "PreStrb"
+                    getString(R.string.pre_chorus) -> {
+                        label = getString(R.string.pre_chorus_simple)
                         loadFragment(fragment = LabelFragment())
                     }
 
-                    "Estribillo" -> {
-                        label = "Strb"
+                    getString(R.string.chorus) -> {
+                        label = getString(R.string.chorus_simple)
                         loadFragment(fragment = LabelFragment())
                     }
 
-                    "Puente" -> {
-                        label = "Puente"
+                    getString(R.string.bridge) -> {
+                        label = getString(R.string.bridge)
                         loadFragment(fragment = LabelFragment())
                     }
 
-                    "Solo" -> {
-                        label = "Solo"
+                    getString(R.string.solo) -> {
+                        label = getString(R.string.solo)
                         loadFragment(fragment = LabelFragment())
                     }
 
-                    "Final" -> {
-                        label = "Final"
+                    getString(R.string.end) -> {
+                        label = getString(R.string.end)
                         loadFragment(fragment = LabelFragment())
                     }
 
-                    "4 cc" -> {
+                    getString(R.string._4_cc) -> {
                         loadFragment(fragment = ContentFragment())
                     }
 
-                    "8 cc" -> {
+                    getString(R.string._8_cc) -> {
                         repeat(2) {
                             loadFragment(fragment = ContentFragment())
                         }
                     }
 
-                    "12 cc" -> {
+                    getString(R.string._12_cc) -> {
                         repeat(3) {
                             loadFragment(fragment = ContentFragment())
                         }
                     }
 
-                    "16 cc" -> {
+                    getString(R.string._16_cc) -> {
                         repeat(4) {
                             loadFragment(fragment = ContentFragment())
                         }
                     }
 
-                    "Final Alternativo" -> {
+                    getString(R.string.alternate_ending) -> {
                         loadFragment(fragment = AlternateEndingFragment())
                     }
 
-                    "Texto" -> {
+                    getString(R.string.text) -> {
                         loadFragment(fragment = NoteFragment())
                     }
 
-                    "x3 veces" -> {
+                    getString(R.string.x3_times) -> {
                         reps = "x3"
                         loadFragment(fragment = RepeatFragment())
                     }
 
-                    "x4 veces" -> {
+                    getString(R.string.x4_times) -> {
                         reps = "x4"
                         loadFragment(fragment = RepeatFragment())
                     }
 
-                    "Casilla" -> {
+                    getString(R.string.box) -> {
                         loadFragment(fragment = BoxRepeatFragment())
                     }
 
@@ -228,7 +228,7 @@ class EditorActivity : AppCompatActivity() {
             posic = 0
             finish()
         } catch (e: Exception) {
-            Toast.makeText(this, "ERROR, prueba otra vez a guardar", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.try_save), Toast.LENGTH_SHORT).show()
         }
     }
 

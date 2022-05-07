@@ -112,19 +112,19 @@ class AssemblyActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when {
 
-            item.toString() == "Salir" -> {
+            item.toString() == getString(R.string.exit_camel_case) -> {
                 onBackPressed()
             }
 
-            item.toString() == "Editar" -> {
-                Toast.makeText(this, "Función no disponible por el momento", Toast.LENGTH_SHORT)
+            item.toString() == getString(R.string.edit) -> {
+                Toast.makeText(this, getString(R.string.func_not_available), Toast.LENGTH_SHORT)
                     .show()
             }
-            item.toString() == "Eliminar" -> {
+            item.toString() == getString(R.string.delete) -> {
                 showAlert()
             }
             else -> {
-                Toast.makeText(this, "¿Que has pulsado...?", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.have_pressed), Toast.LENGTH_SHORT).show()
             }
         }
         return true
@@ -134,19 +134,19 @@ class AssemblyActivity : AppCompatActivity() {
         // build alert dialog
         val dialogBuilder = AlertDialog.Builder(this)
         // set title of alert dialog
-        dialogBuilder.setTitle("ELIMINAR CANCIÓN")
+        dialogBuilder.setTitle(getString(R.string.delete_song))
             // if the dialog is cancelable
             .setCancelable(false)
             // set message of alert dialog
-            .setMessage("¿Estás seguro?")
+            .setMessage(getString(R.string.are_you_sure))
             // positive button text and action
-            .setPositiveButton("SI") { _, _ ->
+            .setPositiveButton(getString(R.string.yes)) { _, _ ->
                 delete = true
                 deleteSong()
                 songsDBHelper.deleteSong(songName)
             }
             // negative button text and action
-            .setNegativeButton("NO") { dialog, _ ->
+            .setNegativeButton(getString(R.string.no)) { dialog, _ ->
                 dialog.cancel()
             }
 
@@ -164,7 +164,7 @@ class AssemblyActivity : AppCompatActivity() {
             songsDBHelper.deleteSong(songName)
             finish()
         } catch (e: Exception) {
-            Toast.makeText(this, "ERROR, prueba otra vez a eliminar", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.try_delete), Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -180,28 +180,28 @@ class AssemblyActivity : AppCompatActivity() {
     private fun valueLabel(valueTable: Int) {
         label = when (valueTable) {
             1 -> {
-                "Intro"
+                getString(R.string.intro)
             }
             2 -> {
-                "Estrofa"
+                getString(R.string.verse)
             }
             3 -> {
-                "PreStrb"
+                getString(R.string.pre_chorus)
             }
             4 -> {
-                "Strb"
+                getString(R.string.chorus)
             }
             5 -> {
-                "Puente"
+                getString(R.string.bridge)
             }
             6 -> {
-                "Solo"
+                getString(R.string.solo)
             }
             7 -> {
-                "Final"
+                getString(R.string.end)
             }
             else -> {
-                "<3"
+                getString(R.string.heart)
             }
         }
     }
@@ -209,13 +209,13 @@ class AssemblyActivity : AppCompatActivity() {
     private fun valueRepeat(valueTable: Int) {
         reps = when (valueTable) {
             1 -> {
-                "x3"
+                getString(R.string.x3_times)
             }
             2 -> {
-                "x4"
+                getString(R.string.x4_times)
             }
             else -> {
-                "<3"
+                getString(R.string.heart)
             }
         }
     }
@@ -272,7 +272,7 @@ class AssemblyActivity : AppCompatActivity() {
                 fragmentTransaction.commit()
             }
             else -> {
-                Toast.makeText(this, "Ha surgido un error...", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.error_occurred), Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -281,16 +281,16 @@ class AssemblyActivity : AppCompatActivity() {
         // build alert dialog
         val dialogBuilder = AlertDialog.Builder(this)
         // set message of alert dialog
-        dialogBuilder.setMessage("¿Seguro que quieres salir?")
+        dialogBuilder.setMessage(getString(R.string.sure_exit))
             // if the dialog is cancelable
             .setCancelable(false)
             // positive button text and action
-            .setPositiveButton("SI") { _, _ ->
+            .setPositiveButton(R.string.yes) { _, _ ->
                 finish()
                 super.onBackPressed()
             }
             // negative button text and action
-            .setNegativeButton("NO") { dialog, _ ->
+            .setNegativeButton(R.string.no) { dialog, _ ->
                 dialog.cancel()
             }
 

@@ -79,28 +79,32 @@ class HomeActivity : AppCompatActivity() {
             ) {
 
                 when (parent.getItemAtPosition(position).toString()) {
-                    "Fecha Ascendente" -> {
+                    getString(R.string.ascending_date) -> {
                         orderBy = ID_DB
                         order = "ASC"
                         rebuildRecycler()
                     }
-                    "Fecha Descendente" -> {
+                    getString(R.string.descending_date) -> {
                         orderBy = ID_DB
                         order = "DESC"
                         rebuildRecycler()
                     }
-                    "Nombre Ascendente" -> {
+                    getString(R.string.ascending_name) -> {
                         orderBy = NAME
                         order = "ASC"
                         rebuildRecycler()
                     }
-                    "Nombre Descendente" -> {
+                    getString(R.string.descending_name) -> {
                         orderBy = NAME
                         order = "DESC"
                         rebuildRecycler()
                     }
                     else -> {
-                        Toast.makeText(this@HomeActivity, "Error al ordenar", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            this@HomeActivity,
+                            getString(R.string.ordering_error),
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
             }
@@ -182,15 +186,15 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when {
-            item.toString() == "Opciones" -> {
+            item.toString() == getString(R.string.options) -> {
                 val intent = Intent(this, SettingsActivity::class.java)
                 startActivity(intent)
             }
-            item.toString() == "Cerrar sesión" -> {
+            item.toString() == getString(R.string.sign_out) -> {
                 onBackPressed()
             }
             else -> {
-                Toast.makeText(this, "¿Que has pulsado...?", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.have_pressed), Toast.LENGTH_SHORT).show()
             }
         }
         return true
@@ -243,19 +247,19 @@ class HomeActivity : AppCompatActivity() {
         // build alert dialog
         val dialogBuilder = AlertDialog.Builder(this)
         // set title of alert dialog
-        dialogBuilder.setTitle("SALIR")
+        dialogBuilder.setTitle(getString(R.string.exit))
             // if the dialog is cancelable
             .setCancelable(false)
             // set message of alert dialog
-            .setMessage("¿Estás seguro?")
+            .setMessage(getString(R.string.are_you_sure))
             // positive button text and action
-            .setPositiveButton("SI") { _, _ ->
+            .setPositiveButton(getString(R.string.yes)) { _, _ ->
                 clearSignAuth()
                 finish()
                 super.onBackPressed()
             }
             // negative button text and action
-            .setNegativeButton("NO") { dialog, _ ->
+            .setNegativeButton(getString(R.string.no)) { dialog, _ ->
                 dialog.cancel()
             }
 

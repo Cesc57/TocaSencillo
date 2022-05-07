@@ -50,7 +50,7 @@ class SettingsActivity : AppCompatActivity() {
                 resetPassword()
                 binding.etMail.setText("")
             } else {
-                Toast.makeText(this, "Introduce tu email", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.enter_mail), Toast.LENGTH_SHORT).show()
             }
 
         }
@@ -60,10 +60,10 @@ class SettingsActivity : AppCompatActivity() {
         auth.setLanguageCode("es")
         auth.sendPasswordResetEmail(binding.etMail.text.toString()).addOnCompleteListener { task ->
             if (task.isSuccessful) {
-                Toast.makeText(this, "Se ha enviado un email, revisa tu correo", Toast.LENGTH_SHORT)
+                Toast.makeText(this, getString(R.string.email_sent), Toast.LENGTH_SHORT)
                     .show()
             } else {
-                Toast.makeText(this, "No se ha podido enviar el email", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.email_not_sent), Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -75,14 +75,14 @@ class SettingsActivity : AppCompatActivity() {
                 val sharePrefs =
                     getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
                 val name: String? = sharePrefs.getString("name", null)
-                binding.tvName.text = "Nombre: $name"
+                binding.tvName.text = "${getString(R.string.name_cap)}: $name"
                 binding.etName.text.clear()
             }
             edited === "instrument" -> {
                 val sharePrefs =
                     getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
                 val instrument: String? = sharePrefs.getString("instrument", null)
-                binding.tvInstrument.text = "Instrumento: $instrument"
+                binding.tvInstrument.text = "${getString(R.string.instrument_cap)}: $instrument"
                 binding.etInstrument.text.clear()
             }
             else -> {
@@ -90,8 +90,9 @@ class SettingsActivity : AppCompatActivity() {
                     getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
                 val name: String? = sharePrefs.getString("name", null)
                 val instrument: String? = sharePrefs.getString("instrument", null)
-                binding.tvName.text = "Nombre: $name"
-                binding.tvInstrument.text = "Instrumento: $instrument"
+                binding.tvName.text = "${getString(R.string.name_cap)}: $name"
+                binding.etName.text.clear()
+                binding.tvInstrument.text = "${getString(R.string.instrument_cap)}: $instrument"
                 binding.etInstrument.text.clear()
             }
         }
@@ -105,11 +106,11 @@ class SettingsActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when {
-            item.toString() == "SALIR" -> {
+            item.toString() == getString(R.string.exit) -> {
                 finish()
             }
             else -> {
-                Toast.makeText(this, "¿Que has pulsado...?", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.have_pressed), Toast.LENGTH_SHORT).show()
             }
         }
         return true

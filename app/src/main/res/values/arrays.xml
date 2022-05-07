@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="order_by">
-        <item>Fecha Ascendente</item>
-        <item>Fecha Descendente</item>
-        <item>Nombre Ascendente</item>
-        <item>Nombre Descendente</item>
+        <item>@string/ascending_date</item>
+        <item>@string/descending_date</item>
+        <item>@string/ascending_name</item>
+        <item>@string/descending_name</item>
     </string-array>
 </resources>

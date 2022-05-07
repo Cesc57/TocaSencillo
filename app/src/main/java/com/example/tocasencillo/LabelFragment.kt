@@ -40,22 +40,22 @@ class LabelFragment : Fragment() {
         binding.tvLabel.text = myValue
 
         myId = when (label) {
-            "Intro" -> {
+            getString(R.string.intro) -> {
                 1
             }
-            "Estrofa" -> {
+            getString(R.string.verse) -> {
                 2
             }
-            "PreStrb" -> {
+            getString(R.string.pre_chorus) -> {
                 3
             }
-            "Strb" -> {
+            getString(R.string.chorus) -> {
                 4
             }
-            "Puente" -> {
+            getString(R.string.bridge) -> {
                 5
             }
-            "Solo" -> {
+            getString(R.string.solo) -> {
                 6
             }
             else -> {
