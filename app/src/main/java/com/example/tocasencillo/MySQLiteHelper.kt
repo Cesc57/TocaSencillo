@@ -13,8 +13,8 @@ class MySQLiteHelper(context: Context) : SQLiteOpenHelper(
 
     companion object {
         const val DATABASE = "cancionero.db"
-        const val SONG_TABLE = "cancion"
         const val USER_TABLE = "usuario"
+        const val SONG_TABLE = "cancion"
         const val TITLE_TABLE = "titulo"
         const val CONTENT_TABLE = "contenido"
         const val NOTE_TABLE = "nota"

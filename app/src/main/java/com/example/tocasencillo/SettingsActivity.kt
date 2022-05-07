@@ -95,8 +95,6 @@ class SettingsActivity : AppCompatActivity() {
                 binding.etInstrument.text.clear()
             }
         }
-
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -116,5 +114,4 @@ class SettingsActivity : AppCompatActivity() {
         }
         return true
     }
-
 }

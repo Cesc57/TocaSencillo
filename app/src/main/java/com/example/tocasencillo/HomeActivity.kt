@@ -8,7 +8,6 @@ import android.content.SharedPreferences.Editor
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -138,12 +137,13 @@ class HomeActivity : AppCompatActivity() {
     private fun saveUserAndGetUserId() {
         val sharePrefs = getSharedPreferences(getString(R.string.prefs_file), MODE_PRIVATE)
         val mail: String? = sharePrefs.getString("mail", null)
-        Log.d("mail", mail.toString())
+
         db = songsDBHelper.readableDatabase
         val cursor: Cursor = db.rawQuery(
             "SELECT * FROM $USER_TABLE",
             null
         )
+
         if (cursor.moveToFirst()) {
             do {
                 if (cursor.getString(1) == mail.toString()) {
@@ -151,7 +151,7 @@ class HomeActivity : AppCompatActivity() {
                 }
             } while (cursor.moveToNext())
         }
-        Log.d("isRegistered", isRegistered.toString())
+
         meId = if (isRegistered) {
             songsDBHelper.searchUserIdByMail(mail.toString())
         } else {
@@ -279,5 +279,4 @@ class HomeActivity : AppCompatActivity() {
         binding.svSong.clearFocus()
         fillRecyclerView()
     }
-
 }
