@@ -41,7 +41,7 @@ class ChordsActivity : AppCompatActivity() {
     private fun transposeChord() {
         if (binding.chord.text.isNotEmpty()) {
             transpose = 0
-            note = "Z"
+            note = ""
             tension = ""
             rest = ""
             finalNote = ""
@@ -62,42 +62,48 @@ class ChordsActivity : AppCompatActivity() {
                 }
             }
 
+            var loopFor = 0
             for (char in binding.chord.text.toString()) {
-                //binding.chordResult.text = """${binding.chordResult.text}$char,"""
-                if (char == 'A' || char == 'B' || char == 'C' || char == 'D' || char == 'E' || char == 'F' || char == 'G') {
+                if (loopFor == 0 && char == 'A' || char == 'B' || char == 'C' || char == 'D' || char == 'E' || char == 'F' || char == 'G') {
                     note = char.toString()
-                } else if (char == '#' || char == 'b') {
+                } else if (loopFor == 1 && char == '#' || char == 'b') {
                     tension = char.toString()
                 } else {
                     rest += char.toString()
                 }
+                loopFor++
             }
 
-            finalNote = note + tension
+            if (note != "") {
+                finalNote = note + tension
 
-            if (binding.rbSharp.isChecked) {
-                positionArray = 0
-                for (elem in sharpNotes) {
-                    if (elem == finalNote || finalNote == flatNotes [positionArray]) {
-                        break
+                if (binding.rbSharp.isChecked) {
+                    positionArray = 0
+                    for (elem in sharpNotes) {
+                        if (elem == finalNote || finalNote == flatNotes[positionArray]) {
+                            break
+                        }
+                        positionArray++
                     }
-                    positionArray++
+
+                    finalNote = sharpNotes[(24 + positionArray + transpose) % 12]
+
+                } else if (binding.rbFlat.isChecked) {
+                    positionArray = 0
+                    for (elem in flatNotes) {
+                        if (elem == finalNote || finalNote == sharpNotes[positionArray]) {
+                            break
+                        }
+                        positionArray++
+                    }
+                    finalNote = flatNotes[(24 + positionArray + transpose) % 12]
                 }
 
-                finalNote = sharpNotes[(24 + positionArray + transpose) % 12]
-
-            } else if (binding.rbFlat.isChecked) {
-                positionArray = 0
-                for (elem in flatNotes) {
-                    if (elem == finalNote || finalNote == sharpNotes [positionArray]) {
-                        break
-                    }
-                    positionArray++
-                }
-                finalNote = flatNotes[(24 + positionArray + transpose) % 12]
+                binding.chordResult.text = finalNote + rest
+            } else {
+                binding.chordResult.text = ""
+                Toast.makeText(this, "ERROR, introduce un acorde válido", Toast.LENGTH_SHORT).show()
             }
-
-            binding.chordResult.text = finalNote + rest
 
         } else {
             Toast.makeText(this, "Introduce un acorde", Toast.LENGTH_SHORT).show()
