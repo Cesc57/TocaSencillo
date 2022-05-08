@@ -96,4 +96,5 @@
     <string name="ascending_name">Ascending Name</string>
     <string name="descending_name">Descending Name</string>
     <string name="ordering_error">Error when ordering the songs</string>
+    <string name="chord">Enter your chord here</string>
 </resources>

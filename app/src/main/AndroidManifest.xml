@@ -11,6 +11,9 @@
         android:theme="@style/Theme.TocaSencillo"
         tools:ignore="AllowBackup">
         <activity
+            android:name=".ChordsActivity"
+            android:exported="false" />
+        <activity
             android:name=".GuideActivity"
             android:exported="false" />
 

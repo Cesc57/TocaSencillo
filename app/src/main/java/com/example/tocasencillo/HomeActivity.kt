@@ -135,6 +135,10 @@ class HomeActivity : AppCompatActivity() {
             goEditor()
         }
 
+        binding.floatChord.setOnClickListener {
+            goChord()
+        }
+
     }
 
     @SuppressLint("Recycle")
@@ -243,6 +247,12 @@ class HomeActivity : AppCompatActivity() {
 
     private fun goEditor() {
         val intent = Intent(this, EditorActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+    private fun goChord() {
+        val intent = Intent(this, ChordsActivity::class.java)
         startActivity(intent)
         finish()
     }

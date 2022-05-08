@@ -12,10 +12,6 @@
         android:id="@+id/toolbar"
         layout="@layout/toolbar" />
 
-    <Space
-        android:layout_width="wrap_content"
-        android:layout_height="16dp" />
-
     <SearchView
         android:id="@+id/svSong"
         android:layout_width="match_parent"
@@ -25,10 +21,6 @@
         android:layout_marginRight="8dp"
         android:autofillHints="name"
         android:background="@drawable/search_bar_border" />
-
-    <Space
-        android:layout_width="wrap_content"
-        android:layout_height="16dp" />
 
     <Spinner
         android:id="@+id/spOrder"
@@ -40,9 +32,14 @@
         android:prompt="@string/order_by"
         android:textAlignment="viewStart" />
 
-    <Space
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatChord"
         android:layout_width="match_parent"
-        android:layout_height="12dp" />
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@android:drawable/arrow_up_float"
+        app:fabSize="mini"
+        tools:ignore="ContentDescription" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerSongs"
@@ -50,11 +47,6 @@
         android:layout_height="460dp"
         android:layout_margin="4dp"
         android:background="@drawable/recycler_border" />
-
-    <Space
-        android:layout_width="wrap_content"
-        android:layout_height="24dp" />
-
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatSong"
