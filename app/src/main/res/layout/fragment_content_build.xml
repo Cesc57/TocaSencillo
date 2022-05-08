@@ -15,6 +15,7 @@
         android:gravity="bottom"
         android:padding="2sp"
         android:text="@string/bar"
+        android:textColor="@color/black"
         android:textSize="40sp" />
 
     <TextView
@@ -23,13 +24,15 @@
         android:layout_height="match_parent"
         android:layout_weight="6"
         android:autofillHints="chord"
+        android:gravity="start|bottom"
         android:inputType="none"
-        android:gravity="center"
         android:paddingStart="1dp"
-        android:paddingTop="14dp"
+        android:paddingTop="1dp"
         android:paddingEnd="0dp"
+        android:paddingBottom="5dp"
         android:singleLine="true"
         android:text="@string/empty_bar"
+        android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold"
         tools:ignore="LabelFor"
@@ -42,6 +45,7 @@
         android:gravity="bottom"
         android:padding="2sp"
         android:text="@string/bar"
+        android:textColor="@color/black"
         android:textSize="40sp" />
 
     <TextView
@@ -50,13 +54,15 @@
         android:layout_height="match_parent"
         android:layout_weight="6"
         android:autofillHints="chord"
+        android:gravity="start|bottom"
         android:inputType="none"
-        android:gravity="center"
         android:paddingStart="1dp"
-        android:paddingTop="14dp"
+        android:paddingTop="1dp"
         android:paddingEnd="0dp"
+        android:paddingBottom="5dp"
         android:singleLine="true"
         android:text="@string/empty_bar"
+        android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold"
         tools:ignore="LabelFor"
@@ -69,6 +75,7 @@
         android:gravity="bottom"
         android:padding="2sp"
         android:text="@string/bar"
+        android:textColor="@color/black"
         android:textSize="40sp" />
 
     <TextView
@@ -77,13 +84,15 @@
         android:layout_height="match_parent"
         android:layout_weight="6"
         android:autofillHints="chord"
+        android:gravity="start|bottom"
         android:inputType="none"
-        android:gravity="center"
         android:paddingStart="1dp"
-        android:paddingTop="14dp"
+        android:paddingTop="1dp"
         android:paddingEnd="0dp"
+        android:paddingBottom="5dp"
         android:singleLine="true"
         android:text="@string/empty_bar"
+        android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold"
         tools:ignore="LabelFor"
@@ -96,6 +105,7 @@
         android:gravity="bottom"
         android:padding="2sp"
         android:text="@string/bar"
+        android:textColor="@color/black"
         android:textSize="40sp" />
 
     <TextView
@@ -104,13 +114,15 @@
         android:layout_height="match_parent"
         android:layout_weight="6"
         android:autofillHints="chord"
+        android:gravity="start|bottom"
         android:inputType="none"
-        android:gravity="center"
         android:paddingStart="1dp"
-        android:paddingTop="14dp"
+        android:paddingTop="1dp"
         android:paddingEnd="0dp"
+        android:paddingBottom="5dp"
         android:singleLine="true"
         android:text="@string/empty_bar"
+        android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold"
         tools:ignore="LabelFor"
@@ -123,6 +135,7 @@
         android:gravity="bottom"
         android:padding="2sp"
         android:text="@string/bar"
+        android:textColor="@color/black"
         android:textSize="40sp" />
 
 </LinearLayout>

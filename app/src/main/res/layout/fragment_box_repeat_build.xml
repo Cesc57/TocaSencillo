@@ -14,15 +14,16 @@
         android:id="@+id/rptText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="4dp"
         android:autofillHints="name"
-        android:text="@string/repeat_times"
-        android:textAlignment="textEnd"
-        android:textStyle="bold"
-        android:textSize="16sp"
+        android:background="@drawable/repeat_border"
         android:paddingStart="0dp"
         android:paddingEnd="8dp"
-        tools:ignore="LabelFor"
-        android:layout_margin="4dp"
-        android:background="@drawable/repeat_border"/>
+        android:text="@string/repeat_times"
+        android:textAlignment="textEnd"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        tools:ignore="LabelFor" />
 
 </LinearLayout>
