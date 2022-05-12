@@ -13,4 +13,10 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="Theme.ToolBar" parent="Theme.MaterialComponents.Light">
+        <item name="android:colorBackground">@color/realWhite</item>
+        <item name="android:textColor">@color/realBlack</item>
+    </style>
+
 </resources>
