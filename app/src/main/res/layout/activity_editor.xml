@@ -43,11 +43,12 @@
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_margin="8dp"
-        android:background="@color/lightpink"
+        android:background="@color/primaryLightColor"
         android:gravity="center|center_vertical"
         android:hint="@string/default_song"
         android:importantForAutofill="no"
         android:textColorHint="@color/grayHint"
+        android:textColor="@color/black"
         tools:ignore="TextFields,TouchTargetSizeCheck,TextContrastCheck" />
 
     <ScrollView

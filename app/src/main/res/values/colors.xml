@@ -11,12 +11,13 @@
     <color name="realBlack">#FF000000</color>
     <color name="blue">#003366</color>
 
-    <color name="primaryColor">#e040fb</color>
-    <color name="primaryLightColor">#ff79ff</color>
-    <color name="primaryDarkColor">#aa00c7</color>
-    <color name="secondaryColor">#d500f9</color>
-    <color name="secondaryLightColor">#ff5bff</color>
-    <color name="secondaryDarkColor">#9e00c5</color>
+    <color name="primaryColor">#ce93d8</color>
+    <color name="primaryLightColor">#ffc4ff</color>
+    <color name="primaryDarkColor">#9c64a6</color>
+    <color name="secondaryColor">#e040fb</color>
+    <color name="secondaryLightColor">#ff79ff</color>
+    <color name="secondaryDarkColor">#aa00c7</color>
+    <color name="primaryDistiled">#aace93d8</color>
     <color name="lightpink">#FAE4EC</color>
     <color name="darkpink">#CB9CA1</color>
     <color name="grayHint">#877665</color>
