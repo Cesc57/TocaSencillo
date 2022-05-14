@@ -25,6 +25,7 @@ import com.example.tocasencillo.MySQLiteHelper.Companion.SONG_FRAGMENT_TABLE
 import com.example.tocasencillo.MySQLiteHelper.Companion.TITLE_TABLE
 import com.example.tocasencillo.databinding.ActivityAssemblyBinding
 
+
 class AssemblyActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAssemblyBinding
@@ -37,6 +38,7 @@ class AssemblyActivity : AppCompatActivity() {
         private lateinit var songsDBHelper: MySQLiteHelper
         var id_song_frag: Int = 0
         var delete = false
+        private var transposedChord: Int = 0
     }
 
     @SuppressLint("Recycle")
@@ -60,8 +62,6 @@ class AssemblyActivity : AppCompatActivity() {
 
         val songName: String = intent.getStringExtra("songName").toString()
         songId = songsDBHelper.searchSongIdByName(songName)
-
-        binding.tvMainTitle.text = songName
 
         db = songsDBHelper.readableDatabase
         val cursor: Cursor = db.rawQuery(
@@ -95,6 +95,41 @@ class AssemblyActivity : AppCompatActivity() {
             rebuildFragment(type)
             cursor.moveToNext()
             posicNow++
+        }
+
+        binding.tvPlusTone.setOnClickListener {
+            transposedChord = 2
+            transposedFragments()
+        }
+
+        binding.tvPlusSemiTone.setOnClickListener {
+            transposedChord = 1
+            transposedFragments()
+        }
+
+        binding.tvLessTone.setOnClickListener {
+            transposedChord = -2
+            transposedFragments()
+        }
+
+        binding.tvLessSemiTone.setOnClickListener {
+            transposedChord = -1
+            transposedFragments()
+        }
+
+    }
+
+    private fun transposedFragments() {
+
+        for (fragment in supportFragmentManager.fragments) {
+            //Log.d("helloTag", fragment.javaClass.simpleName)
+            if (fragment.javaClass.simpleName == "ContentBuildFragment") {
+                val fragmentContent = supportFragmentManager.findFragmentById(fragment.id) as ContentBuildFragment
+                fragmentContent.changeChords()
+            }else if (fragment.javaClass.simpleName == "AlternateEndingBuildFragment"){
+                val fragmentAlternate = supportFragmentManager.findFragmentById(fragment.id) as AlternateEndingBuildFragment
+                fragmentAlternate.changeChords()
+            }
         }
     }
 

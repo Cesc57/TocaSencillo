@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.tocasencillo.AssemblyActivity.Companion.delete
 import com.example.tocasencillo.AssemblyActivity.Companion.id_song_frag
@@ -60,5 +61,9 @@ class AlternateEndingBuildFragment : Fragment() {
         binding.tvLine2.text = data[0]
         binding.tvBar1.text = data[1]
         binding.tvBar2.text = data[2]
+    }
+
+    fun changeChords() {
+        Toast.makeText(this.requireContext(),"ALTRERNATE ENDING", Toast.LENGTH_SHORT).show()
     }
 }

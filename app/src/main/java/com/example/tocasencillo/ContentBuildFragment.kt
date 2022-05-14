@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.tocasencillo.AssemblyActivity.Companion.delete
 import com.example.tocasencillo.AssemblyActivity.Companion.id_song_frag
@@ -14,8 +15,10 @@ class ContentBuildFragment : Fragment() {
 
     private val myId: Int = id_song_frag
     private lateinit var data: ArrayList<String>
+    private lateinit var transpositor: ChordTranspositor
 
     private var _binding: FragmentContentBuildBinding? = null
+
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -62,5 +65,11 @@ class ContentBuildFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    fun changeChords() {
+        transpositor = ChordTranspositor()
+        val text = transpositor.newChords()
+        Toast.makeText(this.requireContext(), text, Toast.LENGTH_SHORT).show()
     }
 }
