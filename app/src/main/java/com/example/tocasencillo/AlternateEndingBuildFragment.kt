@@ -4,10 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.tocasencillo.AssemblyActivity.Companion.delete
 import com.example.tocasencillo.AssemblyActivity.Companion.id_song_frag
+import com.example.tocasencillo.AssemblyActivity.Companion.myTension
+import com.example.tocasencillo.AssemblyActivity.Companion.transposedChord
 import com.example.tocasencillo.MySQLiteHelper.Companion.ALTERNATE_ENDING_TABLE
 import com.example.tocasencillo.databinding.FragmentAlternateEndingBuildBinding
 
@@ -15,6 +16,7 @@ class AlternateEndingBuildFragment : Fragment() {
 
     private val myId: Int = id_song_frag
     private lateinit var data: ArrayList<String>
+    private lateinit var transposition: ChordTransposition
 
     private var _binding: FragmentAlternateEndingBuildBinding? = null
 
@@ -31,6 +33,10 @@ class AlternateEndingBuildFragment : Fragment() {
         val view = binding.root
 
         dataRecovery()
+
+        if (transposedChord != 0){
+            changeChords()
+        }
 
         return view
     }
@@ -63,7 +69,11 @@ class AlternateEndingBuildFragment : Fragment() {
         binding.tvBar2.text = data[2]
     }
 
-    fun changeChords() {
-        Toast.makeText(this.requireContext(),"ALTRERNATE ENDING", Toast.LENGTH_SHORT).show()
+    private fun changeChords() {
+        transposition = ChordTransposition()
+        binding.tvBar1.text =
+            transposition.newChords(binding.tvBar1.text.toString(), transposedChord, myTension)
+        binding.tvBar2.text =
+            transposition.newChords(binding.tvBar2.text.toString(), transposedChord, myTension)
     }
 }

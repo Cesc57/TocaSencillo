@@ -35,18 +35,18 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:checked="true"
-                android:text="#" />
+                android:text="@string/sharp" />
 
             <Space
                 android:layout_width="5dp"
                 android:layout_height="match_parent" />
 
             <RadioButton
-                android:id="@+id/rbSharpFlat"
+                android:id="@+id/rbFlat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="b" />
+                android:text="@string/flat" />
         </RadioGroup>
 
         <Space
@@ -60,7 +60,7 @@
             android:layout_weight="0.7"
             android:background="@color/primaryDarkColor"
             android:gravity="center_vertical|center_horizontal"
-            android:text="+1" />
+            android:text="@string/plus_tone" />
 
         <Space
             android:layout_width="5dp"
@@ -73,20 +73,7 @@
             android:layout_weight="0.5"
             android:background="@color/primaryColor"
             android:gravity="center_vertical|center_horizontal"
-            android:text="+1/2" />
-
-        <Space
-            android:layout_width="5dp"
-            android:layout_height="match_parent" />
-
-        <TextView
-            android:id="@+id/tvLessTone"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="0.5"
-            android:background="@color/primaryColor"
-            android:gravity="center_vertical|center_horizontal"
-            android:text="-1/2" />
+            android:text="@string/plus_semitone" />
 
         <Space
             android:layout_width="5dp"
@@ -96,10 +83,23 @@
             android:id="@+id/tvLessSemiTone"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:background="@color/primaryColor"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="@string/minus_semitone" />
+
+        <Space
+            android:layout_width="5dp"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/tvLessTone"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="0.8"
             android:background="@color/primaryDarkColor"
             android:gravity="center_vertical|center_horizontal"
-            android:text="-1" />
+            android:text="@string/minus_tone" />
 
         <Space
             android:layout_width="5dp"

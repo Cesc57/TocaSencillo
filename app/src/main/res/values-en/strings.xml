@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">TocaSencillo</string>
     <string name="name">NAME</string>
     <string name="name_cap">Name</string>
@@ -42,7 +42,6 @@
     <string name="_12_cc">12 cc</string>
     <string name="_16_cc">16 cc</string>
     <string name="text">Text</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="repeat_x">x0</string>
     <string name="repeat_times">1. 2</string>
     <string name="alternate_ending">Alternate Ending</string>
@@ -61,7 +60,6 @@
     <string name="new_instrument">New Instrument</string>
     <string name="old_password">old password</string>
     <string name="new_password">new password</string>
-    <string name="repeat_password">repeat password</string>
     <string name="send_mail">SEND MAIL</string>
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
@@ -96,4 +94,10 @@
     <string name="ascending_name">Ascending Name</string>
     <string name="descending_name">Descending Name</string>
     <string name="ordering_error">Error when ordering the songs</string>
+    <string name="sharp">#</string>
+    <string name="flat">b</string>
+    <string name="plus_tone">+1</string>
+    <string name="plus_semitone" tools:ignore="TypographyFractions">+1/2</string>
+    <string name="minus_semitone" tools:ignore="TypographyFractions">-1/2</string>
+    <string name="minus_tone">-1</string>
 </resources>

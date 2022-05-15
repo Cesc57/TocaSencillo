@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.tocasencillo.AssemblyActivity.Companion.delete
 import com.example.tocasencillo.AssemblyActivity.Companion.id_song_frag
+import com.example.tocasencillo.AssemblyActivity.Companion.myTension
+import com.example.tocasencillo.AssemblyActivity.Companion.transposedChord
 import com.example.tocasencillo.MySQLiteHelper.Companion.TITLE_TABLE
 import com.example.tocasencillo.databinding.FragmentTitleBuildBinding
 
@@ -14,8 +16,10 @@ class TitleBuildFragment : Fragment() {
 
     private val myId: Int = id_song_frag
     private lateinit var data: ArrayList<String>
+    private lateinit var transposition: ChordTransposition
 
     private var _binding: FragmentTitleBuildBinding? = null
+
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -29,6 +33,10 @@ class TitleBuildFragment : Fragment() {
         val view = binding.root
 
         dataRecovery()
+
+        if (transposedChord != 0){
+            changeChords()
+        }
 
         return view
     }
@@ -58,5 +66,14 @@ class TitleBuildFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun changeChords() {
+        transposition = ChordTransposition()
+        binding.tune.text = transposition.newChords(
+            binding.tune.text.toString(),
+            transposedChord,
+            myTension
+        )
     }
 }

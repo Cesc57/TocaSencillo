@@ -46,7 +46,6 @@ class ContentFragment : Fragment() {
             when (bar5.text) {
                 "|" -> {
                     bar5.text = ":|"
-                    //bar5.autoSizeMaxTextSize()
                 }
                 else -> bar5.text = "|"
             }

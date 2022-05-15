@@ -38,7 +38,8 @@ class AssemblyActivity : AppCompatActivity() {
         private lateinit var songsDBHelper: MySQLiteHelper
         var id_song_frag: Int = 0
         var delete = false
-        private var transposedChord: Int = 0
+        var transposedChord: Int = 0
+        var myTension = "#"
     }
 
     @SuppressLint("Recycle")
@@ -57,6 +58,65 @@ class AssemblyActivity : AppCompatActivity() {
 
         loadAd()
 
+        loadSong()
+
+        binding.rbSharp.setOnClickListener {
+            if (binding.rbSharp.isChecked) {
+                myTension = "#"
+            }
+        }
+
+        binding.rbFlat.setOnClickListener {
+            if (binding.rbFlat.isChecked) {
+                myTension = "b"
+            }
+        }
+
+        binding.tvPlusTone.setOnClickListener {
+            transposedChord += (2 + 24) % 12
+            supportFragmentManager.apply {
+                for (fragment in fragments) {
+                    beginTransaction().remove(fragment).commit()
+                }
+            }
+            posicNow = 0
+            loadSong()
+        }
+
+        binding.tvPlusSemiTone.setOnClickListener {
+            transposedChord += (1 + 24) % 12
+            supportFragmentManager.apply {
+                for (fragment in fragments) {
+                    beginTransaction().remove(fragment).commit()
+                }
+            }
+            posicNow = 0
+            loadSong()        }
+
+        binding.tvLessTone.setOnClickListener {
+            transposedChord += (-2 + 24) % 12
+            supportFragmentManager.apply {
+                for (fragment in fragments) {
+                    beginTransaction().remove(fragment).commit()
+                }
+            }
+            posicNow = 0
+            loadSong()        }
+
+        binding.tvLessSemiTone.setOnClickListener {
+            transposedChord += (-1 + 24) % 12
+            supportFragmentManager.apply {
+                for (fragment in fragments) {
+                    beginTransaction().remove(fragment).commit()
+                }
+            }
+            posicNow = 0
+            loadSong()        }
+
+    }
+
+    @SuppressLint("Recycle")
+    private fun loadSong() {
         songsDBHelper = MySQLiteHelper(this)
         songsDBHelper.readableDatabase
 
@@ -96,44 +156,10 @@ class AssemblyActivity : AppCompatActivity() {
             cursor.moveToNext()
             posicNow++
         }
-
-        binding.tvPlusTone.setOnClickListener {
-            transposedChord = 2
-            transposedFragments()
-        }
-
-        binding.tvPlusSemiTone.setOnClickListener {
-            transposedChord = 1
-            transposedFragments()
-        }
-
-        binding.tvLessTone.setOnClickListener {
-            transposedChord = -2
-            transposedFragments()
-        }
-
-        binding.tvLessSemiTone.setOnClickListener {
-            transposedChord = -1
-            transposedFragments()
-        }
-
-    }
-
-    private fun transposedFragments() {
-
-        for (fragment in supportFragmentManager.fragments) {
-            //Log.d("helloTag", fragment.javaClass.simpleName)
-            if (fragment.javaClass.simpleName == "ContentBuildFragment") {
-                val fragmentContent = supportFragmentManager.findFragmentById(fragment.id) as ContentBuildFragment
-                fragmentContent.changeChords()
-            }else if (fragment.javaClass.simpleName == "AlternateEndingBuildFragment"){
-                val fragmentAlternate = supportFragmentManager.findFragmentById(fragment.id) as AlternateEndingBuildFragment
-                fragmentAlternate.changeChords()
-            }
-        }
     }
 
     private fun restartValues() {
+        transposedChord = 0
         saving = false
         delete = false
     }
