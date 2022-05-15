@@ -58,8 +58,6 @@
     <string name="instrument">INSTRUMENT</string>
     <string name="instrument_cap">Instrument</string>
     <string name="new_instrument">New Instrument</string>
-    <string name="old_password">old password</string>
-    <string name="new_password">new password</string>
     <string name="send_mail">SEND MAIL</string>
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
