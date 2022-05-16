@@ -347,6 +347,7 @@ class AssemblyActivity : AppCompatActivity() {
             .setCancelable(false)
             // positive button text and action
             .setPositiveButton(R.string.yes) { _, _ ->
+                transposedChord = 0
                 finish()
                 super.onBackPressed()
             }
