@@ -28,7 +28,6 @@
         android:text="@string/empty_bar"
         android:textStyle="bold"
         tools:ignore="LabelFor,DuplicateSpeakableTextCheck"
-        tools:targetApi="o"
         android:layout_weight="6"/>
 
     <TextView
@@ -50,7 +49,6 @@
         android:singleLine="true"
         android:text=""
         android:textStyle="bold"
-        tools:targetApi="o"
         tools:ignore="Autofill,LabelFor"
         android:layout_weight="6"/>
 
@@ -73,7 +71,6 @@
         android:singleLine="true"
         android:text=""
         android:textStyle="bold"
-        tools:targetApi="o"
         tools:ignore="LabelFor"
         android:layout_weight="6"/>
 
@@ -95,7 +92,6 @@
         android:singleLine="true"
         android:text=""
         android:textStyle="bold"
-        tools:targetApi="o"
         tools:ignore="LabelFor"
         android:layout_weight="6"/>
 
