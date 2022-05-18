@@ -35,8 +35,7 @@
         android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold"
-        tools:ignore="LabelFor"
-        tools:targetApi="o" />
+        tools:ignore="LabelFor" />
 
     <TextView
         android:id="@+id/tvLine2"
@@ -65,8 +64,7 @@
         android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold"
-        tools:ignore="LabelFor"
-        tools:targetApi="o" />
+        tools:ignore="LabelFor" />
 
     <TextView
         android:id="@+id/tvLine3"
@@ -95,8 +93,7 @@
         android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold"
-        tools:ignore="LabelFor"
-        tools:targetApi="o" />
+        tools:ignore="LabelFor" />
 
     <TextView
         android:id="@+id/tvLine4"
@@ -125,8 +122,7 @@
         android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold"
-        tools:ignore="LabelFor"
-        tools:targetApi="o" />
+        tools:ignore="LabelFor" />
 
     <TextView
         android:id="@+id/tvLine5"
