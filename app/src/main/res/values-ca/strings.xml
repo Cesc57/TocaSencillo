@@ -26,7 +26,7 @@
     <string name="tag">tag</string>
     <string name="text_note">Introdueix el teu text</string>
     <string name="title">Títol</string>
-    <string name="label">Etiqueta</string>
+    <string name="label" tools:ignore="PrivateResource">Etiqueta</string>
     <string name="intro">Intro</string>
     <string name="verse">Estrofa</string>
     <string name="pre_chorus">PreTornada</string>
@@ -51,7 +51,6 @@
     <string name="x3_times">x3 vegades</string>
     <string name="x4_times">x4 vegades</string>
     <string name="options">Opcions</string>
-    <string name="help">Ajuda</string>
     <string name="sign_out">Tancar sessió</string>
     <string name="new_name">Nou Nom</string>
     <string name="change_password">CANVIAR CONTRASENYA</string>

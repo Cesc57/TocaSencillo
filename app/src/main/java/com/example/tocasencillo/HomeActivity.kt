@@ -190,10 +190,6 @@ class HomeActivity : AppCompatActivity() {
                 val intent = Intent(this, SettingsActivity::class.java)
                 startActivity(intent)
             }
-            item.toString() == getString(R.string.help) -> {
-                val intent = Intent(this, GuideActivity::class.java)
-                startActivity(intent)
-            }
             item.toString() == getString(R.string.sign_out) -> {
                 onBackPressed()
             }

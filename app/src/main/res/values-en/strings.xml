@@ -26,7 +26,7 @@
     <string name="tag">tag</string>
     <string name="text_note">Enter your text</string>
     <string name="title">Title</string>
-    <string name="label">Label</string>
+    <string name="label" tools:ignore="PrivateResource">Label</string>
     <string name="intro">Intro</string>
     <string name="verse">Verse</string>
     <string name="pre_chorus">PreChorus</string>
@@ -51,7 +51,6 @@
     <string name="x3_times">x3 times</string>
     <string name="x4_times">x4 times</string>
     <string name="options">Options</string>
-    <string name="help">Help</string>
     <string name="sign_out">Log out</string>
     <string name="new_name">New Name</string>
     <string name="change_password">CHANGE PASSWORD</string>
