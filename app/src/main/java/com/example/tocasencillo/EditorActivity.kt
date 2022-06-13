@@ -90,37 +90,37 @@ class EditorActivity : AppCompatActivity() {
                     }
 
                     getString(R.string.intro) -> {
-                        label = getString(R.string.intro)
+                        label = "Intro"
                         loadFragment(fragment = LabelFragment())
                     }
 
                     getString(R.string.verse) -> {
-                        label = getString(R.string.verse)
+                        label = "Estrofa"
                         loadFragment(fragment = LabelFragment())
                     }
 
                     getString(R.string.pre_chorus) -> {
-                        label = getString(R.string.pre_chorus_simple)
+                        label = "PreStrb"
                         loadFragment(fragment = LabelFragment())
                     }
 
                     getString(R.string.chorus) -> {
-                        label = getString(R.string.chorus_simple)
+                        label = "Strb"
                         loadFragment(fragment = LabelFragment())
                     }
 
                     getString(R.string.bridge) -> {
-                        label = getString(R.string.bridge)
+                        label = "Puente"
                         loadFragment(fragment = LabelFragment())
                     }
 
                     getString(R.string.solo) -> {
-                        label = getString(R.string.solo)
+                        label = "Solo"
                         loadFragment(fragment = LabelFragment())
                     }
 
                     getString(R.string.end) -> {
-                        label = getString(R.string.end)
+                        label = "Final"
                         loadFragment(fragment = LabelFragment())
                     }
 

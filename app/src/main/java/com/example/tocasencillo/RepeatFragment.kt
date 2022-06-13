@@ -40,7 +40,7 @@ class RepeatFragment : Fragment() {
         binding.tvTimes.text = myValue
 
         myId = when (reps) {
-            getString(R.string.x3_times) -> {
+            "x3" -> {
                 1
             }
             else -> {
