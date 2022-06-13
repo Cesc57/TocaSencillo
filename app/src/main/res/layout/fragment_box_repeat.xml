@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="8dp"
-    tools:context=".BoxRepeatFragment">
+    tools:context=".BoxRepeatFragment"
+    android:gravity="center">
 
     <Space
         android:layout_width="198dp"

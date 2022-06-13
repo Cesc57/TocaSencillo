@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/myLayout"
-    tools:context=".NoteBuildFragment">
+    tools:context=".NoteBuildFragment"
+    android:gravity="center">
 
     <TextView
         android:id="@+id/txtNote"

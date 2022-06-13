@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:gravity="center"
     tools:context=".AlternateEndingFragment">
 
     <Space
@@ -21,8 +22,7 @@
         android:singleLine="true"
         android:text="@string/empty_bar"
         android:textStyle="bold"
-        tools:ignore="LabelFor"
-        tools:targetApi="o" />
+        tools:ignore="LabelFor" />
 
     <TextView
         android:id="@+id/tvLine1"
@@ -44,8 +44,7 @@
         android:singleLine="true"
         android:text="@string/empty_bar"
         android:textStyle="bold"
-        tools:ignore="LabelFor"
-        tools:targetApi="o" />
+        tools:ignore="LabelFor" />
 
     <TextView
         android:id="@+id/tvLine2"

@@ -5,7 +5,8 @@
     android:layout_height="60dp"
     android:layout_gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context=".TitleBuildFragment">
+    tools:context=".TitleBuildFragment"
+    android:gravity="center">
 
 
     <LinearLayout
