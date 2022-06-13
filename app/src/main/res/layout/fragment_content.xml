@@ -6,7 +6,8 @@
     android:layout_height="50dp"
     android:orientation="horizontal"
     android:weightSum="29"
-    tools:context=".ContentFragment">
+    tools:context=".ContentFragment"
+    android:gravity="center">
 
     <TextView
         android:id="@+id/tvLine1"
